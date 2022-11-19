@@ -1,0 +1,15 @@
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\bin\Debug\net6.0\Homework1.2_GrandCircusOOP.exe
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\bin\Debug\net6.0\Homework1.2_GrandCircusOOP.deps.json
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\bin\Debug\net6.0\Homework1.2_GrandCircusOOP.runtimeconfig.json
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\bin\Debug\net6.0\Homework1.2_GrandCircusOOP.dll
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\bin\Debug\net6.0\Homework1.2_GrandCircusOOP.pdb
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.csproj.AssemblyReference.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.GeneratedMSBuildEditorConfig.editorconfig
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.AssemblyInfoInputs.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.AssemblyInfo.cs
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.csproj.CoreCompileInputs.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.dll
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\refint\Homework1.2_GrandCircusOOP.dll
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.pdb
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\Homework1.2_GrandCircusOOP.genruntimeconfig.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\Debug\net6.0\ref\Homework1.2_GrandCircusOOP.dll
