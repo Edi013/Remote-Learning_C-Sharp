@@ -1,0 +1,15 @@
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\bin\Debug\net6.0\Homework1.exe
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\bin\Debug\net6.0\Homework1.deps.json
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\bin\Debug\net6.0\Homework1.runtimeconfig.json
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\bin\Debug\net6.0\Homework1.dll
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\bin\Debug\net6.0\Homework1.pdb
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.csproj.AssemblyReference.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.GeneratedMSBuildEditorConfig.editorconfig
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.AssemblyInfoInputs.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.AssemblyInfo.cs
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.csproj.CoreCompileInputs.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.dll
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\refint\Homework1.dll
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.pdb
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\Homework1.genruntimeconfig.cache
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1\obj\Debug\net6.0\ref\Homework1.dll
