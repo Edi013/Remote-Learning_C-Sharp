@@ -1,2 +1,2 @@
-bin/
-obj/
+Homework1/obj/
+Homework1/bin/
