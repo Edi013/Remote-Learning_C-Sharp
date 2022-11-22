@@ -1,5 +1,5 @@
-namespace iQuest.GrandCircus{
-
+namespace iQuest.GrandCircus
+{
     public class Arena
         {
             public Arena(){}
