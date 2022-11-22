@@ -1,0 +1,2 @@
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\bin\
+D:\technologii\GitHubDesktop\NagarroRepo\RL_Csharp\Homework1.2_GrandCircusOOP\obj\
