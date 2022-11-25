@@ -1,19 +1,15 @@
 namespace iQuest.GrandCircus
 {
-    public class AnimalBase : IAnimal{
-
+    public abstract class AnimalBase : IAnimal
+    {
         public string Name{ get; }
         public string SpeciesName{ get; }
 
-        public AnimalBase(string Name, string SpeciesName){
-            this.Name = Name;
-            this.SpeciesName = SpeciesName;
+        public AnimalBase(string name, string speciesName){
+            this.Name = name;
+            this.SpeciesName = speciesName;
         }
 
-        public virtual string MakeNoise()
-            {
-                return "idk what noise to use ";
-            }
-
+        public abstract string MakeNoise();
     }
 }

@@ -5,7 +5,6 @@ namespace iQuest.GrandCircus
 
         public Emu(string Name, string SpeciesName): base(Name, SpeciesName)
         {
-
         }
 
         public override string MakeNoise()
