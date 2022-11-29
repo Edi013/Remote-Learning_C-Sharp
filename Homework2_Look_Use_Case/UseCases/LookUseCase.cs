@@ -8,11 +8,11 @@ namespace iQuest.VendingMachine.UseCases
         private readonly VendingMachineApplication Application;
         private ProductRepository Stock;
         private readonly ShelfView View;
-        public string Name => "Products: ";
+        public string Name => "See products";
 
-        public string Description => "This is our stock as you see it.";
+        public string Description => "This is our stock.";
 
-        public bool CanExecute => Stock.GetAll().Count() == 0;
+        public bool CanExecute => Stock.GetAll().Count() != 0;
 
         public LookUseCase(VendingMachineApplication application, ProductRepository stock, ShelfView view)
         {
