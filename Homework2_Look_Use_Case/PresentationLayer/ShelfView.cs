@@ -2,7 +2,7 @@ using iQuest.VendingMachine.DataLayer;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
-    class ShelfView
+    internal class ShelfView
     {
         public ShelfView(){}
 

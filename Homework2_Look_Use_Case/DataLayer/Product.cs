@@ -1,11 +1,12 @@
 namespace iQuest.VendingMachine.DataLayer
 {
-    class Product
+    internal class Product
     {
-        public int ColumnId { get; set;}
-        public string Name { get; }
-        public float Price { get; set;} 
-        public int Quantity { get; set; }
+        private int ColumnId { get; set;}
+        private string Name { get; set; }
+        private float Price { get; set;} 
+        private int Quantity { get; set; }
+
         public Product(int columnId, string name, float price, int quantity)
         {
             ColumnId = columnId;
@@ -13,6 +14,7 @@ namespace iQuest.VendingMachine.DataLayer
             Price = price;
             Quantity = quantity;
         }
+
         public override string ToString()
         {
             return $"{ColumnId, -2}{Name, -15}{Price, -7}{Quantity,-3}";    

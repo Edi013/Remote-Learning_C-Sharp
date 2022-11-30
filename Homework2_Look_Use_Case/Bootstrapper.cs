@@ -18,15 +18,15 @@ namespace iQuest.VendingMachine
             List<IUseCase> useCases = new List<IUseCase>();
             MainDisplay mainDisplay = new MainDisplay();
             VendingMachineApplication vendingMachineApplication = new VendingMachineApplication(useCases, mainDisplay);
-            ProductRepository Stock = new ProductRepository();
-            ShelfView View = new ShelfView();
+            ProductRepository productRepository = new ProductRepository();
+            ShelfView view = new ShelfView();
 
             useCases.AddRange(new IUseCase[]
             {
                 new LoginUseCase(vendingMachineApplication, mainDisplay),
                 new LogoutUseCase(vendingMachineApplication),
                 new TurnOffUseCase(vendingMachineApplication),
-                new LookUseCase(vendingMachineApplication, Stock, View)
+                new LookUseCase(vendingMachineApplication, productRepository, view)
             });
 
             return vendingMachineApplication;
