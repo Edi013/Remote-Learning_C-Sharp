@@ -22,7 +22,13 @@ namespace iQuest.VendingMachine.UseCases
 
         public void Execute()
         { 
-            int columnNumber = buyView.RequestProduct();            
+            int columnNumber;
+
+            if((columnNumber = buyView.RequestProduct()) == -1)
+            {
+                return;
+            }
+
             bool found = false;
             foreach(Product product in productRepository.GetAll() )
             {
@@ -40,7 +46,7 @@ namespace iQuest.VendingMachine.UseCases
                   break;
             }
             if(!found)
-                buyView.DisplayProductNotFound();
+                buyView.DisplayProductNotAvailabel();
         }
     }
 }
