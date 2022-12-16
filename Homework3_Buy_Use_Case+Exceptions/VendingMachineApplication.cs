@@ -27,15 +27,30 @@ namespace iQuest.VendingMachine
 
             while (!turnOffWasRequested)
             {
-                
                 try
                 {
                     IEnumerable<IUseCase> availableUseCases = useCases
                     .Where(x => x.CanExecute);
                     IUseCase useCase = mainDisplay.ChooseCommand(availableUseCases);
                     useCase.Execute();
-
-                }catch(CancelException e )
+                }
+                catch(CancelException e )
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch(InvalidColumnNumberException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch(InvalidInputException e )
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch(ProductNotAvailableException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch(InvalidPasswordException e)
                 {
                     Console.WriteLine(e.Message);
                 }

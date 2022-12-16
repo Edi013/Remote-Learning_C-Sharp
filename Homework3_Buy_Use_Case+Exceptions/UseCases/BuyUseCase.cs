@@ -1,10 +1,12 @@
 using iQuest.VendingMachine.DataLayer;
 using iQuest.VendingMachine.PresentationLayer;
+using iQuest.VendingMachine.Exceptions;
 
 namespace iQuest.VendingMachine.UseCases
 {
     internal class BuyUseCase : IUseCase
     {
+        private readonly VendingMachineApplication vendingMachine;
         private readonly ProductRepository productRepository;
         private readonly BuyView buyView;
 
@@ -12,24 +14,20 @@ namespace iQuest.VendingMachine.UseCases
 
         public string Description => "You will buy something.";
 
-        public bool CanExecute => productRepository.GetAll().Any();
+        public bool CanExecute => productRepository.GetAll().Any() && !vendingMachine.UserIsLoggedIn;
 
-        public BuyUseCase(ProductRepository products, BuyView buyView)
+        public BuyUseCase(VendingMachineApplication vendingMachine, ProductRepository products, BuyView buyView)
         {
+            this.vendingMachine = vendingMachine;
             this.productRepository = products;
             this.buyView = buyView;
         }            
 
         public void Execute()
         { 
-            int columnNumber;
-
-            if((columnNumber = buyView.RequestProduct()) == -1)
-            {
-                return;
-            }
-
+            int columnNumber = buyView.RequestProduct();
             bool found = false;
+            
             foreach(Product product in productRepository.GetAll() )
             {
                 if(product.ColumnId == columnNumber)
@@ -46,7 +44,7 @@ namespace iQuest.VendingMachine.UseCases
                   break;
             }
             if(!found)
-                buyView.DisplayProductNotAvailabel();
+               throw new ProductNotAvailableException();
         }
     }
 }

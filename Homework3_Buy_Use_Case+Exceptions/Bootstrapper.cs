@@ -28,7 +28,7 @@ namespace iQuest.VendingMachine
                 new LogoutUseCase(vendingMachineApplication),
                 new TurnOffUseCase(vendingMachineApplication),
                 new LookUseCase(productRepository, shelfView),
-                new BuyUseCase(productRepository, buyView)
+                new BuyUseCase(vendingMachineApplication, productRepository, buyView)
             });
 
             return vendingMachineApplication;

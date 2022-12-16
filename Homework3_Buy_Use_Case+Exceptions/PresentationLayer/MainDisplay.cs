@@ -21,13 +21,6 @@ namespace iQuest.VendingMachine.PresentationLayer
             {
                 string rawValue = ReadCommandName();
 
-                //for development
-                if(rawValue == "")
-                {
-                    DisplayLine("Cancelling command . . .", ConsoleColor.White);
-                    throw new CancelException("Quit Command in ChooseCommand method");
-                }
-
                 IUseCase selectedUseCase = useCases.FirstOrDefault(x => x.Name == rawValue);
 
                 if (selectedUseCase == null)
