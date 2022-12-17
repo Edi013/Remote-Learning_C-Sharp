@@ -2,7 +2,7 @@ namespace iQuest.VendingMachine.Exceptions
 {
     public class InvalidColumnNumberException : Exception
     {
-        private const string messageInvalidColumnNumber = "Such column number do not exist!";
+        private const string messageInvalidColumnNumber = "Such column number do not exists!";
 
         public InvalidColumnNumberException(string message = messageInvalidColumnNumber) 
             : base(message) 

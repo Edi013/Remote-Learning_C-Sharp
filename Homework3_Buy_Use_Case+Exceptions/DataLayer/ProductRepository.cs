@@ -47,13 +47,14 @@ namespace iQuest.VendingMachine.DataLayer
         }
 
         
-        // public Product GetProductByColumnId(int columnId)
-        // {
-        //     foreach(Product product in products)
-        //     {
-        //         if(product.ColumnId == columnId)
-        //         return product;
-        //     }
-        // }
+        public Product? GetProductByColumnId(int columnId)
+        {
+            foreach(Product product in products)
+            {
+                if(product.ColumnId == columnId)
+                return product;
+            }
+            return null;
+        }
     }
 }

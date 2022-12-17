@@ -26,25 +26,27 @@ namespace iQuest.VendingMachine.UseCases
         public void Execute()
         { 
             int columnNumber = buyView.RequestProduct();
-            bool found = false;
-            
-            foreach(Product product in productRepository.GetAll() )
+
+            Product? wantedProduct = productRepository.GetProductByColumnId(columnNumber);
+
+            if(wantedProduct != null)
             {
-                if(product.ColumnId == columnNumber)
+                if(wantedProduct.Quantity > 0)
                 {
-                    if(product.Quantity > 0)
-                    {
-                        found = true;
-                        //pay
-                        product.Quantity--;
-                        buyView.DispenseProduct(product.Name);
-                    }
+                    //pay
+                    wantedProduct.Quantity--;
+                    buyView.DispenseProduct(wantedProduct.Name);
                 }
-                if(found)
-                  break;
+                else
+                {
+                    throw new ProductNotAvailableException();
+                }
             }
-            if(!found)
-               throw new ProductNotAvailableException();
+            else
+            {
+                throw new InvalidColumnNumberException();
+            }
+            
         }
     }
 }
