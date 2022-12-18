@@ -4,7 +4,7 @@ namespace iQuest.VendingMachine.PresentationLayer
 {
     internal class ShelfView : DisplayBase
     {
-        public void DisplayProducts(IEnumerable<Product> listOfProducts)
+        public void DisplayProducts(IEnumerable<Product> products)
         {
             Console.WriteLine();
             Console.WriteLine();
@@ -12,7 +12,7 @@ namespace iQuest.VendingMachine.PresentationLayer
             DisplayLine("Product number, name, price, quantity " , ConsoleColor.White);
             Console.WriteLine();
 
-            foreach(Product product in listOfProducts){
+            foreach(Product product in products){
                 Console.WriteLine(product.ToString());    
             }
         }
