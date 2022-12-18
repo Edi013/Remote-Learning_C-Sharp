@@ -29,24 +29,17 @@ namespace iQuest.VendingMachine.UseCases
 
             Product? wantedProduct = productRepository.GetProductByColumnId(columnNumber);
 
-            if(wantedProduct != null)
-            {
-                if(wantedProduct.Quantity > 0)
-                {
-                    //pay
-                    wantedProduct.Quantity--;
-                    buyView.DispenseProduct(wantedProduct.Name);
-                }
-                else
-                {
-                    throw new ProductNotAvailableException();
-                }
-            }
-            else
+            if(wantedProduct == null)
             {
                 throw new InvalidColumnNumberException();
             }
-            
+            if(wantedProduct.Quantity == 0)
+            {
+                throw new ProductNotAvailableException();
+            }
+                
+            wantedProduct.Quantity--;
+            buyView.DispenseProduct(wantedProduct.Name); 
         }
     }
 }
