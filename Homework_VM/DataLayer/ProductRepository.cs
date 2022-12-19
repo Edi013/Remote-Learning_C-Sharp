@@ -2,15 +2,10 @@ namespace iQuest.VendingMachine.DataLayer
 {
     internal class ProductRepository
     {
-        private List<Product> products;
+        private static List<Product> products;
 
-        public ProductRepository()
+        public  ProductRepository()
         {
-            // Daca utilizam o lista din afara:
-            // parametru: List<Product> listOfProducts
-            // ListOfProducts = listOfProducts;
-
-            // Daca utilizam o lista interna:
             products = new List<Product>() {
                 new Product(1, "7Days", 4.99F, 10),
                 new Product(2, "Rolls", 3.99F, 7),
@@ -21,6 +16,16 @@ namespace iQuest.VendingMachine.DataLayer
 
         public List<Product> GetAll(){
             return products;
+        }
+
+        public Product? GetProductByColumnId(int columnId)
+        {
+            foreach(Product product in products)
+            {
+                if(product.ColumnId == columnId)
+                return product;
+            }
+            return null;
         }
     }
 }

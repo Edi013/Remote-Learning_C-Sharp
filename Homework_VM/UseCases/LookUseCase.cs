@@ -5,7 +5,6 @@ namespace iQuest.VendingMachine.UseCases
 {
     internal class LookUseCase : IUseCase
     {
-        private readonly VendingMachineApplication application;
         private readonly ProductRepository productRepository;
         private readonly ShelfView view;
 
@@ -15,9 +14,8 @@ namespace iQuest.VendingMachine.UseCases
 
         public bool CanExecute => productRepository.GetAll().Any();
 
-        public LookUseCase(VendingMachineApplication application, ProductRepository products, ShelfView view)
+        public LookUseCase(ProductRepository products, ShelfView view)
         {
-            this.application = application ?? throw new ArgumentNullException(nameof(application));
             this.productRepository = products ?? throw new ArgumentNullException(nameof(products));
             this.view = view ?? throw new ArgumentNullException(nameof(view));
         }            

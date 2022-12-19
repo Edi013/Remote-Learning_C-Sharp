@@ -1,11 +1,11 @@
 namespace iQuest.VendingMachine.DataLayer
 {
-    internal class Product
+    public class Product
     {
-        private int ColumnId { get; set;}
-        private string Name { get; set; }
-        private float Price { get; set;} 
-        private int Quantity { get; set; }
+        internal int ColumnId { get; set;}
+        internal string Name { get; set; }
+        internal float Price { get; set;} 
+        internal int Quantity { get; set; }
 
         public Product(int columnId, string name, float price, int quantity)
         {

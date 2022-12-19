@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using iQuest.VendingMachine.Exceptions;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
@@ -19,6 +20,7 @@ namespace iQuest.VendingMachine.PresentationLayer
             while (true)
             {
                 string rawValue = ReadCommandName();
+
                 IUseCase selectedUseCase = useCases.FirstOrDefault(x => x.Name == rawValue);
 
                 if (selectedUseCase == null)
@@ -26,7 +28,7 @@ namespace iQuest.VendingMachine.PresentationLayer
                     DisplayLine("Invalid command. Please try again.", ConsoleColor.Red);
                     continue;
                 }
-
+                
                 return selectedUseCase;
             }
         }

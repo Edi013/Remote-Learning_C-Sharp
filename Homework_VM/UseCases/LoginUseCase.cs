@@ -1,5 +1,6 @@
 ﻿using System;
 using iQuest.VendingMachine.PresentationLayer;
+using iQuest.VendingMachine.Exceptions;
 
 namespace iQuest.VendingMachine.UseCases
 {
@@ -27,7 +28,9 @@ namespace iQuest.VendingMachine.UseCases
             if (password == "supercalifragilisticexpialidocious")
                 application.UserIsLoggedIn = true;
             else
-                throw new Exception("Invalid password");
+            {
+                throw new InvalidPasswordException("Invalid password");
+            }
         }
     }
 }
