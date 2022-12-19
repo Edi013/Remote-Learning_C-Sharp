@@ -6,28 +6,28 @@ namespace iQuest.VendingMachine.PresentationLayer
     internal class BuyView : DisplayBase
     {
 
-         public int RequestProduct()
-    {
-        int columnNumber;
+        public int RequestProduct()
+        {
+            int columnNumber;
 
-        Console.WriteLine();
-        DisplayLine($"Type the column number of the desired product:", ConsoleColor.White);
-        Console.WriteLine();
+            Console.WriteLine();
+            DisplayLine($"Type the column number of the desired product:", ConsoleColor.White);
+            Console.WriteLine();
         
-        string userInput= Console.ReadLine();
+            string userInput= Console.ReadLine();
 
-        if(userInput == "") // Test for userInput=" ". 
-        {
-            throw new CancelException();
+            if(userInput == "") // Test for userInput=" ". 
+            {
+                throw new CancelException();
+            }
+
+            if(!int.TryParse(userInput, out columnNumber))
+            {
+                throw new InvalidInputException();
+            }
+
+            return columnNumber;
         }
-
-        if(!int.TryParse(userInput, out columnNumber))
-        {
-            throw new InvalidInputException();
-        }
-
-        return columnNumber;
-    }
 
         public void DispenseProduct(string productName)
         {
