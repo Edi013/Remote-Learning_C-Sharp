@@ -1,3 +1,4 @@
+using System;
 using iQuest.VendingMachine.DataLayer;
 using iQuest.VendingMachine.Exceptions;
 
@@ -16,7 +17,7 @@ namespace iQuest.VendingMachine.PresentationLayer
         
             string userInput= Console.ReadLine();
 
-            if(userInput == "") // Test for userInput=" ". 
+            if(string.IsNullOrWhiteSpace(userInput))
             {
                 throw new CancelException();
             }
