@@ -1,23 +1,29 @@
-﻿namespace iQuest.VendingMachine.UseCases
+﻿using iQuest.VendingMachine.Interfaces;
+using iQuest.VendingMachine.Classes;
+
+
+namespace iQuest.VendingMachine.UseCases
 {
     internal class TurnOffUseCase : IUseCase
     {
-        private readonly VendingMachineApplication application;
+        private readonly AuthenticationService authenticationService;
+        private readonly TurnOffWasRequestedChecker turnOffWasRequestedChecker;
 
         public string Name => "exit";
 
         public string Description => "Go to live your life.";
 
-        public bool CanExecute => application.UserIsLoggedIn;
+        public bool CanExecute => authenticationService.IsUserAuthenticated;
 
-        public TurnOffUseCase(VendingMachineApplication application)
+        public TurnOffUseCase(TurnOffWasRequestedChecker turnOffWasRequestedChecker, AuthenticationService authenticationService)
         {
-            this.application = application;
+            this.turnOffWasRequestedChecker = turnOffWasRequestedChecker;
+            this.authenticationService = authenticationService;
         }
 
         public void Execute()
         {
-            application.TurnOff();
+            turnOffWasRequestedChecker.TurnOff();
         }
     }
 }

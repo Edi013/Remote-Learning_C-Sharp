@@ -1,5 +1,6 @@
 using iQuest.VendingMachine.DataLayer;
 using iQuest.VendingMachine.PresentationLayer;
+using iQuest.VendingMachine.Interfaces;
 
 namespace iQuest.VendingMachine.UseCases
 {

@@ -1,25 +1,28 @@
 ﻿using System;
+using iQuest.VendingMachine.Interfaces;
+using iQuest.VendingMachine.Classes;
+
 
 namespace iQuest.VendingMachine.UseCases
 {
     internal class LogoutUseCase : IUseCase
     {
-        private readonly VendingMachineApplication application;
+        private AuthenticationService authenticationService;
 
         public string Name => "logout";
 
         public string Description => "Restrict access to administration buttons.";
 
-        public bool CanExecute => application.UserIsLoggedIn;
+        public bool CanExecute => authenticationService.IsUserAuthenticated;
 
-        public LogoutUseCase(VendingMachineApplication application)
+        public LogoutUseCase(AuthenticationService authenticationService)
         {
-            this.application = application ?? throw new ArgumentNullException(nameof(application));
+            this.authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
 
         public void Execute()
         {
-            application.UserIsLoggedIn = false;
+            authenticationService.Logout();
         }
     }
 }

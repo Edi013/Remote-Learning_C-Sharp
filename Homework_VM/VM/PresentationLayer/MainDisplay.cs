@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using iQuest.VendingMachine.Exceptions;
+using iQuest.VendingMachine.Interfaces;
+
 
 namespace iQuest.VendingMachine.PresentationLayer
 {

@@ -1,4 +1,4 @@
-﻿namespace iQuest.VendingMachine
+﻿namespace iQuest.VendingMachine.Interfaces
 {
     internal interface IUseCase
     {
