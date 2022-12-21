@@ -1,7 +1,6 @@
 ﻿using System;
 using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Classes;
-
+using iQuest.VendingMachine.Services;
 
 namespace iQuest.VendingMachine.UseCases
 {

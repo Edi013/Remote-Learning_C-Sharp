@@ -2,9 +2,9 @@
 using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.Exceptions;
 using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Classes;
+using iQuest.VendingMachine.Services;
 
-namespace iQuest.VendingMachine.UseCases 
+namespace iQuest.VendingMachine.UseCases
 {
     internal class LoginUseCase : IUseCase
     {
