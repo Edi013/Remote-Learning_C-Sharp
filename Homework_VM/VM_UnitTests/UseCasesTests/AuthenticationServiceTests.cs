@@ -3,19 +3,20 @@ using Moq;
 using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.Interfaces;
 using iQuest.VendingMachine.UseCases;
-using iQuest.VendingMachine.Classes;
 using iQuest.VendingMachine.Exceptions;
+using iQuest.VendingMachine;
+using iQuest.VendingMachine.DataLayer;
+using iQuest.VendingMachine.Services;
 
-
-namespace VM_UnitTests.UseCases
+namespace VM_UnitTests.UseCasesTests
 {
-    public class LoginUseCaseTests
+    public class AuthenticationServiceTests
     {
         private string correctPassword = "supercalifragilisticexpialidocious";
         private string incorrectPassword = "Just a string, not the right password";
 
         [Fact]
-        public void HavingAuthenticationService_WhenCorrectPassword_ThanLoginSuccesful()
+        public void HavingAuthenticationServiceLoginMethod_WhenCorrectPassword_ThanLoginSuccesful()
         {
             //Arange 
             AuthenticationService authenticationService = new AuthenticationService();
@@ -28,7 +29,7 @@ namespace VM_UnitTests.UseCases
         }
         
         [Fact]
-        public void HavingAuthenticationService_WhenIncorrectPassword_ThanLoginFail()
+        public void HavingAuthenticationServiceLoginMethod_WhenIncorrectPassword_ThanLoginFail()
         {
             //Arange
             AuthenticationService authenticationService = new AuthenticationService();
@@ -48,24 +49,24 @@ namespace VM_UnitTests.UseCases
         }
 
         [Fact]
-        public void HavingAuthenticationService_WhenUserIsNotLoggedIn_ThanLogoutSuccesful()
-        {
-            //Arange
-            AuthenticationService authenticationService = new AuthenticationService();
-            //Act     
-            authenticationService.Logout();           
-            //Assert
-            Assert.False(authenticationService.IsUserAuthenticated);
-        }
-
-        [Fact]
-        public void HavingAuthenticationService_WhenUserIsAlredyLoggedIn_ThanLogoutSuccesful()
+        public void HavingAuthenticationServiceLogoutMethod_WhenUserIsLoggedIn_ThanLogoutSuccesful()
         {
             //Arange
             AuthenticationService authenticationService = new AuthenticationService();
             authenticationService.Login(correctPassword);
             //Act     
             authenticationService.Logout();
+            //Assert
+            Assert.False(authenticationService.IsUserAuthenticated);
+        }
+
+        [Fact]
+        public void HavingAuthenticationServiceLogoutMethod_WhenUserIsNotLoggedIn_ThanLogoutSuccesful()
+        {
+            //Arange
+            AuthenticationService authenticationService = new AuthenticationService();
+            //Act     
+            authenticationService.Logout();           
             //Assert
             Assert.False(authenticationService.IsUserAuthenticated);
         }
