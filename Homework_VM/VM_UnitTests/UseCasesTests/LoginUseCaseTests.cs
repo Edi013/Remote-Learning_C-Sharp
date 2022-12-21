@@ -46,5 +46,28 @@ namespace VM_UnitTests.UseCases
             Assert.False(authenticationService.IsUserAuthenticated);
 
         }
+
+        [Fact]
+        public void HavingAuthenticationService_WhenUserIsNotLoggedIn_ThanLogoutSuccesful()
+        {
+            //Arange
+            AuthenticationService authenticationService = new AuthenticationService();
+            //Act     
+            authenticationService.Logout();           
+            //Assert
+            Assert.False(authenticationService.IsUserAuthenticated);
+        }
+
+        [Fact]
+        public void HavingAuthenticationService_WhenUserIsAlredyLoggedIn_ThanLogoutSuccesful()
+        {
+            //Arange
+            AuthenticationService authenticationService = new AuthenticationService();
+            authenticationService.Login(correctPassword);
+            //Act     
+            authenticationService.Logout();
+            //Assert
+            Assert.False(authenticationService.IsUserAuthenticated);
+        }
     }
 }
