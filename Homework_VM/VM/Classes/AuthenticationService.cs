@@ -10,7 +10,12 @@ namespace iQuest.VendingMachine.Classes
 {
     internal class AuthenticationService
     {
-        public bool IsUserAuthenticated { get; private set; }
+        public bool IsUserAuthenticated { get; private set; } 
+
+        internal AuthenticationService() 
+        {
+            IsUserAuthenticated = false;
+        }
 
         public void Login(string userInputedPassword)
         {

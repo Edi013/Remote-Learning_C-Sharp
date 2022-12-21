@@ -12,20 +12,20 @@ namespace iQuest.VendingMachine.UseCases
         private readonly VendingMachineApplication vendingMachine;
         private readonly ProductRepository productRepository;
         private readonly BuyView buyView;
-        private LoginChecker loginChecker;
+        private readonly AuthenticationService authenticationService;
 
         public string Name => "Buy";
 
         public string Description => "You will buy something.";
 
-        public bool CanExecute => productRepository.GetAll().Any() && !loginChecker.LoginStatus;
+        public bool CanExecute => productRepository.GetAll().Any() && !authenticationService.IsUserAuthenticated;
 
-        public BuyUseCase(VendingMachineApplication vendingMachine, ProductRepository products, BuyView buyView, LoginChecker loginChecker)
+        public BuyUseCase(VendingMachineApplication vendingMachine, ProductRepository products, BuyView buyView, AuthenticationService authenticationService)
         {
             this.vendingMachine = vendingMachine;
             this.productRepository = products;
             this.buyView = buyView;
-            this.loginChecker = loginChecker;
+            this.authenticationService = authenticationService;
         }            
 
         public void Execute()
