@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using iQuest.VendingMachine.Exceptions;
 
 
-namespace iQuest.VendingMachine.Classes
+namespace iQuest.VendingMachine.Services
 {
     internal class AuthenticationService
     {
-        public bool IsUserAuthenticated { get; private set; } 
+        internal bool IsUserAuthenticated { get; private set; }
 
-        internal AuthenticationService() 
+        internal AuthenticationService()
         {
             IsUserAuthenticated = false;
         }
