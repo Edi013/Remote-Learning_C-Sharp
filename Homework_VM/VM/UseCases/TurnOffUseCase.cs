@@ -6,8 +6,8 @@ namespace iQuest.VendingMachine.UseCases
 {
     internal class TurnOffUseCase : IUseCase
     {
-        private readonly AuthenticationService authenticationService;
-        private readonly TurnOffWasRequestedChecker turnOffWasRequestedChecker;
+        private readonly IAuthenticationService authenticationService;
+        private readonly ITurnOffWasRequestedChecker turnOffWasRequestedChecker;
 
         public string Name => "exit";
 
@@ -15,7 +15,7 @@ namespace iQuest.VendingMachine.UseCases
 
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
-        public TurnOffUseCase(TurnOffWasRequestedChecker turnOffWasRequestedChecker, AuthenticationService authenticationService)
+        public TurnOffUseCase(ITurnOffWasRequestedChecker turnOffWasRequestedChecker, IAuthenticationService authenticationService)
         {
             this.turnOffWasRequestedChecker = turnOffWasRequestedChecker;
             this.authenticationService = authenticationService;

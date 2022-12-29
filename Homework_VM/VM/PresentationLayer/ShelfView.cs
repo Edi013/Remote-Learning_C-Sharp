@@ -2,7 +2,7 @@ using iQuest.VendingMachine.DataLayer;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
-    internal class ShelfView : DisplayBase
+    internal class ShelfView : DisplayBase, IShelfView
     {
         public void DisplayProducts(IEnumerable<Product> products)
         {

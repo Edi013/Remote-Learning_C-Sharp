@@ -7,7 +7,7 @@ using iQuest.VendingMachine.Interfaces;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
-    internal class MainDisplay : DisplayBase
+    internal class MainDisplay : DisplayBase, IMainDisplay
     {
         public IUseCase ChooseCommand(IEnumerable<IUseCase> useCases)
         {
@@ -64,4 +64,5 @@ namespace iQuest.VendingMachine.PresentationLayer
             return Console.ReadLine();
         }
     }
+
 }

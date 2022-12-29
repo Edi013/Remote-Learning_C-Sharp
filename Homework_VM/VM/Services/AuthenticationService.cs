@@ -8,9 +8,9 @@ using iQuest.VendingMachine.Exceptions;
 
 namespace iQuest.VendingMachine.Services
 {
-    internal class AuthenticationService
+    internal class AuthenticationService : IAuthenticationService
     {
-        internal bool IsUserAuthenticated { get; private set; }
+        public bool IsUserAuthenticated { get; set; }
 
         internal AuthenticationService()
         {

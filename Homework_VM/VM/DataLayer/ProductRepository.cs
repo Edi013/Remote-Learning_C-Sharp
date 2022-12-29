@@ -1,6 +1,8 @@
+using iQuest.VendingMachine.Interfaces;
+
 namespace iQuest.VendingMachine.DataLayer
 {
-    internal class ProductRepository
+    internal class ProductRepository : IProductRepository
     {
         private static List<Product> products;
 
@@ -14,7 +16,8 @@ namespace iQuest.VendingMachine.DataLayer
             };
         }
 
-        public List<Product> GetAll(){
+        public List<Product> GetAll()
+        {
             return products;
         }
 

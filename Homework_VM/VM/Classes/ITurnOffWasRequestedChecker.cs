@@ -8,7 +8,7 @@ namespace iQuest.VendingMachine.Interfaces
 {
     internal interface ITurnOffWasRequestedChecker
     {
-        public bool TurnOffWasRequestedStatus { get; set; }
+        public bool Status { get; set; }
         public void TurnOff();
     }
 }

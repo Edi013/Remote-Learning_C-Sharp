@@ -9,18 +9,16 @@ namespace iQuest.VendingMachine.Classes
 {
     internal class TurnOffWasRequestedChecker : ITurnOffWasRequestedChecker
     {
-        public bool TurnOffWasRequestedStatus { get; set; }
+        public bool Status { get; set; }
 
         public TurnOffWasRequestedChecker()
         {
-            TurnOffWasRequestedStatus = false;
+            Status = false;
         }
 
         public void TurnOff()
         {
-            TurnOffWasRequestedStatus = true;
+            Status = true;
         }
-
-        
     }
 }

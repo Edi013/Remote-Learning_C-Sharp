@@ -8,8 +8,8 @@ namespace iQuest.VendingMachine.UseCases
 {
     internal class LoginUseCase : IUseCase
     {
-        private readonly MainDisplay mainDisplay;
-        AuthenticationService authenticationService;
+        private readonly IMainDisplay mainDisplay;
+        IAuthenticationService authenticationService;
 
         public string Name => "login";
 
@@ -17,7 +17,7 @@ namespace iQuest.VendingMachine.UseCases
 
         public bool CanExecute => !authenticationService.IsUserAuthenticated;
 
-        public LoginUseCase( MainDisplay mainDisplay, AuthenticationService authenticationService)
+        public LoginUseCase(IMainDisplay mainDisplay, IAuthenticationService authenticationService)
         {
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
             this.authenticationService = authenticationService;

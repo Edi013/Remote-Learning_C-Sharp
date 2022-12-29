@@ -3,9 +3,8 @@ using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.UseCases;
 using iQuest.VendingMachine.DataLayer;
 using iQuest.VendingMachine.Interfaces;
+using iQuest.VendingMachine.Services;
 using iQuest.VendingMachine.Classes;
-
-
 
 namespace iQuest.VendingMachine
 {
@@ -21,13 +20,13 @@ namespace iQuest.VendingMachine
         {
             List<IUseCase> useCases = new List<IUseCase>();
             MainDisplay mainDisplay = new MainDisplay();
+            ProductRepository productRepository = new ProductRepository();
+            TurnOffWasRequestedChecker turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
 
             AuthenticationService authenticationService = new AuthenticationService();
-            TurnOffWasRequestedChecker turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
-            
+
             VendingMachineApplication vendingMachineApplication = new VendingMachineApplication(useCases, mainDisplay, turnOffWasRequestedChecker);
             
-            ProductRepository productRepository = new ProductRepository();
             ShelfView shelfView = new ShelfView();
             BuyView buyView = new BuyView();
 
@@ -37,7 +36,7 @@ namespace iQuest.VendingMachine
                 new LogoutUseCase(authenticationService),
                 new TurnOffUseCase(turnOffWasRequestedChecker, authenticationService), 
                 new LookUseCase(productRepository, shelfView),
-                new BuyUseCase(vendingMachineApplication, productRepository, buyView, authenticationService)
+                new BuyUseCase(buyView, authenticationService, productRepository)
             });
 
             return vendingMachineApplication;

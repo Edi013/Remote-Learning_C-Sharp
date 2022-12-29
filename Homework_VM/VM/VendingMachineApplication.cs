@@ -22,7 +22,7 @@ namespace iQuest.VendingMachine
 
         public void Run()
         {
-            while (!turnOffWasRequestedChecker.TurnOffWasRequestedStatus)
+            while (!turnOffWasRequestedChecker.Status)
             {
                 try
                 {
