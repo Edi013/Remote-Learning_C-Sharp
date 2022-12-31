@@ -9,7 +9,7 @@ namespace iQuest.VendingMachine.UseCases
     internal class LoginUseCase : IUseCase
     {
         private readonly IMainDisplay mainDisplay;
-        IAuthenticationService authenticationService;
+        private readonly IAuthenticationService authenticationService;
 
         public string Name => "login";
 
@@ -20,7 +20,7 @@ namespace iQuest.VendingMachine.UseCases
         public LoginUseCase(IMainDisplay mainDisplay, IAuthenticationService authenticationService)
         {
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
-            this.authenticationService = authenticationService;
+            this.authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
 
         public void Execute()

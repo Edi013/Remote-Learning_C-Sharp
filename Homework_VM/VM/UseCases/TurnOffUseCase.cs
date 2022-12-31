@@ -17,8 +17,8 @@ namespace iQuest.VendingMachine.UseCases
 
         public TurnOffUseCase(ITurnOffWasRequestedChecker turnOffWasRequestedChecker, IAuthenticationService authenticationService)
         {
-            this.turnOffWasRequestedChecker = turnOffWasRequestedChecker;
-            this.authenticationService = authenticationService;
+            this.turnOffWasRequestedChecker = turnOffWasRequestedChecker ?? throw new ArgumentNullException(nameof(turnOffWasRequestedChecker));
+            this.authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
 
         public void Execute()

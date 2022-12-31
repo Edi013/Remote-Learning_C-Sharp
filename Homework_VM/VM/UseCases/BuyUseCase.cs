@@ -20,9 +20,9 @@ namespace iQuest.VendingMachine.UseCases
 
         public BuyUseCase(IBuyView buyView, IAuthenticationService authenticationService, IProductRepository productRepository)
         {
-            this.buyView = buyView;
-            this.authenticationService = authenticationService;
-            this.productRepository = productRepository;
+            this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
+            this.authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
+            this.productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         }
 
         public void Execute()
