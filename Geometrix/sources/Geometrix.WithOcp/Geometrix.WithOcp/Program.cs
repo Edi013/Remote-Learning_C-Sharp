@@ -12,7 +12,8 @@ namespace iQuest.Geometrix.WithOcp
                 GeometricShapes geometricShapes = new GeometricShapes
                 {
                     new Rectangle { Height = 4, Width = 7 },
-                    new Circle { Radius = 5 }
+                    new Circle { Radius = 5 },
+                    new Triangle {Base = 5, Height = 4}
                 };
 
                 double area = geometricShapes.CalculateArea();
