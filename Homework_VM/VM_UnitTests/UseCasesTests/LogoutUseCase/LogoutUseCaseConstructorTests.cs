@@ -12,17 +12,11 @@ namespace VM_UnitTests.UseCasesTests
     {
         private IAuthenticationService authenticationService;
 
-        /*public LogoutUseCaseConstructorTests()
-        {
-        }*/
-
         [Fact]
         public void HavingOneArgumentNull_ThrowsException()
         {
             authenticationService = null;
             Assert.Throws<ArgumentNullException>(() => new LogoutUseCase(authenticationService));
-            authenticationService = new AuthenticationService();
         }
-
     }
 }

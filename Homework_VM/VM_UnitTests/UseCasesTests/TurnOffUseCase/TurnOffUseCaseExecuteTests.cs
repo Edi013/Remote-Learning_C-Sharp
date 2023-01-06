@@ -20,7 +20,7 @@ namespace VM_UnitTests.UseCasesTests
         public TurnOffUseCaseExecuteTests()
         {
             authenticationService = new Mock<IAuthenticationService>();
-            turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
+            turnOffWasRequestedChecker = new TurnOffService();
         }
 
         [Fact]

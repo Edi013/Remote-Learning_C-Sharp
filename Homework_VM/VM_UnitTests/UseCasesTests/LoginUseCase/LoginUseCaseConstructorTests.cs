@@ -15,12 +15,6 @@ namespace VM_UnitTests.UseCasesTests
         private IMainDisplay mainDisplay;
         private IAuthenticationService  authenticationService;
 
-       /* public LoginUseCaseConstructorTests()
-        {
-             mainDisplay = new MainDisplay();
-             authenticationService = new AuthenticationService();
-        }*/
-
         [Fact]
         public void HavingOneArgumentNull_ThrowsException()
         {
@@ -30,8 +24,6 @@ namespace VM_UnitTests.UseCasesTests
 
             authenticationService = null;
             Assert.Throws<ArgumentNullException>(() => new LoginUseCase(mainDisplay, authenticationService));
-            authenticationService = new AuthenticationService();
         }
-
     }
 }

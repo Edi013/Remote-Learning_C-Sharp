@@ -17,14 +17,6 @@ namespace VM_UnitTests.UseCasesTests
         private  AuthenticationService authenticationService;
         private  BuyView buyView;
 
-
-       /* public BuyUseCaseConstructorTests()
-        {
-            productRepository = new ProductRepository();
-            authenticationService = new AuthenticationService();
-            buyView = new BuyView();
-        }*/
-
         [Fact]
         public void HavingOneArgumentNull_ThrowsException()
         {
@@ -38,8 +30,6 @@ namespace VM_UnitTests.UseCasesTests
 
             productRepository = null;
             Assert.Throws<ArgumentNullException>(() => new BuyUseCase(buyView, authenticationService, productRepository));
-            productRepository = new ProductRepository();
         }
-
     }
 }

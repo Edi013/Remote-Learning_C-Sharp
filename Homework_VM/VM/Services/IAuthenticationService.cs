@@ -8,7 +8,7 @@ namespace iQuest.VendingMachine.Services
 {
     internal interface IAuthenticationService
     {
-        public bool IsUserAuthenticated { get; set; }
+        public bool IsUserAuthenticated { get;}
         public void Login(string userInputedPassword);
         public void Logout();
 

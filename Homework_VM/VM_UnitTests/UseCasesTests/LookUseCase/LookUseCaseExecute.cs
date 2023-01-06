@@ -28,49 +28,13 @@ namespace VM_UnitTests.UseCasesTests
         [Fact]
         public void HavingProductsInRepository_ThanOutputsProducts()
         {
-           /* List<Product> products = new List<Product>()
-            {
-                new Product(1, "testProduct", 3.33f, 3)
-            };
-
-            productRepository
-                .Setup(x => x.GetAll())
-                .Returns(products);
-
-            LookUseCase lookUseCase = new LookUseCase(productRepository.Object, shelfView);
-
-
-            string expectedMsg = expectedMessage + products[0].ToString();
-            var reader = new StreamReader(expectedMsg);
-            var textWriter = new TextWriter();
-
-            string line;
-            StringBuilder storage = new StringBuilder();
-            while ((line = Console.ReadLine()) != null)
-            {
-                storage.Append(line);
-            }
-            lookUseCase.Execute();
-
-            Assert.Equal(1, 2);
-           */
+          
         }
 
         [Fact]
         public void HavingNoProductsInRepository_ThanCanExecuteIsFalse()
         {
-          /*  List<Product> products = new List<Product>()
-            {
-            };
-
-            productRepository
-                .Setup(x => x.GetAll())
-                .Returns(products);
-
-            LookUseCase lookUseCase = new LookUseCase(productRepository.Object, shelfView.Object);
-
-            Assert.Equal(1, 2);
-          */
+          
         }
     }
 }

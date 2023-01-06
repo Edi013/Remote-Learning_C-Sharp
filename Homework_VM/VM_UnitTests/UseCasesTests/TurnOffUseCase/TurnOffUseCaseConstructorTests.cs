@@ -13,25 +13,23 @@ namespace VM_UnitTests.UseCasesTests
     public class TurnOffUseCaseConstructorTests
     {
         private IAuthenticationService authenticationService;
-        private ITurnOffWasRequestedChecker turnOffWasRequestedChecker;
+        private ITurnOffService turnOffService;
 
         public TurnOffUseCaseConstructorTests()
         {
-            turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
+            turnOffService = new TurnOffService();
             authenticationService = new AuthenticationService();
         }
 
         [Fact]
         public void Having3Arguments_WithEitherNull_ThrowsException()
         {
-            turnOffWasRequestedChecker = null;
-            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffWasRequestedChecker, authenticationService));
-            turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
+            turnOffService = null;
+            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffService, authenticationService));
+            turnOffService = new TurnOffService();
 
             authenticationService = null;
-            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffWasRequestedChecker, authenticationService));
-            authenticationService = new AuthenticationService();
+            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffService, authenticationService));
         }
-
     }
 }

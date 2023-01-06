@@ -15,12 +15,6 @@ namespace VM_UnitTests.UseCasesTests
         private  IProductRepository productRepository;
         private  IShelfView shelfView;
 
-       /* public LookUseCaseConstructorTests()
-        {
-            productRepository = new ProductRepository();
-            view = new ShelfView();
-        }*/
-
         [Fact]
         public void Having3Arguments_WithEitherNull_ThrowsException()
         {
@@ -30,7 +24,6 @@ namespace VM_UnitTests.UseCasesTests
 
             shelfView = null;
             Assert.Throws<ArgumentNullException>(() => new LookUseCase(productRepository, shelfView));
-            shelfView = new ShelfView();
         }
     }
 }
