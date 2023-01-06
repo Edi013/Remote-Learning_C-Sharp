@@ -34,7 +34,7 @@ namespace iQuest.VendingMachine.UseCases
                 paymentMethodIndex == 1 
                 ? new CardPayment() 
                 : new CashPayment();
-
+                
             paymentMethod.Run(price);
         }
     }

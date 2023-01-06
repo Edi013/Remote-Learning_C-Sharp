@@ -39,11 +39,22 @@ namespace iQuest.VendingMachine.UseCases
                 throw new ProductNotAvailableException();
             }
 
-            PaymentUseCase payment = new PaymentUseCase(buyView, authenticationService);
-            payment.Execute(wantedProduct.Price);
+            try
+            {
+                PaymentUseCase payment = new PaymentUseCase(buyView, authenticationService);
+                payment.Execute(wantedProduct.Price);
 
-            wantedProduct.Quantity--;
-            buyView.DispenseProduct(wantedProduct.Name);
+                wantedProduct.Quantity--;
+                buyView.DispenseProduct(wantedProduct.Name);
+            }
+            catch (InvalidCardNumberException e)
+            {
+                Console.WriteLine("invalid card number");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("payment service initilization erro");
+            }   
         }
     }
 }

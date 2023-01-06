@@ -26,5 +26,12 @@ namespace iQuest.VendingMachine.PresentationLayer
             Console.WriteLine("Transaction done!");
             Console.WriteLine();
         }
+        public void TransactionFailed()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Transaction failed!");
+            Console.WriteLine();
+            throw new InvalidCardNumberException();
+        }
     }
 }
