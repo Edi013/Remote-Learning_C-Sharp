@@ -39,6 +39,9 @@ namespace iQuest.VendingMachine.UseCases
                 throw new ProductNotAvailableException();
             }
 
+            PaymentUseCase payment = new PaymentUseCase(buyView, authenticationService);
+            payment.Execute(wantedProduct.Price);
+
             wantedProduct.Quantity--;
             buyView.DispenseProduct(wantedProduct.Name);
         }

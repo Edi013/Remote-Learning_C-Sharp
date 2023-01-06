@@ -8,6 +8,7 @@ namespace iQuest.VendingMachine.UseCases
     {
         private readonly IBuyView buyView;
         private readonly IAuthenticationService authenticationSerivce;
+        private          IPaymentAlgorithm paymentMethod;
 
         private readonly List<PaymentMethod> paymentMethods;
 
@@ -28,8 +29,13 @@ namespace iQuest.VendingMachine.UseCases
         public void Execute(float price)
         {
             int paymentMethodIndex = buyView.AskForPaymentMethod(paymentMethods);
+            
+            paymentMethod = 
+                paymentMethodIndex == 1 
+                ? new CardPayment() 
+                : new CashPayment();
 
-
+            paymentMethod.Run(price);
         }
     }
 }
