@@ -1,24 +1,25 @@
-﻿using iQuest.VendingMachine.Classes;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
+﻿using iQuest.VendingMachine.Services;
 using iQuest.VendingMachine.UseCases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VM_UnitTests.UseCasesTests
 {
     public class TurnOffUseCaseConstructorTests
     {
-        private IAuthenticationService authenticationService;
         private ITurnOffService turnOffService;
+        private IAuthenticationService authenticationService;
 
-        public TurnOffUseCaseConstructorTests()
+        [Fact]
+        public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
         {
+            string nameText = "exit";
+            string descriptionText = "Go to live your life.";
+
             turnOffService = new TurnOffService();
             authenticationService = new AuthenticationService();
+
+            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffService, authenticationService);
+            Assert.Equal(nameText, turnOffUseCase.Name);
+            Assert.Equal(descriptionText, turnOffUseCase.Description);
         }
 
         [Fact]

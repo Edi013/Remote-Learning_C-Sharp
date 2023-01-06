@@ -16,6 +16,20 @@ namespace VM_UnitTests.UseCasesTests
         private  IShelfView shelfView;
 
         [Fact]
+        public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
+        {
+            string nameText = "See products";
+            string descriptionText = "This is our stock.";
+
+            productRepository = new ProductRepository();
+            shelfView = new ShelfView();
+
+            LookUseCase lookUseCase = new LookUseCase(productRepository, shelfView);
+            Assert.Equal(nameText, lookUseCase.Name);
+            Assert.Equal(descriptionText, lookUseCase.Description);
+        }
+
+        [Fact]
         public void Having3Arguments_WithEitherNull_ThrowsException()
         {
             productRepository = null;

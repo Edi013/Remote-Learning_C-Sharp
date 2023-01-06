@@ -20,7 +20,7 @@ namespace VM_UnitTests.UseCasesTests
         [Fact]
         public void HavingAdminLoggedIn_ThenLogOut()
         {
-            authenticationService.IsUserAuthenticated = true;
+            authenticationService.Login("supercalifragilisticexpialidocious");
 
             LogoutUseCase logoutUseCase = new LogoutUseCase(authenticationService);
 

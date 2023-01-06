@@ -16,6 +16,20 @@ namespace VM_UnitTests.UseCasesTests
         private IAuthenticationService  authenticationService;
 
         [Fact]
+        public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
+        {
+            string nameText = "login";
+            string descriptionText = "Get access to administration buttons.";
+
+            mainDisplay = new MainDisplay();
+            authenticationService = new AuthenticationService();
+
+            LoginUseCase loginUseCase = new LoginUseCase(mainDisplay, authenticationService);
+            Assert.Equal(nameText, loginUseCase.Name);
+            Assert.Equal(descriptionText, loginUseCase.Description);
+        }
+
+        [Fact]
         public void HavingOneArgumentNull_ThrowsException()
         {
             mainDisplay = null;
