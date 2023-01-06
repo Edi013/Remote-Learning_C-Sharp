@@ -4,7 +4,7 @@ using iQuest.VendingMachine.Exceptions;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
-    internal class BuyView : DisplayBase
+    internal class BuyView : DisplayBase, IBuyView
     {
 
         public int RequestProduct()
@@ -14,8 +14,8 @@ namespace iQuest.VendingMachine.PresentationLayer
             Console.WriteLine();
             DisplayLine($"Type the column number of the desired product:", ConsoleColor.White);
             Console.WriteLine();
-        
-            string userInput= Console.ReadLine();
+
+            string userInput = Console.ReadLine();
 
             if(string.IsNullOrWhiteSpace(userInput))
             {

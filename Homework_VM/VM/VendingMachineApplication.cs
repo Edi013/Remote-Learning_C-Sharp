@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.Exceptions;
+using iQuest.VendingMachine.Interfaces;
+using iQuest.VendingMachine.Services;
+
 
 namespace iQuest.VendingMachine
 {
@@ -10,22 +13,17 @@ namespace iQuest.VendingMachine
     {
         private readonly List<IUseCase> useCases;
         private readonly MainDisplay mainDisplay;
-
-        private bool turnOffWasRequested;
-
-        public bool UserIsLoggedIn { get; set; }
-
-        public VendingMachineApplication(List<IUseCase> useCases, MainDisplay mainDisplay)
+        private TurnOffService turnOffWasRequestedChecker;
+        public VendingMachineApplication(List<IUseCase> useCases, MainDisplay mainDisplay, TurnOffService turnOffWasRequestedChecker)
         {
             this.useCases = useCases ?? throw new ArgumentNullException(nameof(useCases));
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
+            this.turnOffWasRequestedChecker = turnOffWasRequestedChecker ?? throw new ArgumentNullException(nameof(useCases));
         }
 
         public void Run()
         {
-            turnOffWasRequested = false;
-
-            while (!turnOffWasRequested)
+            while (!turnOffWasRequestedChecker.Status)
             {
                 try
                 {
@@ -34,7 +32,7 @@ namespace iQuest.VendingMachine
                     IUseCase useCase = mainDisplay.ChooseCommand(availableUseCases);
                     useCase.Execute();
                 }
-                catch(CancelException e )
+                catch(CancelException e)
                 {
                     Console.WriteLine(e.Message);
                 }
@@ -58,11 +56,6 @@ namespace iQuest.VendingMachine
                     Console.WriteLine(e.Message);
                 }
             }
-        }
-
-        public void TurnOff()
-        {
-            turnOffWasRequested = true;
         }
     }
 }
