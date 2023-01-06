@@ -28,7 +28,7 @@ namespace VM_UnitTests.UseCasesTests
         [Fact]
         public void HavingNoAdminLoggedInAndCorrectPassword_ThanLogIn()
         {
-            authenticationService.IsUserAuthenticated = false;
+            authenticationService.Logout();
 
             mainDisplay
                 .Setup(x => x.AskForPassword())

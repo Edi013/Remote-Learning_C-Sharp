@@ -1,26 +1,19 @@
-﻿using iQuest.VendingMachine.Classes;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
+﻿using iQuest.VendingMachine.Services;
 using iQuest.VendingMachine.UseCases;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VM_UnitTests.UseCasesTests
 {
     public class TurnOffUseCaseExecuteTests
     {
         private readonly Mock<IAuthenticationService> authenticationService;
-        private readonly ITurnOffWasRequestedChecker turnOffWasRequestedChecker;
+        private readonly ITurnOffService turnOffService;
 
 
         public TurnOffUseCaseExecuteTests()
         {
             authenticationService = new Mock<IAuthenticationService>();
-            turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
+            turnOffService = new TurnOffService();
         }
 
         [Fact]
@@ -30,11 +23,11 @@ namespace VM_UnitTests.UseCasesTests
                 .Setup(x => x.IsUserAuthenticated)
                 .Returns(true);
 
-            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffWasRequestedChecker, authenticationService.Object);
+            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffService, authenticationService.Object);
 
             turnOffUseCase.Execute();
 
-            Assert.True(turnOffWasRequestedChecker.Status);
+            Assert.True(turnOffService.Status);
         }
     }
 }

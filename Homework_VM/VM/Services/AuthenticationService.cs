@@ -10,7 +10,8 @@ namespace iQuest.VendingMachine.Services
 {
     internal class AuthenticationService : IAuthenticationService
     {
-        public bool IsUserAuthenticated { get; set; }
+        private bool isUserAuthenticated;
+        public bool IsUserAuthenticated { get => isUserAuthenticated; private set => isUserAuthenticated = value; }
 
         internal AuthenticationService()
         {

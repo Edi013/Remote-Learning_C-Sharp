@@ -2,12 +2,6 @@
 using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.Services;
 using iQuest.VendingMachine.UseCases;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VM_UnitTests.UseCasesTests
 {
@@ -17,13 +11,20 @@ namespace VM_UnitTests.UseCasesTests
         private  AuthenticationService authenticationService;
         private  BuyView buyView;
 
-
-       /* public BuyUseCaseConstructorTests()
+        [Fact]
+        public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
         {
-            productRepository = new ProductRepository();
-            authenticationService = new AuthenticationService();
+            string nameText = "Buy";
+            string descriptionText = "You will buy something.";
+
             buyView = new BuyView();
-        }*/
+            authenticationService = new AuthenticationService();
+            productRepository = new ProductRepository();
+
+            BuyUseCase buyUseCase = new BuyUseCase(buyView, authenticationService, productRepository);
+            Assert.Equal(nameText, buyUseCase.Name);
+            Assert.Equal(descriptionText, buyUseCase.Description);
+        }
 
         [Fact]
         public void HavingOneArgumentNull_ThrowsException()
@@ -38,8 +39,6 @@ namespace VM_UnitTests.UseCasesTests
 
             productRepository = null;
             Assert.Throws<ArgumentNullException>(() => new BuyUseCase(buyView, authenticationService, productRepository));
-            productRepository = new ProductRepository();
         }
-
     }
 }

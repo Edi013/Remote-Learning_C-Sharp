@@ -15,11 +15,19 @@ namespace VM_UnitTests.UseCasesTests
         private  IProductRepository productRepository;
         private  IShelfView shelfView;
 
-       /* public LookUseCaseConstructorTests()
+        [Fact]
+        public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
         {
+            string nameText = "See products";
+            string descriptionText = "This is our stock.";
+
             productRepository = new ProductRepository();
-            view = new ShelfView();
-        }*/
+            shelfView = new ShelfView();
+
+            LookUseCase lookUseCase = new LookUseCase(productRepository, shelfView);
+            Assert.Equal(nameText, lookUseCase.Name);
+            Assert.Equal(descriptionText, lookUseCase.Description);
+        }
 
         [Fact]
         public void Having3Arguments_WithEitherNull_ThrowsException()
@@ -30,7 +38,6 @@ namespace VM_UnitTests.UseCasesTests
 
             shelfView = null;
             Assert.Throws<ArgumentNullException>(() => new LookUseCase(productRepository, shelfView));
-            shelfView = new ShelfView();
         }
     }
 }

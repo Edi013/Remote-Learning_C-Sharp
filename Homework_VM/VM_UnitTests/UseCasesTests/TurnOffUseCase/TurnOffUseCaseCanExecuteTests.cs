@@ -1,5 +1,4 @@
-﻿using iQuest.VendingMachine.Classes;
-using iQuest.VendingMachine.Interfaces;
+﻿using iQuest.VendingMachine.Interfaces;
 using iQuest.VendingMachine.Services;
 using iQuest.VendingMachine.UseCases;
 using Moq;
@@ -14,20 +13,20 @@ namespace VM_UnitTests.UseCasesTests
     public class TurnOffUseCaseCanExecuteTests
     {
         private readonly AuthenticationService authenticationService;
-        private readonly Mock<ITurnOffWasRequestedChecker> turnOffWasRequestedChecker;
+        private readonly Mock<ITurnOffService> turnOffService;
 
         public TurnOffUseCaseCanExecuteTests()
         {
             authenticationService = new AuthenticationService();
-            turnOffWasRequestedChecker = new Mock<ITurnOffWasRequestedChecker>();
+            turnOffService = new Mock<ITurnOffService>();
         }
 
         [Fact]
         public void HavingAdminLoggedIn_ThanCanExecute()
         {
-            authenticationService.IsUserAuthenticated = true;
+            authenticationService.Login("supercalifragilisticexpialidocious");
 
-            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffWasRequestedChecker.Object, authenticationService);
+            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffService.Object, authenticationService);
 
             Assert.True(turnOffUseCase.CanExecute);
         }
@@ -35,9 +34,9 @@ namespace VM_UnitTests.UseCasesTests
         [Fact]
         public void HavingNoAdminLoggedIn_ThanCanNotExecute()
         {
-            authenticationService.IsUserAuthenticated = false;
+            authenticationService.Logout();
 
-            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffWasRequestedChecker.Object, authenticationService);
+            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffService.Object, authenticationService);
 
             Assert.False(turnOffUseCase.CanExecute);
         }

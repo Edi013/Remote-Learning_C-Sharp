@@ -15,11 +15,19 @@ namespace VM_UnitTests.UseCasesTests
         private IMainDisplay mainDisplay;
         private IAuthenticationService  authenticationService;
 
-       /* public LoginUseCaseConstructorTests()
+        [Fact]
+        public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
         {
-             mainDisplay = new MainDisplay();
-             authenticationService = new AuthenticationService();
-        }*/
+            string nameText = "login";
+            string descriptionText = "Get access to administration buttons.";
+
+            mainDisplay = new MainDisplay();
+            authenticationService = new AuthenticationService();
+
+            LoginUseCase loginUseCase = new LoginUseCase(mainDisplay, authenticationService);
+            Assert.Equal(nameText, loginUseCase.Name);
+            Assert.Equal(descriptionText, loginUseCase.Description);
+        }
 
         [Fact]
         public void HavingOneArgumentNull_ThrowsException()
@@ -30,8 +38,6 @@ namespace VM_UnitTests.UseCasesTests
 
             authenticationService = null;
             Assert.Throws<ArgumentNullException>(() => new LoginUseCase(mainDisplay, authenticationService));
-            authenticationService = new AuthenticationService();
         }
-
     }
 }

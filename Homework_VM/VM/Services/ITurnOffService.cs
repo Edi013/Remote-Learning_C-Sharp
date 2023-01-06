@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iQuest.VendingMachine.Interfaces
+namespace iQuest.VendingMachine.Services
 {
-    internal interface ITurnOffWasRequestedChecker
+    internal interface ITurnOffService
     {
-        public bool Status { get; set; }
+        public bool Status { get; }
         public void TurnOff();
     }
 }

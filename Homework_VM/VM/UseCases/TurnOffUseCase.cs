@@ -1,5 +1,4 @@
 ﻿using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Classes;
 using iQuest.VendingMachine.Services;
 
 namespace iQuest.VendingMachine.UseCases
@@ -7,7 +6,7 @@ namespace iQuest.VendingMachine.UseCases
     internal class TurnOffUseCase : IUseCase
     {
         private readonly IAuthenticationService authenticationService;
-        private readonly ITurnOffWasRequestedChecker turnOffWasRequestedChecker;
+        private readonly ITurnOffService turnOffSerivce;
 
         public string Name => "exit";
 
@@ -15,15 +14,15 @@ namespace iQuest.VendingMachine.UseCases
 
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
-        public TurnOffUseCase(ITurnOffWasRequestedChecker turnOffWasRequestedChecker, IAuthenticationService authenticationService)
+        public TurnOffUseCase(ITurnOffService turnOffSerivce, IAuthenticationService authenticationService)
         {
-            this.turnOffWasRequestedChecker = turnOffWasRequestedChecker ?? throw new ArgumentNullException(nameof(turnOffWasRequestedChecker));
+            this.turnOffSerivce = turnOffSerivce ?? throw new ArgumentNullException(nameof(turnOffSerivce));
             this.authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
         }
 
         public void Execute()
         {
-            turnOffWasRequestedChecker.TurnOff();
+            turnOffSerivce.TurnOff();
         }
     }
 }

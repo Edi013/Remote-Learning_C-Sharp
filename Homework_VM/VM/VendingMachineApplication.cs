@@ -4,7 +4,8 @@ using System.Linq;
 using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.Exceptions;
 using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Classes;
+using iQuest.VendingMachine.Services;
+
 
 namespace iQuest.VendingMachine
 {
@@ -12,8 +13,8 @@ namespace iQuest.VendingMachine
     {
         private readonly List<IUseCase> useCases;
         private readonly MainDisplay mainDisplay;
-        private TurnOffWasRequestedChecker turnOffWasRequestedChecker;
-        public VendingMachineApplication(List<IUseCase> useCases, MainDisplay mainDisplay, TurnOffWasRequestedChecker turnOffWasRequestedChecker)
+        private TurnOffService turnOffWasRequestedChecker;
+        public VendingMachineApplication(List<IUseCase> useCases, MainDisplay mainDisplay, TurnOffService turnOffWasRequestedChecker)
         {
             this.useCases = useCases ?? throw new ArgumentNullException(nameof(useCases));
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));

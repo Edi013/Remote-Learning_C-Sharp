@@ -1,37 +1,36 @@
-﻿using iQuest.VendingMachine.Classes;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
+﻿using iQuest.VendingMachine.Services;
 using iQuest.VendingMachine.UseCases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VM_UnitTests.UseCasesTests
 {
     public class TurnOffUseCaseConstructorTests
     {
+        private ITurnOffService turnOffService;
         private IAuthenticationService authenticationService;
-        private ITurnOffWasRequestedChecker turnOffWasRequestedChecker;
 
-        public TurnOffUseCaseConstructorTests()
+        [Fact]
+        public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
         {
-            turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
+            string nameText = "exit";
+            string descriptionText = "Go to live your life.";
+
+            turnOffService = new TurnOffService();
             authenticationService = new AuthenticationService();
+
+            TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffService, authenticationService);
+            Assert.Equal(nameText, turnOffUseCase.Name);
+            Assert.Equal(descriptionText, turnOffUseCase.Description);
         }
 
         [Fact]
         public void Having3Arguments_WithEitherNull_ThrowsException()
         {
-            turnOffWasRequestedChecker = null;
-            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffWasRequestedChecker, authenticationService));
-            turnOffWasRequestedChecker = new TurnOffWasRequestedChecker();
+            turnOffService = null;
+            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffService, authenticationService));
+            turnOffService = new TurnOffService();
 
             authenticationService = null;
-            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffWasRequestedChecker, authenticationService));
-            authenticationService = new AuthenticationService();
+            Assert.Throws<ArgumentNullException>(() => new TurnOffUseCase(turnOffService, authenticationService));
         }
-
     }
 }
