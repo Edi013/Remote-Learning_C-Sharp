@@ -32,18 +32,40 @@ namespace iQuest.VendingMachine.UseCases
             
             int[] cardNumber = new int[cardNumberLength];
             for(int i = 0; i < cardNumberLength; i++)
-                cardNumber[i] = int.Parse(Char.ToString(userInput[i]));
+                cardNumber[cardNumberLength - 1 - i] = int.Parse(Char.ToString(userInput[i]));
 
             for (int i = 0; i < cardNumberLength; i++)
             {
-                if (i % 2 == 0)
-                    sum = sum + cardNumber[i];
-                else if (cardNumber[i] > 4)
-                    sum += 2 * cardNumber[i] - 9;
+                bool isOddPositionInNumber = i % 2 != 0;
+
+                if (isOddPositionInNumber)
+                {
+                    int newNumberOfOddPosition = cardNumber[i] * 2;
+
+                    if (newNumberOfOddPosition  > 9)
+                    {
+                        sum += SumOfDigits(newNumberOfOddPosition);
+                    }
+                    else
+                        sum = sum + newNumberOfOddPosition;
+                }
                 else
-                    sum += 2 * cardNumber[i];
-            }
+                    sum = sum + cardNumber[i];
+            }//4012888888881881  
             return sum % 10 == 0;
+        }
+
+        private int SumOfDigits(int number)
+        {
+            int sum = 0;
+            while (number > 0)
+            {
+                int lastDigit = number % 10;
+                number /= 10;
+
+                sum+= lastDigit;
+            }
+            return sum;
         }
     }
 }
