@@ -20,6 +20,9 @@ namespace iQuest.Geometrix.NoOcp.ShapeModel
                     case Circle circle:
                         area += circle.Radius * circle.Radius * Math.PI;
                         break;
+                    case Triangle triangle:
+                        area += (triangle.Height * triangle.Base) / 2;
+                        break;
 
                     default:
                         throw new Exception("Unknown shape.");
