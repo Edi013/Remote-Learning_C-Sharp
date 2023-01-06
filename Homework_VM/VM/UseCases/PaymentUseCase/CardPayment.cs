@@ -9,13 +9,19 @@ namespace iQuest.VendingMachine.UseCases
 
         public string Name => "Card";
 
-        public CardPayment() { }
+        public CardPayment() 
+        {
+            terminal = new CardPaymentTerminal();
+        }
 
         public void Run(float price)
         {
             string cardNumber = terminal.AskForCardNumber();
 
 
+            //validate card nr
+
+            terminal.TransactionDone();
         }
     }
 }

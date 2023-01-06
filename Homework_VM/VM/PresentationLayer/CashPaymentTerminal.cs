@@ -11,13 +11,13 @@ namespace iQuest.VendingMachine.PresentationLayer
     {
         public float AskForMoney(float price) 
         {
-            int inputMoneySum;
+            float inputMoneySum;
 
             Console.WriteLine();
             Console.WriteLine($"Waiting for cash payment, you have to pay {price} more");
             Console.WriteLine();
 
-            inputMoneySum = int.Parse(Console.ReadLine());
+            inputMoneySum = float.Parse(Console.ReadLine());
 
             return inputMoneySum;
         }

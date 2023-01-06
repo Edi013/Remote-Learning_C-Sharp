@@ -20,5 +20,11 @@ namespace iQuest.VendingMachine.PresentationLayer
 
             return userInput;
         }
+        public void TransactionDone()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Transaction done!");
+            Console.WriteLine();
+        }
     }
 }
