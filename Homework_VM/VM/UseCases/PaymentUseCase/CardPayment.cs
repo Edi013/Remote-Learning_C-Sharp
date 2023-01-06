@@ -5,13 +5,13 @@ namespace iQuest.VendingMachine.UseCases
 {
     internal class CardPayment : IPaymentAlgorithm
     {
-        private CardPaymentTerminal terminal;
+        private ICardPaymentTerminal terminal;
 
         public string Name => "Card";
 
-        public CardPayment() 
+        public CardPayment(ICardPaymentTerminal terminal) 
         {
-            terminal = new CardPaymentTerminal();
+            this.terminal = terminal;
         }
 
         public void Run(float price)
@@ -24,7 +24,7 @@ namespace iQuest.VendingMachine.UseCases
                 terminal.TransactionFailed();
         }
 
-        private bool ValidateCardNumber(string userInput)
+        public bool ValidateCardNumber(string userInput)
         {
             int cardNumberLength = userInput.Length;
             int sum = 0;
@@ -38,20 +38,20 @@ namespace iQuest.VendingMachine.UseCases
             {
                 bool isOddPositionInNumber = i % 2 != 0;
 
-                if (isOddPositionInNumber)
+                if (!isOddPositionInNumber)
+                    sum = sum + cardNumber[i];
+                else
                 {
                     int newNumberOfOddPosition = cardNumber[i] * 2;
 
-                    if (newNumberOfOddPosition  > 9)
+                    if (newNumberOfOddPosition > 9)
                     {
                         sum += SumOfDigits(newNumberOfOddPosition);
                     }
                     else
                         sum = sum + newNumberOfOddPosition;
                 }
-                else
-                    sum = sum + cardNumber[i];
-            }//4012888888881881  
+            }  
             return sum % 10 == 0;
         }
 

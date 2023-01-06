@@ -9,9 +9,9 @@ namespace iQuest.VendingMachine.UseCases
 
         public string Name => "Cash";
         
-        public CashPayment() 
+        public CashPayment(CashPaymentTerminal terminal) 
         {
-            terminal = new CashPaymentTerminal();
+            this.terminal = terminal;
         }
 
         public void Run(float price)

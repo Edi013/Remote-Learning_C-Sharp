@@ -32,8 +32,8 @@ namespace iQuest.VendingMachine.UseCases
             
             paymentMethod = 
                 paymentMethodIndex == 1 
-                ? new CardPayment() 
-                : new CashPayment();
+                ? new CardPayment(new CardPaymentTerminal()) 
+                : new CashPayment(new CashPaymentTerminal());
                 
             paymentMethod.Run(price);
         }

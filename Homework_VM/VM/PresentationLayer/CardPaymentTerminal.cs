@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
-    internal class CardPaymentTerminal
+    internal class CardPaymentTerminal : ICardPaymentTerminal
     {
         public string AskForCardNumber()
         {
