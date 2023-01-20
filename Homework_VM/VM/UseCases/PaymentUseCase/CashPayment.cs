@@ -17,15 +17,18 @@ namespace iQuest.VendingMachine.UseCases
         public void Run(float price)
         {
             float sumPayed = 0;
-
-            while(price > sumPayed)
+            try
             {
+                while(price > sumPayed)
+                {
                 
-                float input = terminal.AskForMoney(price - sumPayed);
+                    float input = terminal.AskForMoney(price - sumPayed);
 
-                sumPayed += input;
+                    sumPayed += input;
+                }
+
             }
-
+            catch(InvalidInput)
             if(price != sumPayed)
                 terminal.GiveBackChange(sumPayed - price);
         }

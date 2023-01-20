@@ -17,7 +17,9 @@ namespace iQuest.VendingMachine.PresentationLayer
             Console.WriteLine($"Waiting for cash payment, you have to pay {price} more");
             Console.WriteLine();
 
-            inputMoneySum = float.Parse(Console.ReadLine());
+            string userInput = Console.ReadLine();
+            if (!float.TryParse(userInput, out inputMoneySum))
+                throw new InvalidInputWhilePayingException();
 
             return inputMoneySum;
         }
