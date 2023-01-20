@@ -29,13 +29,21 @@ namespace iQuest.VendingMachine
             ShelfView shelfView = new ShelfView();
             BuyView buyView = new BuyView();
 
+            List<IPaymentAlgorithm> paymentAlgorithms = new List<IPaymentAlgorithm>
+            {
+                new CardPayment(new CardPaymentTerminal()),
+                new CashPayment(new CashPaymentTerminal())
+            };
+            PaymentUseCase payment = new PaymentUseCase(buyView, paymentAlgorithms); 
+
             useCases.AddRange(new IUseCase[]
             {
+
                 new LoginUseCase(mainDisplay, authenticationService),
                 new LogoutUseCase(authenticationService),
                 new TurnOffUseCase(turnOffService, authenticationService), 
                 new LookUseCase(productRepository, shelfView),
-                new BuyUseCase(buyView, authenticationService, productRepository)
+                new BuyUseCase(buyView, authenticationService, productRepository, payment)
             });
 
             return vendingMachineApplication;
