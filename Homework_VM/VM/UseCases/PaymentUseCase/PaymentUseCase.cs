@@ -28,7 +28,8 @@ namespace iQuest.VendingMachine.UseCases
             int paymentMethodIndex = buyView.AskForPaymentMethod(paymentMethods);
             if (paymentMethodIndex != 1 && paymentMethodIndex != 2)
                 throw new InvalidPaymentMethodException();
-            paymentAlgorithms[paymentMethodIndex].Run(price);
+
+            paymentAlgorithms[paymentMethodIndex-1].Run(price);
         }
     }
 }
