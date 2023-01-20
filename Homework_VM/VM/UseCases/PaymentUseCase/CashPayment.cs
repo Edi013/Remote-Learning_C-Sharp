@@ -1,4 +1,5 @@
-﻿using iQuest.VendingMachine.PresentationLayer;
+﻿using iQuest.VendingMachine.Exceptions;
+using iQuest.VendingMachine.PresentationLayer;
 
 namespace iQuest.VendingMachine.UseCases
 {
@@ -21,14 +22,17 @@ namespace iQuest.VendingMachine.UseCases
             {
                 while(price > sumPayed)
                 {
-                
                     float input = terminal.AskForMoney(price - sumPayed);
 
                     sumPayed += input;
                 }
 
             }
-            catch(InvalidInput)
+            catch(InvalidInputWhilePayingException e)
+            {
+                terminal.ReleaseMoney(sumPayed);   
+            }
+
             if(price != sumPayed)
                 terminal.GiveBackChange(sumPayed - price);
         }
