@@ -2,10 +2,10 @@
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
-    [Serializable]
     internal class InvalidCardNumberException : Exception
     {
-        public InvalidCardNumberException() : base()
+        private const string message = "Invalid card number !";
+        public InvalidCardNumberException(string messageToDisplay = message) : base(messageToDisplay)
         {
         }
     }

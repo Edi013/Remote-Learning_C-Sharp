@@ -32,44 +32,36 @@ namespace iQuest.VendingMachine
                     IUseCase useCase = mainDisplay.ChooseCommand(availableUseCases);
                     useCase.Execute();
                 }
-                catch (InvalidColumnNumberException e)
-                {
-                    Console.WriteLine("Invalid column number!");
-                }
-                catch (ProductNotAvailableException e)
-                {
-                    Console.WriteLine("Product not available!");
-                }
                 catch (InvalidCardNumberException e)
                 {
-                    Console.WriteLine("invalid card number");
+                    mainDisplay.DisplayLine(e.Message);
                 }
                 catch (InvalidInputWhilePayingException e)
                 {
-                    Console.WriteLine(e.Message);
+                    mainDisplay.DisplayLine(e.Message);
                 }
                 catch (CancelException e)
                 {
-                    Console.WriteLine(e.Message);
+                    mainDisplay.DisplayLine(e.Message);
                 }
-                catch(InvalidColumnNumberException e)
+                catch (InvalidColumnNumberException e)
                 {
-                    Console.WriteLine(e.Message);
+                    mainDisplay.DisplayLine(e.Message);
                 }
-                catch(InvalidInputException e )
+                catch (InvalidInputException e )
                 {
-                    Console.WriteLine(e.Message);
+                    mainDisplay.DisplayLine(e.Message);
                 }
-                catch(ProductNotAvailableException e)
+                catch (ProductNotAvailableException e)
                 {
-                    Console.WriteLine(e.Message);
+                    mainDisplay.DisplayLine(e.Message);
                 }
-                catch(InvalidPasswordException e)
+                catch (InvalidPasswordException e)
                 {
-                    Console.WriteLine(e.Message);
+                    mainDisplay.DisplayLine(e.Message);
                 }
-                catch(Exception e){
-                    Console.WriteLine(e.Message);
+                catch (Exception e){
+                    mainDisplay.DisplayLine(e.Message);
                 }
             }
         }
