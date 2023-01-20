@@ -13,7 +13,7 @@ namespace iQuest.Geometrix.WithOcp
                 {
                     new Rectangle { Height = 4, Width = 7 },
                     new Circle { Radius = 5 },
-                    new Triangle {Base = 5, Height = 4}
+                    new Triangle { L1=5, L2=4, L3=3 }
                 };
 
                 double area = geometricShapes.CalculateArea();

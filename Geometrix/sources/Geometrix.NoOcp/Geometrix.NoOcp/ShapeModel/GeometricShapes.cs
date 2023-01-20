@@ -21,7 +21,7 @@ namespace iQuest.Geometrix.NoOcp.ShapeModel
                         area += circle.Radius * circle.Radius * Math.PI;
                         break;
                     case Triangle triangle:
-                        area += (triangle.Height * triangle.Base) / 2;
+                        area += triangle.GetArea();
                         break;
 
                     default:
