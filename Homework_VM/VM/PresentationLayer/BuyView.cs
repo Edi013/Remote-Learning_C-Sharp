@@ -43,7 +43,10 @@ namespace iQuest.VendingMachine.PresentationLayer
 
             Console.WriteLine();
             DisplayLine($"Pick the number of desired payment method:", ConsoleColor.White);
-            DisplayLine("1 - Card\n2 - Cash", ConsoleColor.White);
+            foreach(PaymentMethod method in paymentMethods)
+            {
+                DisplayLine($"{method.Name}: {method.Id}", ConsoleColor.White);
+            }
             Console.WriteLine();
 
             string userInput = Console.ReadLine();
