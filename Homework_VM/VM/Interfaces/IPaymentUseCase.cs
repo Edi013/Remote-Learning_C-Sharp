@@ -6,8 +6,6 @@
 
         public string Description { get; }
 
-        public bool CanExecute { get; }
-
         public void Execute(float price);
     }
 }
