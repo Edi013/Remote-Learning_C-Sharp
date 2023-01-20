@@ -32,40 +32,21 @@ namespace iQuest.VendingMachine.UseCases
 
         public void Execute()
         {
-            try
-            {
-                int columnNumber = buyView.RequestProduct();    
+            int columnNumber = buyView.RequestProduct();    
 
-                Product? wantedProduct = productRepository.GetProductByColumnId(columnNumber);
-                if (wantedProduct == null)
-                {
-                    throw new InvalidColumnNumberException();
-                }
-                if (wantedProduct.Quantity == 0)
-                {
-                    throw new ProductNotAvailableException();
-                }
+            Product? wantedProduct = productRepository.GetProductByColumnId(columnNumber);
+            if (wantedProduct == null)
+            {
+                throw new InvalidColumnNumberException();
+            }
+            if (wantedProduct.Quantity == 0)
+            {
+                throw new ProductNotAvailableException();
+            }
 
-                paymentUseCase.Execute(wantedProduct.Price);
-                wantedProduct.Quantity--;
-                buyView.DispenseProduct(wantedProduct.Name);
-            }
-            catch (InvalidColumnNumberException e)
-            {
-                Console.WriteLine("Invalid column number!");
-            }
-            catch (ProductNotAvailableException e)
-            {
-                Console.WriteLine("Product not available!");
-            }
-            catch (InvalidCardNumberException e)
-            {
-                Console.WriteLine("invalid card number");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("payment service initilization error");
-            }   
+            paymentUseCase.Execute(wantedProduct.Price);
+            wantedProduct.Quantity--;
+            buyView.DispenseProduct(wantedProduct.Name);
         }
     }
 }

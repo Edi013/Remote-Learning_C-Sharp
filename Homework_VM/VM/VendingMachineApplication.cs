@@ -32,7 +32,23 @@ namespace iQuest.VendingMachine
                     IUseCase useCase = mainDisplay.ChooseCommand(availableUseCases);
                     useCase.Execute();
                 }
-                catch(CancelException e)
+                catch (InvalidColumnNumberException e)
+                {
+                    Console.WriteLine("Invalid column number!");
+                }
+                catch (ProductNotAvailableException e)
+                {
+                    Console.WriteLine("Product not available!");
+                }
+                catch (InvalidCardNumberException e)
+                {
+                    Console.WriteLine("invalid card number");
+                }
+                catch (InvalidInputWhilePayingException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                catch (CancelException e)
                 {
                     Console.WriteLine(e.Message);
                 }
