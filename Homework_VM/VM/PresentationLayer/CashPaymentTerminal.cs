@@ -32,7 +32,7 @@ namespace iQuest.VendingMachine.PresentationLayer
         public void ReleaseMoney(float amount)
         {
             Console.WriteLine();
-            Console.WriteLine($"There have been an error.\nYour money will be released.");
+            Console.WriteLine($"Your money will be released.");
             Console.WriteLine($"Releasing change {amount}");
             Console.WriteLine();
         }
