@@ -1,22 +1,20 @@
 ﻿using iQuest.VendingMachine.Interfaces;
 using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Services;
+using iQuest.VendingMachine.Exceptions;
 
 namespace iQuest.VendingMachine.UseCases
 {
     internal class PaymentUseCase : IPaymentUseCase
     {
         private readonly IBuyView buyView;
-        private readonly IAuthenticationService authenticationSerivce;
-        private          IPaymentAlgorithm paymentMethod;
-
+        private readonly List<IPaymentAlgorithm> paymentAlgorithms;
         private readonly List<PaymentMethod> paymentMethods;
 
-        public PaymentUseCase(IBuyView buyView, IAuthenticationService authenticationSerivce) 
+        public PaymentUseCase(IBuyView buyView, List<IPaymentAlgorithm> paymentAlgorithms) 
         {
-            this.authenticationSerivce = authenticationSerivce;
             this.buyView = buyView;
-            paymentMethods =
+            this.paymentAlgorithms = paymentAlgorithms; 
+            this.paymentMethods =
                 new List<PaymentMethod>()
                 {
                     new PaymentMethod(1, "Card"),
@@ -25,17 +23,12 @@ namespace iQuest.VendingMachine.UseCases
         }
         public string Name => "pay";
         public string Description => "Payment method";
-        public bool CanExecute => !authenticationSerivce.IsUserAuthenticated;
         public void Execute(float price)
         {
             int paymentMethodIndex = buyView.AskForPaymentMethod(paymentMethods);
-            
-            paymentMethod = 
-                paymentMethodIndex == 1 
-                ? new CardPayment(new CardPaymentTerminal()) 
-                : new CashPayment(new CashPaymentTerminal());
-                
-            paymentMethod.Run(price);
+            if (paymentMethodIndex != 1 && paymentMethodIndex != 2)
+                throw new InvalidPaymentMethodException();
+            paymentAlgorithms[paymentMethodIndex].Run(price);
         }
     }
 }
