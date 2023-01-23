@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iQuest.VendingMachine.Exceptions;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
@@ -17,6 +13,8 @@ namespace iQuest.VendingMachine.PresentationLayer
             Console.WriteLine();
 
             userInput = Console.ReadLine();
+            if (userInput == "")
+                throw new CancelException();
 
             return userInput;
         }

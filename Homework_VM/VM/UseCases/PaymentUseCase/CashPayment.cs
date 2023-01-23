@@ -33,6 +33,11 @@ namespace iQuest.VendingMachine.UseCases
                 terminal.ReleaseMoney(sumPayed);
                 throw e;
             }
+            catch(CancelException e)
+            {
+                terminal.ReleaseMoney(sumPayed);
+                throw e;
+            }
 
             if(price != sumPayed)
                 terminal.GiveBackChange(sumPayed - price);

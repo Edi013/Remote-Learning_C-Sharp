@@ -18,6 +18,8 @@ namespace iQuest.VendingMachine.PresentationLayer
             Console.WriteLine();
 
             string userInput = Console.ReadLine();
+            if (userInput == "")
+                throw new CancelException();
             if (!float.TryParse(userInput, out inputMoneySum))
                 throw new InvalidInputWhilePayingException();
 
