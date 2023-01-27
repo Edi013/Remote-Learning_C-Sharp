@@ -17,12 +17,14 @@ namespace VM_UnitTests.UseCasesTests
         private readonly Mock<IProductRepository> productRepository;
         private readonly Mock<IAuthenticationService> authenticationService;
         private readonly Mock<IBuyView> buyView;
+        private readonly Mock<IPaymentUseCase> paymentUseCase;
 
         public BuyUseCaseCanExecuteTests()
         {
             productRepository = new Mock<IProductRepository>();
             authenticationService = new Mock<IAuthenticationService>();
             buyView = new Mock<IBuyView>();
+            paymentUseCase = new Mock<IPaymentUseCase>();
         }
 
         [Fact]
@@ -39,7 +41,8 @@ namespace VM_UnitTests.UseCasesTests
             authenticationService
                 .Setup(x => x.IsUserAuthenticated)
                 .Returns(false);
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object);
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
 
             Assert.True(buyUseCase.CanExecute);
         }
@@ -57,7 +60,8 @@ namespace VM_UnitTests.UseCasesTests
             authenticationService
                 .Setup(x => x.IsUserAuthenticated)
                 .Returns(false);
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object);
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
 
             Assert.False(buyUseCase.CanExecute);
         }
@@ -75,7 +79,8 @@ namespace VM_UnitTests.UseCasesTests
             authenticationService
                 .Setup(x => x.IsUserAuthenticated)
                 .Returns(true);
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object);
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
 
             Assert.False(buyUseCase.CanExecute);
         }
@@ -93,7 +98,8 @@ namespace VM_UnitTests.UseCasesTests
             authenticationService
                 .Setup(x => x.IsUserAuthenticated)
                 .Returns(true);
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object);
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
 
             Assert.False(buyUseCase.CanExecute);
         }
