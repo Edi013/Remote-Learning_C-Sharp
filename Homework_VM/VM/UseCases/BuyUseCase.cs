@@ -11,7 +11,7 @@ namespace iQuest.VendingMachine.UseCases
         private readonly IProductRepository productRepository;
         private readonly IBuyView buyView;
         private readonly IAuthenticationService authenticationService;
-        private readonly PaymentUseCase paymentUseCase;
+        private readonly IPaymentUseCase paymentUseCase;
 
         public string Name => "Buy";
 
@@ -21,7 +21,7 @@ namespace iQuest.VendingMachine.UseCases
 
         public BuyUseCase(
             IBuyView buyView, IAuthenticationService authenticationService,
-            IProductRepository productRepository, PaymentUseCase paymentUseCase
+            IProductRepository productRepository, IPaymentUseCase paymentUseCase
             )
         {
             this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
