@@ -28,15 +28,15 @@ namespace iQuest.VendingMachine.UseCases
                 }
 
             }
-            catch(InvalidInputWhilePayingException e)
+            catch(InvalidInputWhilePayingException)
             {
                 terminal.ReleaseMoney(sumPayed);
-                throw e;
+                throw;
             }
-            catch(CancelException e)
+            catch(CancelException)
             {
                 terminal.ReleaseMoney(sumPayed);
-                throw e;
+                throw;
             }
 
             if(price != sumPayed)
