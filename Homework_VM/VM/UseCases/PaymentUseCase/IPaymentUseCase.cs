@@ -1,4 +1,4 @@
-﻿namespace iQuest.VendingMachine.Interfaces
+﻿namespace iQuest.VendingMachine.UseCases
 {
     internal interface IPaymentUseCase
     {
