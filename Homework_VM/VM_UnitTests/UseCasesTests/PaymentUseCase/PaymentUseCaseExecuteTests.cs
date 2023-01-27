@@ -26,21 +26,6 @@ namespace VM_UnitTests.UseCasesTests
                 };
         }
 
-        [Fact]
-        public void ChoosingExistingPayingMethod_WithLegitCard_Than()
-        {
-            buyView
-              .Setup(x => x.AskForPaymentMethod(paymentMethods))
-              .Returns(1);
-        }
-
-        [Fact]
-        public void ChoosingExistingPayingMethod_WithCash_Than()
-        {
-            buyView
-              .Setup(x => x.AskForPaymentMethod(paymentMethods))
-              .Returns(2);
-        }
 
         [Fact]
         public void ChoosingUnexistingPayingMethod_ThanExceptionThrown()
