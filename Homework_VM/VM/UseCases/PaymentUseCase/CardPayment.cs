@@ -5,8 +5,8 @@ namespace iQuest.VendingMachine.UseCases
 {
     internal class CardPayment : IPaymentAlgorithm
     {
-        private ICardPaymentTerminal terminal;
-        private CardValidator validator;
+        private readonly ICardPaymentTerminal terminal;
+        public readonly CardValidator validator;
         public string Name => "Card";
 
         public CardPayment(ICardPaymentTerminal terminal) 

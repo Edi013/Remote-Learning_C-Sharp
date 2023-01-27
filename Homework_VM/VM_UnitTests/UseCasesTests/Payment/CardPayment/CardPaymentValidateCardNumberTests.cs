@@ -19,12 +19,12 @@ namespace VM_UnitTests.UseCasesTests
         [Fact]
         public void HavingAGoodCardNumber_ThanReturnsTrue()
         {
-            Assert.True(cardPayment.ValidateCardNumber(validCardNumber));
+            Assert.True(cardPayment.validator.ValidateCardNumber(validCardNumber));
         }
         [Fact]
         public void HavingABadCardNumber_ThanReturnsFalse()
         {
-            Assert.False(cardPayment.ValidateCardNumber("11"));
+            Assert.False(cardPayment.validator.ValidateCardNumber("11"));
         }
     }
 }
