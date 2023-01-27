@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace iQuest.VendingMachine.Exceptions
 {
-    internal class InvalidInputWhilePayingException : Exception
+    internal class InvalidPaymentInputException : Exception
     {
         private const string messageProductNotAvailable = "Invalid input while paying !";
 
-        public InvalidInputWhilePayingException(string message = messageProductNotAvailable)
+        public InvalidPaymentInputException(string message = messageProductNotAvailable)
             : base(message)
         {
         }
-        public InvalidInputWhilePayingException(string message, Exception innerException)
+        public InvalidPaymentInputException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

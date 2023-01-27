@@ -21,7 +21,7 @@ namespace iQuest.VendingMachine.PresentationLayer
             if (userInput == "")
                 throw new CancelException();
             if (!float.TryParse(userInput, out inputMoneySum))
-                throw new InvalidInputWhilePayingException();
+                throw new InvalidPaymentInputException();
 
             return inputMoneySum;
         }

@@ -28,7 +28,7 @@ namespace iQuest.VendingMachine.UseCases
                 }
 
             }
-            catch(InvalidInputWhilePayingException)
+            catch(InvalidPaymentInputException)
             {
                 terminal.ReleaseMoney(sumPayed);
                 throw;

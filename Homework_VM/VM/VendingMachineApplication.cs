@@ -36,7 +36,7 @@ namespace iQuest.VendingMachine
                 {
                     mainDisplay.DisplayLine(e.Message);
                 }
-                catch (InvalidInputWhilePayingException e)
+                catch (InvalidPaymentInputException e)
                 {
                     mainDisplay.DisplayLine(e.Message);
                 }
