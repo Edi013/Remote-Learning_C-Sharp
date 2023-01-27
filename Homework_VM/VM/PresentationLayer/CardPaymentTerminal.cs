@@ -13,7 +13,7 @@ namespace iQuest.VendingMachine.PresentationLayer
             Console.WriteLine();
 
             userInput = Console.ReadLine();
-            if (userInput == "")
+            if (String.IsNullOrEmpty(userInput))
                 throw new CancelException();
 
             return userInput;
