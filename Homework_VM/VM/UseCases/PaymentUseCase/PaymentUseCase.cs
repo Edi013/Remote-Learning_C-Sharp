@@ -12,14 +12,14 @@ namespace iQuest.VendingMachine.UseCases
 
         public PaymentUseCase(IBuyView buyView, List<IPaymentAlgorithm> paymentAlgorithms) 
         {
-            this.buyView = buyView;
-            this.paymentAlgorithms = paymentAlgorithms; 
+            this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
+            this.paymentAlgorithms = paymentAlgorithms ?? throw new ArgumentNullException(nameof(paymentAlgorithms)); 
             this.paymentMethods =
                 new List<PaymentMethod>()
                 {
                     new PaymentMethod(1, "Card"),
                     new PaymentMethod(2, "Cash")
-                };
+                } ?? throw new ArgumentNullException(nameof(paymentMethods));
         }
         public string Name => "pay";
         public string Description => "Payment method";

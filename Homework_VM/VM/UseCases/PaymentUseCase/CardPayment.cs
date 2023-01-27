@@ -20,12 +20,10 @@ namespace iQuest.VendingMachine.UseCases
         {
             string cardNumber = terminal.AskForCardNumber();
 
-            if(validator.ValidateCardNumber(cardNumber))
+            if(validator.ValidateCardNumber(cardNumber)){
                 terminal.TransactionDone();
             else
                 terminal.TransactionFailed();
         }
-
- 
     }
 }
