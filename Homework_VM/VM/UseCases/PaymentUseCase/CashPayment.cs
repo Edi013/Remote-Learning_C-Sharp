@@ -6,11 +6,11 @@ namespace iQuest.VendingMachine.UseCases
     internal class CashPayment : IPaymentAlgorithm
     {
 
-        private readonly CashPaymentTerminal terminal;
+        private readonly ICashPaymentTerminal terminal;
 
         public string Name => "Cash";
         
-        public CashPayment(CashPaymentTerminal terminal) 
+        public CashPayment(ICashPaymentTerminal terminal) 
         {
             this.terminal = terminal;
         }

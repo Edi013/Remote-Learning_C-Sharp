@@ -1,13 +1,8 @@
 ﻿using iQuest.VendingMachine.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace iQuest.VendingMachine.PresentationLayer
 {
-    internal class CashPaymentTerminal
+    internal class CashPaymentTerminal : ICashPaymentTerminal
     {
         public float AskForMoney(float price) 
         {
