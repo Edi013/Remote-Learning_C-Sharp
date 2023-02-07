@@ -26,7 +26,7 @@ namespace VM_UnitTests.UseCasesTests
         public void WhilePaying_WithNonFloatInput_ThrowsException()
         {
             terminal
-                .SetupSequence(x => x.AskForMoney(priceToPay))
+                .Setup(x => x.AskForMoney(priceToPay))
                 .Throws(new InvalidPaymentInputException());
             cashPayment = new CashPayment(terminal.Object);
 
@@ -38,7 +38,7 @@ namespace VM_UnitTests.UseCasesTests
         {
 
             terminal
-                .SetupSequence(x => x.AskForMoney(priceToPay))
+                .Setup(x => x.AskForMoney(priceToPay))
                 .Throws(new CancelException());
             cashPayment = new CashPayment(terminal.Object);
 
