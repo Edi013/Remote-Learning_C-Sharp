@@ -17,6 +17,8 @@ namespace VM_UnitTests.UseCasesTests
         private readonly Mock<IProductRepository> productRepository;
         private readonly Mock<IAuthenticationService> authenticationService;
         private readonly Mock<IBuyView> buyView;
+        private readonly Mock<IPaymentUseCase> paymentUseCase;
+
 
 
         public BuyUseCaseExecuteTests()
@@ -24,6 +26,7 @@ namespace VM_UnitTests.UseCasesTests
             productRepository = new Mock<IProductRepository>();
             authenticationService = new Mock<IAuthenticationService>();
             buyView = new Mock<IBuyView>();
+            paymentUseCase = new Mock<IPaymentUseCase>();
         }
 
         [Fact]
@@ -40,7 +43,7 @@ namespace VM_UnitTests.UseCasesTests
                 .Returns(testProduct);
 
 
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object);
+            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
             
             //Act
             buyUseCase.Execute();
@@ -63,7 +66,8 @@ namespace VM_UnitTests.UseCasesTests
                 .Returns(testProduct);
 
 
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object);
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
 
             //Act
             //Assert
@@ -84,7 +88,8 @@ namespace VM_UnitTests.UseCasesTests
                 .Returns(testProduct);
 
 
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object);
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
 
             //Act
             //Assert

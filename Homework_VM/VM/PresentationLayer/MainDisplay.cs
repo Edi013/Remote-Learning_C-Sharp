@@ -63,6 +63,11 @@ namespace iQuest.VendingMachine.PresentationLayer
             Display("Type the admin password: ", ConsoleColor.Cyan);
             return Console.ReadLine();
         }
+
+        public void DisplayLine(string message)
+        {
+            DisplayLine(message, ConsoleColor.White);
+        }
     }
 
 }
