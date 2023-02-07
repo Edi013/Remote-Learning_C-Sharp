@@ -15,7 +15,7 @@ namespace VM_UnitTests.UseCasesTests
         private Mock<ICashPaymentTerminal> terminal;
         private CashPayment cashPayment;
 
-        private float priceToPay = 5.99f;
+        private float priceToPay = 10.00f;
 
         public CashPaymentTests()
         {
@@ -34,15 +34,36 @@ namespace VM_UnitTests.UseCasesTests
         }
 
         [Fact]
-        public void WhilePaying_CommandIsCanceled_ThrowsException()
+        public void WhilePaying_CommandIsCanceled_ThrowsExceptionAndReleaseMoney()
         {
+            int firstUserInput = 1;
+            int secondUserInput = 4;
+
 
             terminal
-                .Setup(x => x.AskForMoney(priceToPay))
+                .SetupSequence(x => x.AskForMoney(It.IsAny<float>()))
+                .Returns(firstUserInput)
+                .Returns(secondUserInput)
                 .Throws(new CancelException());
             cashPayment = new CashPayment(terminal.Object);
 
             Assert.Throws<CancelException>(() => cashPayment.Run(priceToPay));
+            terminal.Verify(x => x.ReleaseMoney(firstUserInput + secondUserInput), Times.Once);
+        }
+
+        [Fact]
+        public void WhilePaying_InputTooMuchMoney_GiveBackChange()
+        {
+            int tooMuchMoneyInput = 50;
+
+            terminal
+                .Setup(x => x.AskForMoney(It.IsAny<float>()))
+                .Returns(tooMuchMoneyInput);
+
+            cashPayment = new CashPayment(terminal.Object);
+            cashPayment.Run(priceToPay);
+
+            terminal.Verify(x => x.GiveBackChange(tooMuchMoneyInput - priceToPay), Times.Once);
         }
     }
 }
