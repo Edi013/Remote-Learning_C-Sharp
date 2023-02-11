@@ -9,7 +9,7 @@ namespace RemoteLearning.TheUniverse.Infrastructure
 
         public void RegisterHandler(Type requestType, Type requestHandlerType)
         {
-            if (!requestHandlerType.ImplementsInterface(typeof(IRequestHandler)))
+            if (!requestHandlerType.ImplementsInterface(typeof(IRequestHandler<,>)))
                 throw new ArgumentException("requestHandlerType must inherit RequestHandlerBase", nameof(requestHandlerType));
 
             if (handlers.ContainsKey(requestType))
@@ -18,7 +18,7 @@ namespace RemoteLearning.TheUniverse.Infrastructure
             handlers.Add(requestType, requestHandlerType);
         }
 
-        public object Send(object request)
+        public Response Send<Request, Response> (Request request)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
@@ -29,7 +29,7 @@ namespace RemoteLearning.TheUniverse.Infrastructure
 
             Type requestHandlerType = handlers[requestType];
 
-            IRequestHandler requestHandler = (IRequestHandler)Activator.CreateInstance(requestHandlerType);
+            IRequestHandler<Request, Response> requestHandler = (IRequestHandler<Request, Response>)Activator.CreateInstance(requestHandlerType);
 
             return requestHandler.Execute(request);
         }

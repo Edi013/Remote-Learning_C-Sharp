@@ -4,9 +4,9 @@ using RemoteLearning.TheUniverse.Infrastructure;
 
 namespace RemoteLearning.TheUniverse.Application.AddStar
 {
-    public class AddStarRequestHandler : IRequestHandler
+    public class AddStarRequestHandler : IRequestHandler<AddStarRequest, bool>
     {
-        public object Execute(object request)
+        public bool Execute(AddStarRequest request)
         {
             if (request == null)
                 throw new ArgumentNullException(nameof(request));

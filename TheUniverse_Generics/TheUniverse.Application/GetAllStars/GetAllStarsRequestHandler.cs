@@ -4,9 +4,9 @@ using RemoteLearning.TheUniverse.Infrastructure;
 
 namespace RemoteLearning.TheUniverse.Application.GetAllStars
 {
-    public class GetAllStarsRequestHandler : IRequestHandler
+    public class GetAllStarsRequestHandler : IRequestHandler<GetAllStarsRequest, List<StarInfo>>
     {
-        public object Execute(object request)
+        public List<StarInfo> Execute(GetAllStarsRequest request)
         {
             List<StarInfo> starsInfo = new List<StarInfo>();
 

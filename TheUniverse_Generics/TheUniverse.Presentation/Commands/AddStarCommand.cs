@@ -19,7 +19,7 @@ namespace RemoteLearning.TheUniverse.Presentation.Commands
             {
                 StarDetailsProvider = new StarDetailsProvider()
             };
-            bool success = (bool)requestBus.Send(addStarRequest);
+            bool success = (bool)requestBus.Send<AddStarRequest, bool>(addStarRequest);
 
             if (success)
                 DisplaySuccessMessage();
