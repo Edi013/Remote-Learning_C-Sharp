@@ -19,7 +19,7 @@ namespace RemoteLearning.TheUniverse.Presentation.Commands
             {
                 GalaxyDetailsProvider = new GalaxyDetailsProvider()
             };
-            bool success = (bool)requestBus.Send<AddGalaxyRequest, bool>(addGalaxyRequest);
+            bool success = requestBus.Send<AddGalaxyRequest, bool>(addGalaxyRequest);
 
             if (success)
                 DisplaySuccessMessage();
