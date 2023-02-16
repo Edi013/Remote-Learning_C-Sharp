@@ -2,11 +2,11 @@ using iQuest.VendingMachine.Interfaces;
 
 namespace iQuest.VendingMachine.DataLayer
 {
-    internal class ProductRepository : IProductRepository
+    internal class ProductRepositoryInMemory : IProductRepository
     {
         private static List<Product> products;
 
-        public  ProductRepository()
+        public  ProductRepositoryInMemory()
         {
             products = new List<Product>() {
                 new Product(1, "7Days", 4.99F, 10),

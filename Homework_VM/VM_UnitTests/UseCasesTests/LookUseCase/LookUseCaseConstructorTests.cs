@@ -21,7 +21,7 @@ namespace VM_UnitTests.UseCasesTests
             string nameText = "See products";
             string descriptionText = "This is our stock.";
 
-            productRepository = new ProductRepository();
+            productRepository = new ProductRepositoryInMemory();
             shelfView = new ShelfView();
 
             LookUseCase lookUseCase = new LookUseCase(productRepository, shelfView);
@@ -34,7 +34,7 @@ namespace VM_UnitTests.UseCasesTests
         {
             productRepository = null;
             Assert.Throws<ArgumentNullException>(() => new LookUseCase(productRepository, shelfView));
-            productRepository = new ProductRepository();
+            productRepository = new ProductRepositoryInMemory();
 
             shelfView = null;
             Assert.Throws<ArgumentNullException>(() => new LookUseCase(productRepository, shelfView));

@@ -19,7 +19,7 @@ namespace iQuest.VendingMachine
         {
             List<IUseCase> useCases = new List<IUseCase>();
             MainDisplay mainDisplay = new MainDisplay();
-            ProductRepository productRepository = new ProductRepository();
+            ProductRepositoryInMemory productRepository = new ProductRepositoryInMemory();
             TurnOffService turnOffService = new TurnOffService();
 
             AuthenticationService authenticationService = new AuthenticationService();
