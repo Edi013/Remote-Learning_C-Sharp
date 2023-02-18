@@ -16,7 +16,7 @@ namespace iQuest.VendingMachine.DataLayer
             };
         }
 
-        public List<Product> GetAll()
+        public List<Product> GetProducts()
         {
             return products;
         }

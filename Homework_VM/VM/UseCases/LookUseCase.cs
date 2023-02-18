@@ -13,7 +13,7 @@ namespace iQuest.VendingMachine.UseCases
 
         public string Description => "This is our stock.";
 
-        public bool CanExecute => productRepository.GetAll().Any();
+        public bool CanExecute => productRepository.GetProducts().Any();
 
         public LookUseCase(IProductRepository products, IShelfView view)
         {
@@ -23,7 +23,7 @@ namespace iQuest.VendingMachine.UseCases
 
         public void Execute()
         {
-            view.DisplayProducts(productRepository.GetAll());
+            view.DisplayProducts(productRepository.GetProducts());
         }
     }
 }

@@ -35,7 +35,7 @@ namespace VM_UnitTests.UseCasesTests
                 new Product(1, "testProduct", 3.33f, 3)
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             authenticationService
@@ -54,7 +54,7 @@ namespace VM_UnitTests.UseCasesTests
             {
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             authenticationService
@@ -74,7 +74,7 @@ namespace VM_UnitTests.UseCasesTests
                 new Product(1, "testProduct", 3.33f, 3)
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
             authenticationService
                 .Setup(x => x.IsUserAuthenticated)
@@ -92,7 +92,7 @@ namespace VM_UnitTests.UseCasesTests
             {
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             authenticationService

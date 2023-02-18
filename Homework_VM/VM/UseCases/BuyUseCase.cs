@@ -17,7 +17,7 @@ namespace iQuest.VendingMachine.UseCases
 
         public string Description => "You will buy something.";
 
-        public bool CanExecute => productRepository.GetAll().Any() && !authenticationService.IsUserAuthenticated; 
+        public bool CanExecute => productRepository.GetProducts().Any() && !authenticationService.IsUserAuthenticated; 
 
         public BuyUseCase(
             IBuyView buyView, IAuthenticationService authenticationService,
@@ -39,7 +39,7 @@ namespace iQuest.VendingMachine.UseCases
             {
                 throw new InvalidColumnNumberException();
             }
-            if (wantedProduct.Quantity == 0)
+            if (wantedProduct.Quantity == 0 || wantedProduct.GetType() != typeof(Product))
             {
                 throw new ProductNotAvailableException();
             }

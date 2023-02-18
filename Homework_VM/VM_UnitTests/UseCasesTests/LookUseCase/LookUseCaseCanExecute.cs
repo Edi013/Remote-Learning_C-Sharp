@@ -30,7 +30,7 @@ namespace VM_UnitTests.UseCasesTests
             };
 
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             LookUseCase lookUseCase = new LookUseCase(productRepository.Object, shelfView.Object);
@@ -46,7 +46,7 @@ namespace VM_UnitTests.UseCasesTests
             };
 
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             LookUseCase lookUseCase = new LookUseCase(productRepository.Object, shelfView.Object);
