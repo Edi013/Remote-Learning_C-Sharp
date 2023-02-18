@@ -13,5 +13,7 @@ namespace iQuest.VendingMachine.DataLayer
         public List<Product> GetProducts();
         public Product? GetProductByColumnId(int columnId);
 
+        public void DecreaseQuantity(Product product);
+
     }
 }

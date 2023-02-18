@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace iQuest.VendingMachine.DataLayer
@@ -7,10 +8,10 @@ namespace iQuest.VendingMachine.DataLayer
     {
         private string _connectionString;
 
-        public SqlServerRepository(IConfiguration configuration)
+        public SqlServerRepository()
         {
-            Console.WriteLine("Connection string :" + configuration.GetConnectionString("Default"));
-            _connectionString = configuration.GetConnectionString("Default");
+            _connectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+            Console.WriteLine("Connection string :" + _connectionString);
         }
         public List<Product> GetProducts()
         {
@@ -19,24 +20,20 @@ namespace iQuest.VendingMachine.DataLayer
             try
             {
                 using var connection = new SqlConnection(_connectionString);
-
                 string queryString = "Select * From dbo.Products";
-                var command = new SqlCommand(queryString, connection);
-                //command.CommandText = System.Data.CommandType.StoredProcedure;
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = command;
 
-                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
+                DataSet dataset = new DataSet();
+                adapter.Fill(dataset);
 
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+               foreach(DataRow row in dataset.Tables[0].Rows)
                 {
                      products.Add(new Product
                      {
-                         ColumnId = Convert.ToInt32(reader["ColumnId"]),
-                         Name = reader["Name"].ToString(),
-                         Price = Convert.ToSingle(reader["Price"]),
-                         Quantity = Convert.ToInt32(reader["Quantity"])
+                         ColumnId = Convert.ToInt32(row["ColumnId"]),
+                         Name = row["Name"].ToString(),
+                         Price = Convert.ToSingle(row["Price"]),
+                         Quantity = Convert.ToInt32(row["Quantity"])
                      });
                 }
             }
@@ -44,7 +41,6 @@ namespace iQuest.VendingMachine.DataLayer
             {
                 Console.WriteLine("Error in SqlServerRepo - line 41 ~");
                 Console.WriteLine(e.Message);
-
             }
 
             return products;
@@ -52,11 +48,43 @@ namespace iQuest.VendingMachine.DataLayer
 
         public Product? GetProductByColumnId(int columnId)
         {
-            var products = GetProducts();
-            if (!products.Any())
-                return new Product { Quantity = 0 };
+            var products = new List<Product>();
+            using var connection = new SqlConnection(_connectionString);
+            string queryString = $"Select * From dbo.Products Where ColumnId = '{columnId}'";
+            var command = new SqlCommand(queryString, connection);
 
-            return products.FirstOrDefault(x => x.ColumnId == columnId);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+            reader.Read();
+              
+            return new Product
+            {
+                ColumnId = Convert.ToInt32(reader["ColumnId"]),
+                Name = reader["Name"].ToString(),
+                Price = Convert.ToSingle(reader["Price"]),
+                Quantity = Convert.ToInt32(reader["Quantity"])
+            };         
+        }
+
+        public void DecreaseQuantity(Product product)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            string queryString = $"UPDATE dbo.Products SET Quantity = {product.Quantity} Where ColumnId='{product.ColumnId}';";
+
+            SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
+            DataSet dataset = new DataSet();
+            adapter.Fill(dataset);
+
+            /*foreach(DataRow row in dataset.Tables[0].Rows)
+            {
+                if ((int)row["ColumnId"] == product.ColumnId)
+                {
+                    row["Quantity"] = product.Quantity;
+                }
+            }*/
+
+            adapter.Update(dataset);
         }
     }
 }

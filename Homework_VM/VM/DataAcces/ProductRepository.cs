@@ -1,4 +1,4 @@
-using iQuest.VendingMachine.Interfaces;
+﻿using iQuest.VendingMachine.Interfaces;
 
 namespace iQuest.VendingMachine.DataLayer
 {
@@ -29,6 +29,11 @@ namespace iQuest.VendingMachine.DataLayer
                 return product;
             }
             return null;
+        }
+
+        public void DecreaseQuantity(Product product)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,4 @@
-using iQuest.VendingMachine.DataLayer;
+﻿using iQuest.VendingMachine.DataLayer;
 using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.Exceptions;
 using iQuest.VendingMachine.Interfaces;
@@ -45,7 +45,8 @@ namespace iQuest.VendingMachine.UseCases
             }
 
             paymentUseCase.Execute(wantedProduct.Price);
-            wantedProduct.Quantity--;
+            productRepository.DecreaseQuantity(wantedProduct);
+            
             buyView.DispenseProduct(wantedProduct.Name);
         }
     }
