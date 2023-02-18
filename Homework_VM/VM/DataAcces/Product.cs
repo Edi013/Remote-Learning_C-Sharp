@@ -14,6 +14,8 @@ namespace iQuest.VendingMachine.DataLayer
             Price = price;
             Quantity = quantity;
         }
+        public Product()
+        { }
 
         public override string ToString()
         {
