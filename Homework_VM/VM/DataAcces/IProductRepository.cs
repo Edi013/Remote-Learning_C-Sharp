@@ -10,7 +10,7 @@ namespace iQuest.VendingMachine.DataLayer
     internal interface IProductRepository
     {
         private static List<Product> products;
-        public List<Product> GetAll();
+        public List<Product> GetProducts();
         public Product? GetProductByColumnId(int columnId);
 
     }
