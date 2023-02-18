@@ -19,7 +19,16 @@ namespace iQuest.VendingMachine
         {
             List<IUseCase> useCases = new List<IUseCase>();
             MainDisplay mainDisplay = new MainDisplay();
-            ProductRepositoryInMemory productRepository = new ProductRepositoryInMemory();
+            // #1 In memory ProductRepo
+            //ProductRepositoryInMemory productRepository = new ProductRepositoryInMemory();
+
+            // #2 SQL Server ProductRepo
+            SqlServerRepository productRepository = SqlServerConnection.SetUp();
+                // next line is just for testing the sql connection 
+            productRepository.GetProducts().ForEach(p => Console.WriteLine($"{p.Name}, price: {p.Price}"));
+
+            // #3
+            // ----
             TurnOffService turnOffService = new TurnOffService();
 
             AuthenticationService authenticationService = new AuthenticationService();
