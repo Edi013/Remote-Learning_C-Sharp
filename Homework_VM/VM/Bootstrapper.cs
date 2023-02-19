@@ -30,6 +30,7 @@ namespace iQuest.VendingMachine
                     productRepository = new SqlServerRepository();
                     break;
                 case "LiteDB":
+                    productRepository = new LiteDBRepository();
                     break;
             }
 
