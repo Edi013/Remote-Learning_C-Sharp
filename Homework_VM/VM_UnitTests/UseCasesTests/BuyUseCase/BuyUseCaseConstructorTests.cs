@@ -8,7 +8,7 @@ namespace VM_UnitTests.UseCasesTests
 {
     public class BuyUseCaseConstructorTests
     {
-        private  ProductRepositoryInMemory productRepository;
+        private  InMemoryRepository productRepository;
         private  AuthenticationService authenticationService;
         private  BuyView buyView;
 
@@ -20,7 +20,7 @@ namespace VM_UnitTests.UseCasesTests
 
             buyView = new BuyView();
             authenticationService = new AuthenticationService();
-            productRepository = new ProductRepositoryInMemory();
+            productRepository = new InMemoryRepository();
             Mock<IPaymentUseCase> paymentUseCase = new Mock<IPaymentUseCase>();
 
             BuyUseCase buyUseCase = new BuyUseCase(buyView, authenticationService, productRepository, paymentUseCase.Object);
@@ -46,7 +46,7 @@ namespace VM_UnitTests.UseCasesTests
 
             productRepository = null;
             Assert.Throws<ArgumentNullException>(() => new BuyUseCase(buyView, authenticationService, productRepository, paymentUseCase));
-            productRepository = new ProductRepositoryInMemory();
+            productRepository = new InMemoryRepository();
 
             paymentUseCase = null;
             Assert.Throws<ArgumentNullException>(() => new BuyUseCase(buyView, authenticationService, productRepository, paymentUseCase));
