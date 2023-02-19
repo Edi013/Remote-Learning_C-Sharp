@@ -24,7 +24,7 @@ namespace iQuest.VendingMachine
             switch (ConfigurationManager.AppSettings["repoType"])
             {
                 case "InMemory":
-                    productRepository = new ProductRepositoryInMemory();
+                    productRepository = new InMemoryRepository();
                     break;
                 case "SQL":
                     productRepository = new SqlServerRepository();
