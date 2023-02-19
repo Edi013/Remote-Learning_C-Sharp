@@ -25,7 +25,6 @@ namespace iQuest.VendingMachine
             Console.WriteLine(ex);
             Console.ForegroundColor = oldColor;
         }
-
         private static void Pause()
         {
             Console.ReadKey(true);

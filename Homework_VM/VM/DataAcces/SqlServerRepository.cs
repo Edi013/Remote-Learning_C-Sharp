@@ -37,10 +37,9 @@ namespace iQuest.VendingMachine.DataLayer
                      });
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine("Error in SqlServerRepo - line 41 ~");
-                Console.WriteLine(e.Message);
+                throw;
             }
 
             return products;
@@ -48,23 +47,29 @@ namespace iQuest.VendingMachine.DataLayer
 
         public Product? GetProductByColumnId(int columnId)
         {
-            var products = new List<Product>();
             using var connection = new SqlConnection(_connectionString);
             string queryString = $"Select * From dbo.Products Where ColumnId = '{columnId}'";
             var command = new SqlCommand(queryString, connection);
 
-            connection.Open();
-
-            SqlDataReader reader = command.ExecuteReader();
-            reader.Read();
-              
-            return new Product
+            try
             {
-                ColumnId = Convert.ToInt32(reader["ColumnId"]),
-                Name = reader["Name"].ToString(),
-                Price = Convert.ToSingle(reader["Price"]),
-                Quantity = Convert.ToInt32(reader["Quantity"])
-            };         
+                connection.Open();  
+                SqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                return new Product
+                {
+                    ColumnId = Convert.ToInt32(reader["ColumnId"]),
+                    Name = reader["Name"].ToString(),
+                    Price = Convert.ToSingle(reader["Price"]),
+                    Quantity = Convert.ToInt32(reader["Quantity"])
+                };         
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return null;
         }
 
         public void DecreaseQuantity(Product product)
@@ -78,7 +83,7 @@ namespace iQuest.VendingMachine.DataLayer
             DataSet dataset = new DataSet();
 
             adapter.TableMappings.Add("Products", "Products");
-            //adapter.Update(dataset, "dbo.Products");
+
             adapter.Fill(dataset);
         }
     }

@@ -39,7 +39,7 @@ namespace iQuest.VendingMachine.UseCases
             {
                 throw new InvalidColumnNumberException();
             }
-            if (wantedProduct.Quantity == 0 || wantedProduct.GetType() != typeof(Product))
+            if (wantedProduct.Quantity == 0)
             {
                 throw new ProductNotAvailableException();
             }
