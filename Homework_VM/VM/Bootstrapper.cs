@@ -24,11 +24,6 @@ namespace iQuest.VendingMachine
 
             // #2 SQL Server ProductRepo
             SqlServerRepository productRepository = new SqlServerRepository();
-                // next lines are just for testing the sql connection 
-            productRepository.GetProducts().ForEach(p => Console.WriteLine($"{p.Name}, price: {p.Price}"));
-            var p = productRepository.GetProductByColumnId(1);
-            Console.WriteLine($"{p.Name}, price: {p.Price}");
-
 
             // #3
             // ----
