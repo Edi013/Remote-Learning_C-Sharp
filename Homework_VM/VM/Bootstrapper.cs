@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using iQuest.VendingMachine.PresentationLayer;
+﻿using iQuest.VendingMachine.PresentationLayer;
 using iQuest.VendingMachine.UseCases;
 using iQuest.VendingMachine.DataLayer;
 using iQuest.VendingMachine.Interfaces;
