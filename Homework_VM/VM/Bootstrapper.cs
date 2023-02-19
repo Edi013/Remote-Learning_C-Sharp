@@ -20,7 +20,7 @@ namespace iQuest.VendingMachine
             List<IUseCase> useCases = new List<IUseCase>();
             MainDisplay mainDisplay = new MainDisplay();
 
-            IProductRepository productRepository;
+            IProductRepository productRepository = null;
             switch (ConfigurationManager.AppSettings["repoType"])
             {
                 case "InMemory":
