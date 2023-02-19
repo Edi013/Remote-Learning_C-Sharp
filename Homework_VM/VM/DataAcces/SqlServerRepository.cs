@@ -11,7 +11,6 @@ namespace iQuest.VendingMachine.DataLayer
         public SqlServerRepository()
         {
             _connectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
-            Console.WriteLine("Connection string :" + _connectionString);
         }
         public List<Product> GetProducts()
         {
