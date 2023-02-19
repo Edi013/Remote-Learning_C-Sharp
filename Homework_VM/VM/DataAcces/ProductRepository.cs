@@ -33,7 +33,7 @@ namespace iQuest.VendingMachine.DataLayer
 
         public void DecreaseQuantity(Product product)
         {
-            throw new NotImplementedException();
+            product.Quantity--;
         }
     }
 }
