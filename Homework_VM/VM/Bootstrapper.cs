@@ -3,6 +3,7 @@ using iQuest.VendingMachine.UseCases;
 using iQuest.VendingMachine.DataLayer;
 using iQuest.VendingMachine.Interfaces;
 using iQuest.VendingMachine.Services;
+using System.Configuration;
 
 namespace iQuest.VendingMachine
 {
@@ -18,19 +19,26 @@ namespace iQuest.VendingMachine
         {
             List<IUseCase> useCases = new List<IUseCase>();
             MainDisplay mainDisplay = new MainDisplay();
-            // #1 In memory ProductRepo
-            //ProductRepositoryInMemory productRepository = new ProductRepositoryInMemory();
 
-            // #2 SQL Server ProductRepo
-            SqlServerRepository productRepository = new SqlServerRepository();
+            IProductRepository productRepository;
+            switch (ConfigurationManager.AppSettings["repoType"])
+            {
+                case "InMemory":
+                    productRepository = new ProductRepositoryInMemory();
+                    break;
+                case "SQL":
+                    productRepository = new SqlServerRepository();
+                    break;
+                case "LiteDB":
+                    break;
+            }
 
-            // #3
-            // ----
             TurnOffService turnOffService = new TurnOffService();
 
             AuthenticationService authenticationService = new AuthenticationService();
 
-            VendingMachineApplication vendingMachineApplication = new VendingMachineApplication(useCases, mainDisplay, turnOffService);
+            VendingMachineApplication vendingMachineApplication =
+                new VendingMachineApplication(useCases, mainDisplay, turnOffService);
             
             ShelfView shelfView = new ShelfView();
             BuyView buyView = new BuyView();
