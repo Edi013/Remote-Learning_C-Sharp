@@ -29,7 +29,7 @@ namespace iQuest.BooksAndNews.Application
             CreateBookLovers();
             CreateNewsHunters();
 
-            printingOffice.PrintRandom(2, 5);
+            printingOffice.PrintRandom(3, 2);
         }
 
         private void CreatePrintingOffice()
@@ -52,10 +52,10 @@ namespace iQuest.BooksAndNews.Application
         private void CreateNewsHunters()
         {
             NewsHunter alice = new NewsHunter("Alice", printingOffice, log);
-            newsHunters.Add(alice);
+             newsHunters.Add(alice);
 
-            NewsHunter johnny = new NewsHunter("Johnny", printingOffice, log);
-            newsHunters.Add(johnny);
+             NewsHunter johnny = new NewsHunter("Johnny", printingOffice, log);
+             newsHunters.Add(johnny);
         }
     }
 }
