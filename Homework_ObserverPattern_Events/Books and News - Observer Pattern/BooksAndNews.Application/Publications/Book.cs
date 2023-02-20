@@ -7,5 +7,10 @@
         public string Title { get; set; }
 
         public int Year { get; set; }
+
+        public override string ToString()
+        {
+            return $"Book {Title} - {Author} from {Year}";
+        }
     }
 }
