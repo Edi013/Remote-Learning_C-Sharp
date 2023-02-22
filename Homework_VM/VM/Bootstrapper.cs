@@ -20,6 +20,8 @@ namespace iQuest.VendingMachine
             List<IUseCase> useCases = new List<IUseCase>();
             MainDisplay mainDisplay = new MainDisplay();
 
+            string _connectionString;
+
             IProductRepository productRepository = null;
             switch (ConfigurationManager.AppSettings["repoType"])
             {
@@ -27,10 +29,15 @@ namespace iQuest.VendingMachine
                     productRepository = new InMemoryRepository();
                     break;
                 case "SQL":
-                    productRepository = new SqlServerRepository();
+                    _connectionString = 
+                        ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+                    productRepository = new SqlServerRepository(_connectionString);
                     break;
                 case "LiteDB":
-                    productRepository = new LiteDBRepository();
+                    _connectionString =
+                        ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
+
+                    productRepository = new LiteDBRepository(_connectionString);
                     break;
             }
 

@@ -8,9 +8,9 @@ namespace iQuest.VendingMachine.DataLayer
     {
         private string _connectionString;
 
-        public SqlServerRepository()
+        public SqlServerRepository(string connectionString)
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+            _connectionString = connectionString;
         }
         public List<Product> GetProducts()
         {
