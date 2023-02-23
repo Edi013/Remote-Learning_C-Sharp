@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework_VM", "VM\Homework_VM.csproj", "{22C9FCD5-21F9-4AD5-BE2D-38F2F85A8BF9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VM_UnitTests", "VM_UnitTests\VM_UnitTests.csproj", "{73851EDC-7BFE-44C4-9400-25288D54E824}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Business", "VendingMachine.Business\VendingMachine.Business.csproj", "{1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Business", "VendingMachine.Business\VendingMachine.Business.csproj", "{1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.DataAccess", "VendingMachine.DataAccess\VendingMachine.DataAccess.csproj", "{A8E5A2E8-412C-4307-9436-DD751364E1E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.DataAccess", "VendingMachine.DataAccess\VendingMachine.DataAccess.csproj", "{A8E5A2E8-412C-4307-9436-DD751364E1E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine", "VendingMachine\VendingMachine.csproj", "{0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine", "VendingMachine\VendingMachine.csproj", "{0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Presentation", "VendingMachine.Presentation\VendingMachine.Presentation.csproj", "{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{22C9FCD5-21F9-4AD5-BE2D-38F2F85A8BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22C9FCD5-21F9-4AD5-BE2D-38F2F85A8BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22C9FCD5-21F9-4AD5-BE2D-38F2F85A8BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22C9FCD5-21F9-4AD5-BE2D-38F2F85A8BF9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73851EDC-7BFE-44C4-9400-25288D54E824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73851EDC-7BFE-44C4-9400-25288D54E824}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73851EDC-7BFE-44C4-9400-25288D54E824}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
