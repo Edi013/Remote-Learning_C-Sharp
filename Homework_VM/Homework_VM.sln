@@ -4,14 +4,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VM_UnitTests", "VM_UnitTests\VM_UnitTests.csproj", "{73851EDC-7BFE-44C4-9400-25288D54E824}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7} = {0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7}
+		{1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63} = {1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63}
+		{A8E5A2E8-412C-4307-9436-DD751364E1E6} = {A8E5A2E8-412C-4307-9436-DD751364E1E6}
+		{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB} = {D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Business", "VendingMachine.Business\VendingMachine.Business.csproj", "{1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.DataAccess", "VendingMachine.DataAccess\VendingMachine.DataAccess.csproj", "{A8E5A2E8-412C-4307-9436-DD751364E1E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63} = {1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine", "VendingMachine\VendingMachine.csproj", "{0F069AB6-A6D0-4CF7-8CFA-4DAB39C383C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63} = {1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63}
+		{A8E5A2E8-412C-4307-9436-DD751364E1E6} = {A8E5A2E8-412C-4307-9436-DD751364E1E6}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VendingMachine.Presentation", "VendingMachine.Presentation\VendingMachine.Presentation.csproj", "{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Presentation", "VendingMachine.Presentation\VendingMachine.Presentation.csproj", "{D64BCEF6-C4C4-49D9-95E9-9689D1237BDB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63} = {1BC347AB-9E9D-4562-8B19-DCA3DE9E4A63}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
