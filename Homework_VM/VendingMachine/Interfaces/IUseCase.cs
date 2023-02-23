@@ -1,6 +1,6 @@
 ﻿namespace iQuest.VendingMachine.Interfaces
 {
-    internal interface IUseCase
+    public interface IUseCase
     {
         string Name { get; }
 
