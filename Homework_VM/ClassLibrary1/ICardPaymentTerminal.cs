@@ -1,6 +1,6 @@
 ﻿namespace iQuest.VendingMachine.PresentationLayer
 {
-    internal interface ICardPaymentTerminal
+    public interface ICardPaymentTerminal
     {
         public string AskForCardNumber();
         

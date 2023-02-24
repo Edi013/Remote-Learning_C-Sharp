@@ -2,7 +2,7 @@
 
 namespace iQuest.VendingMachine.DataLayer
 {
-    internal class InMemoryRepository : IProductRepository
+    public class InMemoryRepository : IProductRepository
     {
         private static List<Product> products;
 

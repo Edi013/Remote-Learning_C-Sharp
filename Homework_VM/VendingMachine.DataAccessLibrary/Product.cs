@@ -2,10 +2,10 @@
 {
     public class Product
     {
-        internal int ColumnId { get; set;}
-        internal string Name { get; set; }
-        internal float Price { get; set;} 
-        internal int Quantity { get; set; }
+        public int ColumnId { get; set;}
+        public string Name { get; set; }
+        public float Price { get; set;}
+        public int Quantity { get; set; }
 
         public Product(int columnId, string name, float price, int quantity)
         {

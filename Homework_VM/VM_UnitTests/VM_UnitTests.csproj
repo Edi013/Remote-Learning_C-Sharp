@@ -22,8 +22,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\VM\Homework_VM.csproj" />
-  </ItemGroup>
-
 </Project>
