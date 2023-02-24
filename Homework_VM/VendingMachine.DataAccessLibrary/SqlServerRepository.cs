@@ -1,8 +1,9 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using iQuest.VendingMachine.Business;
 
-namespace iQuest.VendingMachine.DataLayer
+namespace iQuest.VendingMachine.DataAcces
 {
     public class SqlServerRepository : IProductRepository
     {

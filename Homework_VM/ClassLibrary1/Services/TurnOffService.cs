@@ -1,6 +1,6 @@
-﻿namespace iQuest.VendingMachine.Services
+﻿namespace iQuest.VendingMachine.Business
 {
-    internal class TurnOffService : ITurnOffService
+    public class TurnOffService : ITurnOffService
     {
         private bool status;
 

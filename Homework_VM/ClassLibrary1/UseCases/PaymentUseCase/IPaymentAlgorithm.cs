@@ -1,7 +1,7 @@
 ﻿
-namespace iQuest.VendingMachine.UseCases
+namespace iQuest.VendingMachine.Business
 {
-    internal interface IPaymentAlgorithm
+    public interface IPaymentAlgorithm
     {
         public string Name { get; }
 

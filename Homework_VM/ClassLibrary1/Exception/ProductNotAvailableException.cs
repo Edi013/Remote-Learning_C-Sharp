@@ -1,4 +1,4 @@
-namespace iQuest.VendingMachine.Exceptions
+﻿namespace iQuest.VendingMachine.Business.Exceptions
 {
     public class ProductNotAvailableException : Exception
     {

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace iQuest.VendingMachine.Exceptions
+﻿namespace iQuest.VendingMachine.Business.Exceptions
 {
-    internal class InvalidPaymentInputException : Exception
+    public class InvalidPaymentInputException : Exception
     {
         private const string messageProductNotAvailable = "Invalid input while paying !";
 

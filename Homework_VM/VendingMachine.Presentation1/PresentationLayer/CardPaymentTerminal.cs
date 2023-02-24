@@ -1,8 +1,9 @@
-﻿using iQuest.VendingMachine.Exceptions;
+﻿using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.Business.Exceptions;
 
-namespace iQuest.VendingMachine.PresentationLayer
+namespace iQuest.VendingMachine.Presentation
 {
-    internal class CardPaymentTerminal : ICardPaymentTerminal
+    public class CardPaymentTerminal : ICardPaymentTerminal
     {
         public string AskForCardNumber()
         {

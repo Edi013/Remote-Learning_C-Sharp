@@ -1,6 +1,6 @@
-﻿namespace iQuest.VendingMachine.UseCases
+﻿namespace iQuest.VendingMachine.Business
 {
-    internal interface IPaymentUseCase
+    public interface IPaymentUseCase
     {
         public string Name { get; }
 

@@ -1,10 +1,6 @@
-﻿using System;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
-
-namespace iQuest.VendingMachine.UseCases
+﻿namespace iQuest.VendingMachine.Business
 {
-    internal class LogoutUseCase : IUseCase
+    public class LogoutUseCase : IUseCase
     {
         private IAuthenticationService authenticationService;
 

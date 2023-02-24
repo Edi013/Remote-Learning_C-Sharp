@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iQuest.VendingMachine.Services
+namespace iQuest.VendingMachine.Business
 {
-    internal interface ITurnOffService
+    public interface ITurnOffService
     {
         public bool Status { get; }
         public void TurnOff();

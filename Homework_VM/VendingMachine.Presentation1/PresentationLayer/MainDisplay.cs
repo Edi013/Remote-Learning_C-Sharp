@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using iQuest.VendingMachine.Exceptions;
-using iQuest.VendingMachine.Interfaces;
+﻿using iQuest.VendingMachine.Business;
 
-
-namespace iQuest.VendingMachine.PresentationLayer
+namespace iQuest.VendingMachine.Presentation
 {
-    internal class MainDisplay : DisplayBase, IMainDisplay
+    public class MainDisplay : DisplayBase, IMainDisplay
     {
         public IUseCase ChooseCommand(IEnumerable<IUseCase> useCases)
         {

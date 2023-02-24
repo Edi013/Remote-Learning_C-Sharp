@@ -1,6 +1,6 @@
-﻿using iQuest.VendingMachine.Interfaces;
+﻿using iQuest.VendingMachine.Business;
 
-namespace iQuest.VendingMachine.DataLayer
+namespace iQuest.VendingMachine.DataAcces
 {
     public class InMemoryRepository : IProductRepository
     {

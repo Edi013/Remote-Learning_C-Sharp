@@ -1,9 +1,7 @@
-﻿using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.UseCases;
-using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
-using System.Configuration;
+﻿using System.Configuration;
+using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.DataAcces;
+using iQuest.VendingMachine.Presentation;
 
 namespace iQuest.VendingMachine
 {

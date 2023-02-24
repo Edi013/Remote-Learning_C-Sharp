@@ -1,7 +1,8 @@
 ﻿using System.Configuration;
+using iQuest.VendingMachine.Business;
 using LiteDB;
 
-namespace iQuest.VendingMachine.DataLayer
+namespace iQuest.VendingMachine.DataAcces
 {
     public class LiteDBRepository : IProductRepository
     {
@@ -10,7 +11,7 @@ namespace iQuest.VendingMachine.DataLayer
         {
             _connectionString = connectionString;
 
-            var products = new List<Product>() {
+           /* var products = new List<Product>() {
                 new Product(1, "7Days", 4.99F, 10),
                 new Product(2, "Rolls", 3.99F, 7),
                 new Product(3, "Napoleon", 2.99F, 1),
@@ -22,7 +23,7 @@ namespace iQuest.VendingMachine.DataLayer
             {
                 var collection = database.GetCollection<Product>("Products");
                 collection.InsertBulk(products);
-            }
+            }*/
         }
 
         public void DecreaseQuantity(Product product)

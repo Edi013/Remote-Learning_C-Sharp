@@ -1,10 +1,8 @@
-﻿using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Exceptions;
+﻿using iQuest.VendingMachine.Business.Exceptions;
 
-namespace iQuest.VendingMachine.UseCases
+namespace iQuest.VendingMachine.Business
 {
-    internal class PaymentUseCase : IPaymentUseCase
+    public class PaymentUseCase : IPaymentUseCase
     {
         private readonly IBuyView buyView;
         private readonly List<IPaymentAlgorithm> paymentAlgorithms;

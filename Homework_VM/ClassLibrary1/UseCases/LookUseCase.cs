@@ -1,10 +1,8 @@
-using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Interfaces;
+﻿
 
-namespace iQuest.VendingMachine.UseCases
+namespace iQuest.VendingMachine.Business
 {
-    internal class LookUseCase : IUseCase
+    public class LookUseCase : IUseCase
     {
         private readonly IProductRepository productRepository;
         private readonly IShelfView view;

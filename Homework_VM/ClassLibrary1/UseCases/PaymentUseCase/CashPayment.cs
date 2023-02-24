@@ -1,9 +1,8 @@
-﻿using iQuest.VendingMachine.Exceptions;
-using iQuest.VendingMachine.PresentationLayer;
+﻿using iQuest.VendingMachine.Business.Exceptions;
 
-namespace iQuest.VendingMachine.UseCases
+namespace iQuest.VendingMachine.Business
 {
-    internal class CashPayment : IPaymentAlgorithm
+    public class CashPayment : IPaymentAlgorithm
     {
 
         private readonly ICashPaymentTerminal terminal;

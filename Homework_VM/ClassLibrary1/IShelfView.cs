@@ -1,6 +1,4 @@
-﻿using iQuest.VendingMachine.DataLayer;
-
-namespace iQuest.VendingMachine.PresentationLayer
+﻿namespace iQuest.VendingMachine.Business
 {
     public interface IShelfView
     {

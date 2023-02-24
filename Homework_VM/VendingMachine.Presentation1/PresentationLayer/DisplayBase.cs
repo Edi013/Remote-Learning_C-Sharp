@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace iQuest.VendingMachine.PresentationLayer
+namespace iQuest.VendingMachine.Presentation
 {
-    internal class DisplayBase
+    public class DisplayBase
     {
         protected void DisplayLine(string message, ConsoleColor color)
         {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iQuest.VendingMachine.Services
+namespace iQuest.VendingMachine.Business
 {
-    internal interface IAuthenticationService
+    public interface IAuthenticationService
     {
         public bool IsUserAuthenticated { get;}
         public void Login(string userInputedPassword);

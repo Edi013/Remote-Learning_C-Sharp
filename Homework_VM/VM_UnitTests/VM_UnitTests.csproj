@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\VendingMachine.Business.csproj" />
+    <ProjectReference Include="..\VendingMachine.Presentation1\VendingMachine.Presentation.csproj" />
+  </ItemGroup>
+
 </Project>

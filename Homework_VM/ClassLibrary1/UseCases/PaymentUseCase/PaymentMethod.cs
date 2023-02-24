@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iQuest.VendingMachine.UseCases
+namespace iQuest.VendingMachine.Business
 {
     public class PaymentMethod
     {

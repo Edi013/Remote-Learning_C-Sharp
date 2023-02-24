@@ -1,9 +1,6 @@
-﻿using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
-
-namespace iQuest.VendingMachine.UseCases
+﻿namespace iQuest.VendingMachine.Business
 {
-    internal class TurnOffUseCase : IUseCase
+    public class TurnOffUseCase : IUseCase
     {
         private readonly IAuthenticationService authenticationService;
         private readonly ITurnOffService turnOffSerivce;

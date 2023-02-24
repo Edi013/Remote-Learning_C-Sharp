@@ -1,12 +1,8 @@
-﻿using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Exceptions;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
+﻿using iQuest.VendingMachine.Business.Exceptions;
 
-namespace iQuest.VendingMachine.UseCases
+namespace iQuest.VendingMachine.Business
 {
-    internal class BuyUseCase : IUseCase
+    public class BuyUseCase : IUseCase
     {
         private readonly IProductRepository productRepository;
         private readonly IBuyView buyView;

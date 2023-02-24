@@ -1,4 +1,4 @@
-﻿namespace iQuest.VendingMachine.PresentationLayer
+﻿namespace iQuest.VendingMachine.Business
 {
     public interface ICardPaymentTerminal
     {

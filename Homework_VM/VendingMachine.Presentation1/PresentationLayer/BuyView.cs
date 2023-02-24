@@ -1,9 +1,9 @@
-using iQuest.VendingMachine.UseCases;
-using iQuest.VendingMachine.Exceptions;
+﻿using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.Business.Exceptions;
 
-namespace iQuest.VendingMachine.PresentationLayer
+namespace iQuest.VendingMachine.Presentation
 {
-    internal class BuyView : DisplayBase, IBuyView
+    public class BuyView : DisplayBase, IBuyView
     {
 
         public int RequestProduct()

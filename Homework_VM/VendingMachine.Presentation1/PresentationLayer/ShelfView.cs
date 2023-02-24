@@ -1,8 +1,8 @@
-using iQuest.VendingMachine.DataLayer;
+﻿using iQuest.VendingMachine.Business;
 
-namespace iQuest.VendingMachine.PresentationLayer
+namespace iQuest.VendingMachine.Presentation
 {
-    internal class ShelfView : DisplayBase, IShelfView
+    public class ShelfView : DisplayBase, IShelfView
     {
         public void DisplayProducts(IEnumerable<Product> products)
         {

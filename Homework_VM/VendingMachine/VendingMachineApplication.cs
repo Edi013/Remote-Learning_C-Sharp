@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Exceptions;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
-
+﻿using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.Business.Exceptions;
+using iQuest.VendingMachine.Presentation;
 
 namespace iQuest.VendingMachine
 {

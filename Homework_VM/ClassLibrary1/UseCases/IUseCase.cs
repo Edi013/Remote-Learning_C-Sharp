@@ -1,4 +1,4 @@
-﻿namespace iQuest.VendingMachine.Interfaces
+﻿namespace iQuest.VendingMachine.Business
 {
     public interface IUseCase
     {

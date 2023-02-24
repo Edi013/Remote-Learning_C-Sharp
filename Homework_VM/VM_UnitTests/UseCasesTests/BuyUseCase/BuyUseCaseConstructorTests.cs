@@ -1,7 +1,6 @@
-﻿using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Services;
-using iQuest.VendingMachine.UseCases;
+﻿using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.DataAcces;
+using iQuest.VendingMachine.Presentation;
 using Moq;
 
 namespace VM_UnitTests.UseCasesTests

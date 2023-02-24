@@ -1,12 +1,6 @@
-﻿using System;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Exceptions;
-using iQuest.VendingMachine.Interfaces;
-using iQuest.VendingMachine.Services;
-
-namespace iQuest.VendingMachine.UseCases
+﻿namespace iQuest.VendingMachine.Business
 {
-    internal class LoginUseCase : IUseCase
+    public class LoginUseCase : IUseCase
     {
         private readonly IMainDisplay mainDisplay;
         private readonly IAuthenticationService authenticationService;

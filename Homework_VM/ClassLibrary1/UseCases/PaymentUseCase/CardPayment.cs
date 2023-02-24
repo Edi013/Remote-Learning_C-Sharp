@@ -1,9 +1,7 @@
 ﻿
-using iQuest.VendingMachine.PresentationLayer;
-
-namespace iQuest.VendingMachine.UseCases
+namespace iQuest.VendingMachine.Business
 {
-    internal class CardPayment : IPaymentAlgorithm
+    public class CardPayment : IPaymentAlgorithm
     {
         private readonly ICardPaymentTerminal terminal;
         public readonly CardValidator validator;

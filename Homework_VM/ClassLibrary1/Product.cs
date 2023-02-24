@@ -1,4 +1,4 @@
-﻿namespace iQuest.VendingMachine.DataLayer
+﻿namespace iQuest.VendingMachine.Business
 {
     public class Product
     {

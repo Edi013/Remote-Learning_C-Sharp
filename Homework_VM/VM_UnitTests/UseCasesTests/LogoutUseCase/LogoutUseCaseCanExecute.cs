@@ -1,5 +1,4 @@
-﻿using iQuest.VendingMachine.Services;
-using iQuest.VendingMachine.UseCases;
+﻿using iQuest.VendingMachine.Business;
 
 namespace VM_UnitTests.UseCasesTests
 {
