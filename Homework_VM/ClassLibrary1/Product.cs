@@ -1,7 +1,10 @@
-﻿namespace iQuest.VendingMachine.Business
+﻿using LiteDB;
+
+namespace iQuest.VendingMachine.Business
 {
     public class Product
     {
+        [BsonId]
         public int ColumnId { get; set;}
         public string Name { get; set; }
         public float Price { get; set;}
