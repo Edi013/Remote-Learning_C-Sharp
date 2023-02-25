@@ -22,10 +22,16 @@ namespace iQuest.BooksAndNews.Application.Publishers
         private ILog _logger;
 
         private List<ISubscriber> subscribers;
+        public List<ISubscriber> Subscribers
+        {
+            get
+            {
+                return subscribers;
+            }
+        }
 
-        public event EventHandler<CustomEvent> BookRelease;
-        public event EventHandler<CustomEvent> NewspaperRelease;
-
+        public event EventHandler<CustomEvent> BookPrinted;
+        public event EventHandler<CustomEvent> NewspaperPrinted;
 
         public PrintingOffice(IBookRepository bookRepository, INewspaperRepository newspaperRepository, ILog log)
         {
@@ -55,7 +61,7 @@ namespace iQuest.BooksAndNews.Application.Publishers
         }
         public void HandlerBookRelease(CustomEvent e)
         {
-            EventHandler<CustomEvent> raiseEvent = BookRelease;
+            EventHandler<CustomEvent> raiseEvent = BookPrinted;
 
             if(raiseEvent != null)
             {
@@ -64,20 +70,18 @@ namespace iQuest.BooksAndNews.Application.Publishers
         }
         public void HandlerNewspaperRelease(CustomEvent e)
         {
-            EventHandler<CustomEvent> raiseEvent = NewspaperRelease;
+            EventHandler<CustomEvent> raiseEvent = NewspaperPrinted;
 
             if (raiseEvent != null)
             {
                 raiseEvent(this, e);
             }
         }
-
-
-        public void Subscribe(ISubscriber subscriber)
+        public void AddSubscriber(ISubscriber subscriber)
         {
             subscribers.Add(subscriber);
         }
-        public void Unsubscribe(ISubscriber subscriber)
+        public void RemoveSubscriber(ISubscriber subscriber)
         {
             subscribers.Remove(subscriber);
         }

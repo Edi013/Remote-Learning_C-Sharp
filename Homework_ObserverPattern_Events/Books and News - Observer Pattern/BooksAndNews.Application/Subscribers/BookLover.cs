@@ -9,7 +9,7 @@ namespace iQuest.BooksAndNews.Application.Subscribers
     /// This is a subscriber that is interested to receive notification whenever a book
     /// is printed.
     ///
-    /// Subscribe to the printing office and log each book that was printed.
+    /// AddSubscriber to the printing office and log each book that was printed.
     /// </summary>
     public class BookLover : ISubscriber
     {
@@ -32,14 +32,14 @@ namespace iQuest.BooksAndNews.Application.Subscribers
 
         private void Subscribe()
         {
-            _printingOffice.Subscribe(this);
-            _printingOffice.BookRelease += HandleCustomEvent;
+            _printingOffice.AddSubscriber(this);
+            _printingOffice.BookPrinted += HandleCustomEvent;
         }
 
         private void Unsubscribe()
         {
-            _printingOffice.Unsubscribe(this);
-            _printingOffice.BookRelease -= HandleCustomEvent;
+            _printingOffice.RemoveSubscriber(this);
+            _printingOffice.BookPrinted -= HandleCustomEvent;
         }
     }
 }

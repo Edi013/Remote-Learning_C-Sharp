@@ -9,7 +9,7 @@ namespace iQuest.BooksAndNews.Application.Subscribers
     /// This is a subscriber that is interested to receive notification whenever news
     /// are printed.
     ///
-    /// Subscribe to the printing office and log each news that was printed.
+    /// AddSubscriber to the printing office and log each news that was printed.
     /// </summary>
     public class NewsHunter : ISubscriber
     {
@@ -32,14 +32,14 @@ namespace iQuest.BooksAndNews.Application.Subscribers
 
         private void Subscribe()
         {
-            _printingOffice.Subscribe(this);
-            _printingOffice.NewspaperRelease += HandleCustomEvent;
+            _printingOffice.AddSubscriber(this);
+            _printingOffice.NewspaperPrinted += HandleCustomEvent;
         }
 
         private void Unsubscribe()
         {
-            _printingOffice.Unsubscribe(this);
-            _printingOffice.NewspaperRelease -= HandleCustomEvent;
+            _printingOffice.RemoveSubscriber(this);
+            _printingOffice.NewspaperPrinted -= HandleCustomEvent;
         }
     }
 }
