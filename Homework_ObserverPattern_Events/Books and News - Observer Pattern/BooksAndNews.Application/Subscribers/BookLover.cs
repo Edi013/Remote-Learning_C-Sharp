@@ -27,7 +27,7 @@ namespace iQuest.BooksAndNews.Application.Subscribers
         }
         void HandleCustomEvent(object sender, CustomEvent e)
         {
-            Console.WriteLine($"{_name} received this message: {e.Message}");
+            _log.WriteInfo($"{_name} received this message: {e.Message}");
         }
 
         private void Subscribe()
