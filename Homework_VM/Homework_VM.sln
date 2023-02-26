@@ -18,14 +18,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine", "VendingMa
 		{F4D625D0-52D5-4E5E-BB39-B8EDF3C7B970} = {F4D625D0-52D5-4E5E-BB39-B8EDF3C7B970}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Business", "ClassLibrary1\VendingMachine.Business.csproj", "{48F49396-B8C0-4244-98B1-0491A2C256EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Business", "VendingMachine.Business\VendingMachine.Business.csproj", "{48F49396-B8C0-4244-98B1-0491A2C256EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.DataAccess", "VendingMachine.DataAccessLibrary\VendingMachine.DataAccess.csproj", "{F4D625D0-52D5-4E5E-BB39-B8EDF3C7B970}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.DataAccess", "VendingMachine.DataAccess\VendingMachine.DataAccess.csproj", "{F4D625D0-52D5-4E5E-BB39-B8EDF3C7B970}"
 	ProjectSection(ProjectDependencies) = postProject
 		{48F49396-B8C0-4244-98B1-0491A2C256EC} = {48F49396-B8C0-4244-98B1-0491A2C256EC}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Presentation", "VendingMachine.Presentation1\VendingMachine.Presentation.csproj", "{3A19E59B-3EDC-4317-AE9B-A6A3EB0B6C0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Presentation", "VendingMachine.Presentation\VendingMachine.Presentation.csproj", "{3A19E59B-3EDC-4317-AE9B-A6A3EB0B6C0A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{48F49396-B8C0-4244-98B1-0491A2C256EC} = {48F49396-B8C0-4244-98B1-0491A2C256EC}
 	EndProjectSection
