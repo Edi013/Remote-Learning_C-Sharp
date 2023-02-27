@@ -25,20 +25,18 @@ namespace iQuest.BooksAndNews.Application.Subscribers
 
             Subscribe();
         }
-        void HandleCustomEvent(object sender, CustomEvent e)
+        void HandleCustomEvent(object sender, PrintNewspapper e)
         {
-            _log.WriteInfo($"{_name} received this message: {e.Message}");
+            _log.WriteInfo($"{_name} received this newspapper: {e.PrintedNewspapper.Title}");
         }
 
         private void Subscribe()
         {
-            _printingOffice.AddSubscriber(this);
             _printingOffice.NewspaperPrinted += HandleCustomEvent;
         }
 
         private void Unsubscribe()
         {
-            _printingOffice.RemoveSubscriber(this);
             _printingOffice.NewspaperPrinted -= HandleCustomEvent;
         }
     }
