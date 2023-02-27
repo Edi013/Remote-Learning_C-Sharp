@@ -21,15 +21,6 @@ namespace iQuest.BooksAndNews.Application.Publishers
         private INewspaperRepository _newspaperRepository;
         private ILog _logger;
 
-        private List<ISubscriber> subscribers;
-        public List<ISubscriber> Subscribers
-        {
-            get
-            {
-                return subscribers;
-            }
-        }
-
         public event EventHandler<CustomEvent> BookPrinted;
         public event EventHandler<CustomEvent> NewspaperPrinted;
 
@@ -38,8 +29,6 @@ namespace iQuest.BooksAndNews.Application.Publishers
             _bookRepository = bookRepository;
             _newspaperRepository = newspaperRepository;
             _logger = log;
-
-            subscribers = new List<ISubscriber>();
         }
 
         public void PrintRandom(int bookCount, int newspaperCount) //
