@@ -4,7 +4,7 @@ using iQuest.BooksAndNews.Application.DataAccess;
 using iQuest.BooksAndNews.Application.Publishers;
 using iQuest.BooksAndNews.Application.Subscribers;
 
-namespace iQuest.BooksAndNews.Application
+namespace iQuest.BooksAndNews.ApplicationDelegates
 {
     public class PrintingUseCase
     {
@@ -29,7 +29,7 @@ namespace iQuest.BooksAndNews.Application
             CreateBookLovers();
             CreateNewsHunters();
 
-            printingOffice.PrintRandom(3, 2);
+            printingOffice.PrintRandom(3, 2); //bookLovers, newsHunters
         }
 
         private void CreatePrintingOffice()
@@ -39,23 +39,18 @@ namespace iQuest.BooksAndNews.Application
 
         private void CreateBookLovers()
         {
-            BookLover william = new BookLover("William", printingOffice, log);
-            bookLovers.Add(william);
+            BookLover william = new BookLover("William", printingOffice, log, bookLovers);
 
-            BookLover james = new BookLover("James", printingOffice, log);
-            bookLovers.Add(james);
+            BookLover james = new BookLover("James", printingOffice, log, bookLovers);
 
-            BookLover anna = new BookLover("Anna", printingOffice, log);
-            bookLovers.Add(anna);
+            BookLover anna = new BookLover("Anna", printingOffice, log, bookLovers);
         }
 
         private void CreateNewsHunters()
         {
-            NewsHunter alice = new NewsHunter("Alice", printingOffice, log);
-             newsHunters.Add(alice);
+            NewsHunter alice = new NewsHunter("Alice", printingOffice, log, newsHunters);
 
-             NewsHunter johnny = new NewsHunter("Johnny", printingOffice, log);
-             newsHunters.Add(johnny);
+            NewsHunter johnny = new NewsHunter("Johnny", printingOffice, log, newsHunters);
         }
     }
 }

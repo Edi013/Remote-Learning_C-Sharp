@@ -1,4 +1,5 @@
-﻿using iQuest.BooksAndNews.Application.Publishers;
+﻿using iQuest.BooksAndNews.Application.Publications;
+using iQuest.BooksAndNews.Application.Publishers;
 using System;
 
 namespace iQuest.BooksAndNews.Application.Subscribers
@@ -17,23 +18,24 @@ namespace iQuest.BooksAndNews.Application.Subscribers
         private PrintingOffice _printingOffice;
         private ILog _log;
 
-        public BookLover(string name, PrintingOffice printingOffice, ILog log)
+        public BookLover(string name, PrintingOffice printingOffice,
+            ILog log, List<BookLover> bookLovers)
         {
             _name = name;
             _printingOffice = printingOffice;
             _log = log;
 
-            Subscribe();
+            Subscribe(bookLovers);
         }
 
-        private void Subscribe()
+        public void HandlerBookPrinted(Book item)
         {
-            _printingOffice.AddSubscriber(this);
+            _log.WriteInfo($"{_name} received book {item.Title} !");
         }
 
-        private void Unsubscribe()
+        public void Subscribe(List<BookLover> bookLovers)
         {
-            _printingOffice.RemoveSubscriber(this);
+            bookLovers.Add(this);
         }
     }
 }

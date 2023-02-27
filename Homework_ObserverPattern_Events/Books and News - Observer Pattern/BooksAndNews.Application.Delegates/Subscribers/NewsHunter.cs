@@ -1,4 +1,5 @@
-﻿using iQuest.BooksAndNews.Application.Publishers;
+﻿using iQuest.BooksAndNews.Application.Publications;
+using iQuest.BooksAndNews.Application.Publishers;
 using System;
 
 namespace iQuest.BooksAndNews.Application.Subscribers
@@ -17,23 +18,22 @@ namespace iQuest.BooksAndNews.Application.Subscribers
         private PrintingOffice _printingOffice;
         private ILog _log;
 
-        public NewsHunter(string name, PrintingOffice printingOffice, ILog log)
+        public NewsHunter(string name, PrintingOffice printingOffice, ILog log, List<NewsHunter> newsHunters)
         {
             _name = name;
             _printingOffice = printingOffice;
             _log = log;
 
-            Subscribe();
+            Subscribe(newsHunters);
         }
 
-        private void Subscribe()
+        public void HandlerNewspaperPrinted(Newspaper item)
         {
-            _printingOffice.AddSubscriber(this);
+            _log.WriteInfo($"{_name} received newspaper {item.Title} !");
         }
-
-        private void Unsubscribe()
+        public void Subscribe(List<NewsHunter> newsHunters)
         {
-            _printingOffice.RemoveSubscriber(this);
+            newsHunters.Add(this);
         }
     }
 }
