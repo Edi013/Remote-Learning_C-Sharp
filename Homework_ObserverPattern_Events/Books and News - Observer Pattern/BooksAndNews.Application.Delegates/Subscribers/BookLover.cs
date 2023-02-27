@@ -16,7 +16,7 @@ namespace iQuest.BooksAndNews.Application.Subscribers
     {
         private string _name;
         private PrintingOffice _printingOffice;
-        private ILog _log;
+        private static ILog _log;
 
         public BookLover(string name, PrintingOffice printingOffice,
             ILog log, List<BookLover> bookLovers)
@@ -28,9 +28,9 @@ namespace iQuest.BooksAndNews.Application.Subscribers
             Subscribe(bookLovers);
         }
 
-        public void HandlerBookPrinted(Book item)
+        public static void HandlerBookPrinted(Book item)
         {
-            _log.WriteInfo($"{_name} received book {item.Title} !");
+            _log.WriteInfo($"One received book {item.Title} !");
         }
 
         public void Subscribe(List<BookLover> bookLovers)

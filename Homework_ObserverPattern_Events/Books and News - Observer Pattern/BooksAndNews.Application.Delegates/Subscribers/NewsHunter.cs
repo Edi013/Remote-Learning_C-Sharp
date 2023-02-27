@@ -16,9 +16,10 @@ namespace iQuest.BooksAndNews.Application.Subscribers
     {
         private string _name;
         private PrintingOffice _printingOffice;
-        private ILog _log;
+        private static ILog _log;
 
-        public NewsHunter(string name, PrintingOffice printingOffice, ILog log, List<NewsHunter> newsHunters)
+        public NewsHunter(string name, PrintingOffice printingOffice,
+            ILog log, List<NewsHunter> newsHunters)
         {
             _name = name;
             _printingOffice = printingOffice;
@@ -27,9 +28,9 @@ namespace iQuest.BooksAndNews.Application.Subscribers
             Subscribe(newsHunters);
         }
 
-        public void HandlerNewspaperPrinted(Newspaper item)
+        public static void HandlerNewspaperPrinted(Newspaper item)
         {
-            _log.WriteInfo($"{_name} received newspaper {item.Title} !");
+            _log.WriteInfo($"One received newspaper {item.Title} !");
         }
         public void Subscribe(List<NewsHunter> newsHunters)
         {
