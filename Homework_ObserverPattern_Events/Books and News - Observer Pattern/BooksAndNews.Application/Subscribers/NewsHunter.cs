@@ -11,7 +11,7 @@ namespace iQuest.BooksAndNews.Application.Subscribers
     ///
     /// AddSubscriber to the printing office and log each news that was printed.
     /// </summary>
-    public class NewsHunter : ISubscriber
+    public class NewsHunter
     {
         private string _name;
         private PrintingOffice _printingOffice;
