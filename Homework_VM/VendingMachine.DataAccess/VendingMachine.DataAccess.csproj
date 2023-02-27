@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\VendingMachine.Business.csproj" />
+    <ProjectReference Include="..\VendingMachine.Business\VendingMachine.Business.csproj" />
   </ItemGroup>
 
 </Project>
