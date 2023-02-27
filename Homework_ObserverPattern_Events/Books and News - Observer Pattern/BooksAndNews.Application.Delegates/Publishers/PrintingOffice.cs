@@ -21,47 +21,42 @@ namespace iQuest.BooksAndNews.Application.Publishers
         private INewspaperRepository _newspaperRepository;
         private ILog _logger;
 
-        private List<ISubscriber> subscribers;
-        public List<ISubscriber> Subscribers
-        {
-            get
-            {
-                return subscribers;
-            }
-        }
-
+        private delegate void PrintingBook(Book item);
+        private delegate void PrintingNewspaper(Newspaper item);
         public PrintingOffice(IBookRepository bookRepository, INewspaperRepository newspaperRepository, ILog log)
         {
             _bookRepository = bookRepository;
             _newspaperRepository = newspaperRepository;
             _logger = log;
 
-            subscribers = new List<ISubscriber>();
         }
 
-        public void PrintRandom(int bookCount, int newspaperCount) //
+        public void PrintRandom(int bookCount, int newspaperCount) 
         {
+            //ther are 3 ways to do this assignasion. Here are 2/3 : 
+            PrintingBook printingBook = BookLover.HandlerBookPrinted;
+            PrintingNewspaper printingNewspaper = new PrintingNewspaper(NewsHunter.HandlerNewspaperPrinted);
+
             for(int i = 0; i < bookCount; i++)
             {
+                var book = _bookRepository.GetRandom();
+                string aux = book.ToString();
+
                 Console.WriteLine("-------NEW BOOK------------");
-                string aux = _bookRepository.GetRandom().ToString();
                 Console.WriteLine("Book printed" + aux);
+
+                printingBook.Invoke(book);
             }
             for(int i = 0; i < newspaperCount; i++)
             {
+                var newspaper = _newspaperRepository.GetRandom();
+                string aux = newspaper.ToString();
+
                 Console.WriteLine("-------NEW NEWSPAPER------------");
-                string aux = _newspaperRepository.GetRandom().ToString();
                 Console.WriteLine("Newspaper printed" + aux);
+
+                printingNewspaper.Invoke(newspaper);
             }
-        }
- 
-        public void AddSubscriber(ISubscriber subscriber)
-        {
-            subscribers.Add(subscriber);
-        }
-        public void RemoveSubscriber(ISubscriber subscriber)
-        {
-            subscribers.Remove(subscriber);
         }
     }
 }
