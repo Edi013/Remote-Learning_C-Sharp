@@ -29,13 +29,11 @@ namespace iQuest.BooksAndNews.Application.Subscribers
         private void Subscribe()
         {
             _printingOffice.AddSubscriber(this);
-            _printingOffice.BookPrinted += HandleCustomEvent;
         }
 
         private void Unsubscribe()
         {
             _printingOffice.RemoveSubscriber(this);
-            _printingOffice.BookPrinted -= HandleCustomEvent;
         }
     }
 }
