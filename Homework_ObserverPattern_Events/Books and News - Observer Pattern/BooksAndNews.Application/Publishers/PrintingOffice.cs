@@ -21,8 +21,8 @@ namespace iQuest.BooksAndNews.Application.Publishers
         private INewspaperRepository _newspaperRepository;
         private ILog _logger;
 
-        public event EventHandler<CustomEvent> BookPrinted;
-        public event EventHandler<CustomEvent> NewspaperPrinted;
+        public event EventHandler<PrintBook> BookPrinted;
+        public event EventHandler<PrintNewspapper> NewspaperPrinted;
 
         public PrintingOffice(IBookRepository bookRepository, INewspaperRepository newspaperRepository, ILog log)
         {
@@ -35,44 +35,42 @@ namespace iQuest.BooksAndNews.Application.Publishers
         {
             for(int i = 0; i < bookCount; i++)
             {
+                var book = _bookRepository.GetRandom();
+                string aux = book.ToString();
+
                 Console.WriteLine("-------NEW BOOK------------");
-                string aux = _bookRepository.GetRandom().ToString();
                 Console.WriteLine("Book printed" + aux);
-                HandlerBookRelease(new CustomEvent(aux));
+
+                HandlerPrintedBook(new PrintBook(book));
             }
             for(int i = 0; i < newspaperCount; i++)
             {
+                var newspapper = _newspaperRepository.GetRandom();
+                string aux = newspapper.ToString();
+                
                 Console.WriteLine("-------NEW NEWSPAPER------------");
-                string aux = _newspaperRepository.GetRandom().ToString();
                 Console.WriteLine("Newspaper printed" + aux);
-                HandlerNewspaperRelease(new CustomEvent(aux));
+                
+                HandlerPrintedNewspapper(new PrintNewspapper(newspapper));
             }
         }
-        public void HandlerBookRelease(CustomEvent e)
+        public void HandlerPrintedBook(PrintBook e)
         {
-            EventHandler<CustomEvent> raiseEvent = BookPrinted;
+            EventHandler<PrintBook> raiseEvent = BookPrinted;
 
             if(raiseEvent != null)
             {
                 raiseEvent(this, e);
             }
         }
-        public void HandlerNewspaperRelease(CustomEvent e)
+        public void HandlerPrintedNewspapper(PrintNewspapper e)
         {
-            EventHandler<CustomEvent> raiseEvent = NewspaperPrinted;
+            EventHandler<PrintNewspapper> raiseEvent = NewspaperPrinted;
 
             if (raiseEvent != null)
             {
                 raiseEvent(this, e);
             }
-        }
-        public void AddSubscriber(ISubscriber subscriber)
-        {
-            subscribers.Add(subscriber);
-        }
-        public void RemoveSubscriber(ISubscriber subscriber)
-        {
-            subscribers.Remove(subscriber);
         }
     }
 }
