@@ -47,16 +47,16 @@ namespace iQuest.VendingMachine.DataAcces
 
         public Product? GetProductByColumnId(int columnId)
         {
-            Product toFind = null;
+            Product searchedProduct = null;
 
             using (var database = new LiteDatabase(
                         _connectionString))
             {
                 var collection = database.GetCollection<Product>("Products");
-                toFind = collection.FindById(columnId);
+                searchedProduct = collection.FindById(columnId);
             }
 
-            return toFind;
+            return searchedProduct;
         }
 
         public List<Product> GetProducts()
