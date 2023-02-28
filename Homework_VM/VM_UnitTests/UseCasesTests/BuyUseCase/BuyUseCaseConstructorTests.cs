@@ -1,14 +1,13 @@
-﻿using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Services;
-using iQuest.VendingMachine.UseCases;
+﻿using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.DataAcces;
+using iQuest.VendingMachine.Presentation;
 using Moq;
 
 namespace VM_UnitTests.UseCasesTests
 {
     public class BuyUseCaseConstructorTests
     {
-        private  ProductRepository productRepository;
+        private  InMemoryRepository productRepository;
         private  AuthenticationService authenticationService;
         private  BuyView buyView;
 
@@ -20,7 +19,7 @@ namespace VM_UnitTests.UseCasesTests
 
             buyView = new BuyView();
             authenticationService = new AuthenticationService();
-            productRepository = new ProductRepository();
+            productRepository = new InMemoryRepository();
             Mock<IPaymentUseCase> paymentUseCase = new Mock<IPaymentUseCase>();
 
             BuyUseCase buyUseCase = new BuyUseCase(buyView, authenticationService, productRepository, paymentUseCase.Object);
@@ -46,7 +45,7 @@ namespace VM_UnitTests.UseCasesTests
 
             productRepository = null;
             Assert.Throws<ArgumentNullException>(() => new BuyUseCase(buyView, authenticationService, productRepository, paymentUseCase));
-            productRepository = new ProductRepository();
+            productRepository = new InMemoryRepository();
 
             paymentUseCase = null;
             Assert.Throws<ArgumentNullException>(() => new BuyUseCase(buyView, authenticationService, productRepository, paymentUseCase));

@@ -1,14 +1,5 @@
-﻿using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.Services;
-using iQuest.VendingMachine.UseCases;
+﻿using iQuest.VendingMachine.Business;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using iQuest.VendingMachine.UseCases;
 
 namespace VM_UnitTests.UseCasesTests
 {
@@ -35,7 +26,7 @@ namespace VM_UnitTests.UseCasesTests
                 new Product(1, "testProduct", 3.33f, 3)
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             authenticationService
@@ -54,7 +45,7 @@ namespace VM_UnitTests.UseCasesTests
             {
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             authenticationService
@@ -74,7 +65,7 @@ namespace VM_UnitTests.UseCasesTests
                 new Product(1, "testProduct", 3.33f, 3)
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
             authenticationService
                 .Setup(x => x.IsUserAuthenticated)
@@ -92,7 +83,7 @@ namespace VM_UnitTests.UseCasesTests
             {
             };
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             authenticationService

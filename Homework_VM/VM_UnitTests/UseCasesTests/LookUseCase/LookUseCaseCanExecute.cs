@@ -1,12 +1,5 @@
-﻿using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.UseCases;
+﻿using iQuest.VendingMachine.Business;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VM_UnitTests.UseCasesTests
 {
@@ -30,7 +23,7 @@ namespace VM_UnitTests.UseCasesTests
             };
 
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             LookUseCase lookUseCase = new LookUseCase(productRepository.Object, shelfView.Object);
@@ -46,7 +39,7 @@ namespace VM_UnitTests.UseCasesTests
             };
 
             productRepository
-                .Setup(x => x.GetAll())
+                .Setup(x => x.GetProducts())
                 .Returns(products);
 
             LookUseCase lookUseCase = new LookUseCase(productRepository.Object, shelfView.Object);

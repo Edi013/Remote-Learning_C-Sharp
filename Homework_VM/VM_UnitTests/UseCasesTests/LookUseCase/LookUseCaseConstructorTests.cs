@@ -1,11 +1,6 @@
-﻿using iQuest.VendingMachine.DataLayer;
-using iQuest.VendingMachine.PresentationLayer;
-using iQuest.VendingMachine.UseCases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.DataAcces;
+using iQuest.VendingMachine.Presentation;
 
 namespace VM_UnitTests.UseCasesTests
 {
@@ -21,7 +16,7 @@ namespace VM_UnitTests.UseCasesTests
             string nameText = "See products";
             string descriptionText = "This is our stock.";
 
-            productRepository = new ProductRepository();
+            productRepository = new InMemoryRepository();
             shelfView = new ShelfView();
 
             LookUseCase lookUseCase = new LookUseCase(productRepository, shelfView);
@@ -34,7 +29,7 @@ namespace VM_UnitTests.UseCasesTests
         {
             productRepository = null;
             Assert.Throws<ArgumentNullException>(() => new LookUseCase(productRepository, shelfView));
-            productRepository = new ProductRepository();
+            productRepository = new InMemoryRepository();
 
             shelfView = null;
             Assert.Throws<ArgumentNullException>(() => new LookUseCase(productRepository, shelfView));
