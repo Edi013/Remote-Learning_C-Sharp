@@ -12,6 +12,11 @@ namespace iQuest.VendingMachine.DataAcces
         {
             _connectionString = connectionString;
 
+            InsertDataIfEmpty();
+        }
+
+        private void InsertDataIfEmpty()
+        {
             using (var database = new LiteDatabase(
                         _connectionString))
             {
@@ -28,7 +33,6 @@ namespace iQuest.VendingMachine.DataAcces
                 }
             }
         }
-
         public void DecreaseQuantity(Product product)
         {
             product.Quantity--;
