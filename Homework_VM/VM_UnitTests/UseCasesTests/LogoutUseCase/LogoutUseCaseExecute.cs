@@ -1,10 +1,4 @@
-﻿using iQuest.VendingMachine.Services;
-using iQuest.VendingMachine.UseCases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iQuest.VendingMachine.Business;
 
 namespace VM_UnitTests.UseCasesTests
 {

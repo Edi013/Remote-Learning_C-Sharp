@@ -23,7 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VM\Homework_VM.csproj" />
+    <ProjectReference Include="..\VendingMachine.Business\VendingMachine.Business.csproj" />
+    <ProjectReference Include="..\VendingMachine.DataAccess\VendingMachine.DataAccess.csproj" />
+    <ProjectReference Include="..\VendingMachine.Presentation\VendingMachine.Presentation.csproj" />
+    <ProjectReference Include="..\VendingMachine\VendingMachine.csproj" />
   </ItemGroup>
 
 </Project>
