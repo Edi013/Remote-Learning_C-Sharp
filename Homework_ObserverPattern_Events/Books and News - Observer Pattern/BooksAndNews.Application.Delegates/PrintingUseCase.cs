@@ -4,7 +4,7 @@ using iQuest.BooksAndNews.Application.DataAccess;
 using iQuest.BooksAndNews.Application.Publishers;
 using iQuest.BooksAndNews.Application.Subscribers;
 
-namespace iQuest.BooksAndNews.ApplicationDelegates
+namespace iQuest.BooksAndNews.Application
 {
     public class PrintingUseCase
     {

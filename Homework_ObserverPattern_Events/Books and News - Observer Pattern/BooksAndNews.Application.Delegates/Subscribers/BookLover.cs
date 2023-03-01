@@ -12,7 +12,7 @@ namespace iQuest.BooksAndNews.Application.Subscribers
     ///
     /// AddSubscriber to the printing office and log each book that was printed.
     /// </summary>
-    public class BookLover : ISubscriber
+    public class BookLover
     {
         private string _name;
         private PrintingOffice _printingOffice;
