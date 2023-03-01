@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksAndNews.DataAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksAndNews.Application", "BooksAndNews.Application\BooksAndNews.Application.csproj", "{E6F82DDE-D60F-4E77-93C5-F4043AC8682B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksAndNews.Application.Delegates", "BooksAndNews.Application.Delegates\BooksAndNews.Application.Delegates.csproj", "{A46C342C-E07A-41A9-9987-38DD12BB0955}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksAndNews.ApplicationDelegates", "BooksAndNews.Application.Delegates\BooksAndNews.ApplicationDelegates.csproj", "{7A05ECCA-0DDA-4B97-95D4-CC153D29FEA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{E6F82DDE-D60F-4E77-93C5-F4043AC8682B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6F82DDE-D60F-4E77-93C5-F4043AC8682B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6F82DDE-D60F-4E77-93C5-F4043AC8682B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A46C342C-E07A-41A9-9987-38DD12BB0955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A46C342C-E07A-41A9-9987-38DD12BB0955}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A46C342C-E07A-41A9-9987-38DD12BB0955}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A46C342C-E07A-41A9-9987-38DD12BB0955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A05ECCA-0DDA-4B97-95D4-CC153D29FEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A05ECCA-0DDA-4B97-95D4-CC153D29FEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A05ECCA-0DDA-4B97-95D4-CC153D29FEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A05ECCA-0DDA-4B97-95D4-CC153D29FEA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
