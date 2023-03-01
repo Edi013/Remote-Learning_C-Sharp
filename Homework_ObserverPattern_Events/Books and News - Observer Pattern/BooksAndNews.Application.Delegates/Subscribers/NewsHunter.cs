@@ -1,6 +1,7 @@
 ﻿using iQuest.BooksAndNews.Application.Publications;
 using iQuest.BooksAndNews.Application.Publishers;
 using System;
+using System.Collections.Generic;
 
 namespace iQuest.BooksAndNews.Application.Subscribers
 {
@@ -30,7 +31,7 @@ namespace iQuest.BooksAndNews.Application.Subscribers
 
         public static void HandlerNewspaperPrinted(Newspaper item)
         {
-            _log.WriteInfo($"One received newspaper {item.Title} !");
+            _log.WriteInfo($"One NewsHunter received newspaper {item.Title} !");
         }
         public void Subscribe(List<NewsHunter> newsHunters)
         {
