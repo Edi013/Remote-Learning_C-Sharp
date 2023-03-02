@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using iQuest.BooksAndNews.Application.DataAccess;
-using iQuest.BooksAndNews.Application.Publications;
+using iQuest.BooksAndNews.Common;
 using Newtonsoft.Json;
 
 namespace iQuest.BooksAndNews.DataAccess

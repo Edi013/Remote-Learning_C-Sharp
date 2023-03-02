@@ -1,5 +1,7 @@
 ﻿using iQuest.BooksAndNews.Application.Publishers;
+using iQuest.BooksAndNews.Common;
 using System;
+using System.Collections.Generic;
 
 namespace iQuest.BooksAndNews.Application.Subscribers
 {
@@ -17,22 +19,25 @@ namespace iQuest.BooksAndNews.Application.Subscribers
         private PrintingOffice _printingOffice;
         private ILog _log;
 
-        public BookLover(string name, PrintingOffice printingOffice, ILog log)
+        public BookLover(string name, PrintingOffice printingOffice,
+            ILog log, List<BookLover> bookLovers)
         {
             _name = name;
             _printingOffice = printingOffice;
             _log = log;
 
-            Subscribe();
+            Subscribe(bookLovers);
         }
         void HandleCustomEvent(object sender, PrintBook e)
         {
             _log.WriteInfo($"{_name} received this book: {e.PrintedBook.Title}");
         }
 
-        private void Subscribe()
+        private void Subscribe(List<BookLover> bookLovers)
         {
             _printingOffice.BookPrinted += HandleCustomEvent;
+            bookLovers.Add(this);
+
         }
 
         private void Unsubscribe()

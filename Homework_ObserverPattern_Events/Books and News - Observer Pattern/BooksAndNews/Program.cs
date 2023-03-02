@@ -1,5 +1,5 @@
 ﻿using System;
-using iQuest.BooksAndNews.Application;
+using System.Configuration;
 using iQuest.BooksAndNews.DataAccess;
 
 namespace iQuest.BooksAndNews
@@ -15,9 +15,26 @@ namespace iQuest.BooksAndNews
             NewspaperRepository newspaperRepository = new NewspaperRepository();
 
             // Run
+            string implementation = ConfigurationManager.AppSettings["Implementation"] ?? "Not Found";
+            switch (implementation){
+                case "Events":
+                    Application.PrintingUseCase printingUseCaseEvents = new Application.PrintingUseCase(bookRepository, newspaperRepository, log);
+                    printingUseCaseEvents.Execute();
+                    break;
 
-            PrintingUseCase printingUseCase = new PrintingUseCase(bookRepository, newspaperRepository, log);
-            printingUseCase.Execute();
+                case "Delegates":
+                    ApplicationDelegates.PrintingUseCase printingUseCaseDelegates = new ApplicationDelegates.PrintingUseCase(bookRepository, newspaperRepository, log);
+                    printingUseCaseDelegates.Execute();
+                    break;
+
+                case "Not Found":
+                    Console.WriteLine("ConfigurationManager.AppSettings was null");
+                    break;
+
+                default:
+                    Console.WriteLine("Switch-case reached default case!");
+                    break;
+            }
 
             // End
 

@@ -1,4 +1,4 @@
-﻿using iQuest.BooksAndNews.Application.Publications;
+﻿using iQuest.BooksAndNews.Common;
 using System;
 
 namespace iQuest.BooksAndNews.Application

@@ -14,7 +14,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\BooksAndNews.Application.Delegates\BooksAndNews.ApplicationDelegates.csproj" />
+        <ProjectReference Include="..\BooksAndNews.Application\BooksAndNews.Application.csproj" />
         <ProjectReference Include="..\BooksAndNews.DataAccess\BooksAndNews.DataAccess.csproj" />
     </ItemGroup>
 

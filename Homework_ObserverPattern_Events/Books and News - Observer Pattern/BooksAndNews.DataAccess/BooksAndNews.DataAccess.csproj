@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BooksAndNews.Application.Delegates\BooksAndNews.ApplicationDelegates.csproj" />
+      <ProjectReference Include="..\BookAndNewsCommon\BookAndNewsCommon.csproj" />
     </ItemGroup>
 
     <ItemGroup>

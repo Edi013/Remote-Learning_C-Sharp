@@ -1,4 +1,4 @@
-﻿namespace iQuest.BooksAndNews.Application.Publications
+﻿namespace iQuest.BooksAndNews.Common
 {
     public class Newspaper
     {

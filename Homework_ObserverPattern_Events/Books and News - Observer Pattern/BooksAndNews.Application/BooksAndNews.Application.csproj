@@ -12,4 +12,8 @@
         <Copyright>Copyright © Naraggo iQuest 2020</Copyright>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\BookAndNewsCommon\BookAndNewsCommon.csproj" />
+    </ItemGroup>
+
 </Project>

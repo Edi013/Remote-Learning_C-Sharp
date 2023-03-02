@@ -1,10 +1,8 @@
-﻿using iQuest.BooksAndNews.Application.DataAccess;
-using iQuest.BooksAndNews.Application.Publications;
-using iQuest.BooksAndNews.Application.Subscribers;
+﻿using iQuest.BooksAndNews.ApplicationDelegates.Subscribers;
+using iQuest.BooksAndNews.Common;
 using System;
-using System.Collections.Generic;
 
-namespace iQuest.BooksAndNews.Application.Publishers
+namespace iQuest.BooksAndNews.ApplicationDelegates.Publishers
 {
     // todo: This class must be implemented.
 

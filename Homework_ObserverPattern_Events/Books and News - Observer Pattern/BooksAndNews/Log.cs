@@ -1,5 +1,5 @@
-﻿using System;
-using iQuest.BooksAndNews.Application;
+﻿using iQuest.BooksAndNews.Common;
+using System;
 
 namespace iQuest.BooksAndNews
 {
