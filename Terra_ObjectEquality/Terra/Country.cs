@@ -32,9 +32,10 @@ namespace iQuest.Terra
         }
         public override bool Equals(object obj)
         {
-            return this.GetType() == obj.GetType() 
-                ? Equals(obj) 
-                : false;
+            if (this.GetType() != obj.GetType())
+                return false;
+
+            return Equals(obj as Country);
         }
 
         public int CompareTo([AllowNull] Country other)
