@@ -21,14 +21,12 @@ namespace iQuest.Terra
                 return false;
             if (ReferenceEquals(this, other)) 
                 return true;
-            if (this.GetType() != other.GetType())
-                return false;
 
+            if(this.Name == other.Name
+                && this.Capital == other.Capital)
+                return true;
 
-            return this.Name == other.Name 
-                && this.Capital == other.Capital
-                ? true
-                : false ;
+            return false ;
         }
         public override bool Equals(object obj)
         {
@@ -48,7 +46,6 @@ namespace iQuest.Terra
                 return willReturn;
 
             return Capital.CompareTo(other.Capital);;
-        
         }
         public int CompareTo(object obj)
         {
