@@ -41,11 +41,20 @@ namespace iQuest.Terra
         {
             if(other == null) return 1;
             if (ReferenceEquals(this, other)) return 0;
-            return 5;
-        }
-        public override int CompareTo()
-        {
 
+            var willReturn = Name.CompareTo(other.Name);
+            if (willReturn != 0)
+                return willReturn;
+
+            return Capital.CompareTo(other.Capital);;
+        
+        }
+        public int CompareTo(object obj)
+        {
+            if(this.GetType() != obj.GetType())
+                throw new ArgumentException(nameof(obj));
+
+            return CompareTo(obj as Country);
         }
     }
 }
