@@ -1,6 +1,6 @@
 ﻿namespace Hashtable
 {
-    public class HashTable<T>
+    public class HashTable<T> : HashTable.IHashTable<T>
     {
         private readonly Node<T>[] _buckets;
 
@@ -34,7 +34,6 @@
                 throw new ArgumentNullException("Size is null or 0!");
 
             _buckets = new Node<T>[size];
-
         }
 
         //Indexer
@@ -122,7 +121,7 @@
             // return key[0] % _buckets.Length;
             return Math.Abs(key.GetHashCode() % _buckets.Length);
         }
-        protected (Node<T> previous, Node<T> current) GetNodeByKey(string key)
+        public (Node<T> previous, Node<T> current) GetNodeByKey(string key)
         {
             int position = GetBucketByKey(key);
             Node<T> current = _buckets[position];
@@ -139,7 +138,7 @@
 
             return (null, null);
         }
-        protected void ValidateKey(string key)
+        public void ValidateKey(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));
