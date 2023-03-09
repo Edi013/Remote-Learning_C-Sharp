@@ -6,20 +6,14 @@ namespace HashTable.UnitTests
 {
     public class HashTableConstructorUnitTests
     {
-        [Fact]
-        public void WhenCreatingHashTable_WithValidSize_ObjectIsValid()
-        {
-            int size = 1;
-
-            HashTable<int> hashTable = new HashTable<int>(size);
-
-            Assert.NotNull(hashTable);
-        }
+        private int size = 4;
 
         [Fact]
-        public void WhenCreatingHashTable_WithNullSize_ObjectIsValid()
-        {
-            Assert.Throws<ArgumentNullException>(() => new HashTable<int>(0));
-        }
+        public void WhenCreatingHashTable_WithValidSize_ObjectIsValid
+            () => Assert.NotNull(new HashTable<int>(size));
+
+        [Fact]
+        public void WhenCreatingHashTable_WithNullSize_ObjectIsValid 
+            () => Assert.Throws<ArgumentNullException>(() => new HashTable<int>(0));
     }
 }
