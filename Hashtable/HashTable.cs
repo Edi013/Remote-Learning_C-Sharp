@@ -30,7 +30,11 @@
 
         public HashTable(int size)
         {
+            if(size == 0)
+                throw new ArgumentNullException("Size is null or 0!");
+
             _buckets = new Node<T>[size];
+
         }
 
         //Indexer
