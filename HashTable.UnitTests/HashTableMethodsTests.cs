@@ -19,7 +19,6 @@ namespace HashTable.UnitTests
         }
 
 
-
         //DisplayAll Method
         [Fact]
         public void HavingDisplayAllMethod_ThrowsNothing
@@ -39,15 +38,90 @@ namespace HashTable.UnitTests
         [Fact]
         public void HavingGetMethod_NodeIsNull_Throws()
         {
-            mockHashTable
-                .Setup((x) => x.GetNodeByKey("key"))
-                .Returns((null, null));
-
             Assert.Throws<ArgumentOutOfRangeException>(() => hashTable.Get("key"));
         }
 
 
         //Add Method
+        [Fact]
+        public void HavingAddMethod_ValidParametersAndEmptyBucket_AddsNode()
+        {
+            hashTable.Add("key", 1);
+
+            Assert.Equal(1, hashTable.Get("key"));
+        }
+        [Fact]
+        public void HavingAddMethod_ValidParametersAndNonEmptyBucket_AddsNodes()
+        {
+            hashTable.Add("key1", 1);
+            hashTable.Add("key2", 1);
+            hashTable.Add("key3", 1);
+            hashTable.Add("key4", 1);
+            hashTable.Add("key5", 1);
+            hashTable.Add("key6", 1);
+            hashTable.Add("key7", 1);
+            hashTable.Add("key8", 1);
+            hashTable.Add("key9", 1);
+            hashTable.Add("key10", 1);
+
+            Assert.Equal(1, hashTable.Get("key1"));
+            Assert.Equal(1, hashTable.Get("key2"));
+            Assert.Equal(1, hashTable.Get("key3"));
+            Assert.Equal(1, hashTable.Get("key4"));
+            Assert.Equal(1, hashTable.Get("key5"));
+            Assert.Equal(1, hashTable.Get("key6"));
+            Assert.Equal(1, hashTable.Get("key7"));
+            Assert.Equal(1, hashTable.Get("key8"));
+            Assert.Equal(1, hashTable.Get("key9"));
+            Assert.Equal(1, hashTable.Get("key10"));
+        }
+
+
+        //Remove Method
+        [Fact]
+        public void HavingRemoveMethod_ValidParameter_RemovesNodes()
+        {
+            hashTable.Remove("key");
+            hashTable.Remove("key1");
+            hashTable.Remove("key2");
+            hashTable.Remove("key3");
+            hashTable.Remove("key4");
+            hashTable.Remove("key5");
+            hashTable.Remove("key6");
+            hashTable.Remove("key7");
+            hashTable.Remove("key8");
+            hashTable.Remove("key9");
+            hashTable.Remove("key10");
+            Assert.Throws<ArgumentOutOfRangeException>(() => hashTable.Get("key"));
+
+        }
+
+
+        //Contains Key
+        // can't get the mock to work
+        [Fact]
+        public void HavingContainsKeyMethod_ValidKey_NodeFound()
+        {
+            var key = "12zdf234";
+
+            mockHashTable
+                .Setup(x => x.GetNodeByKey(key))
+                .Returns(() => (null,
+                          new Node<int>() { Key = key, Value = 1, Next = null}));
+
+            Assert.True(mockHashTable.Object.ContainsKey(key));
+        }
+        [Fact]
+        public void HavingContainsKeyMethod_InvalidKey_NodeNotFound()
+        {
+            var key = "12zdf234";
+
+            mockHashTable
+                .Setup(x => x.GetNodeByKey(key))
+                .Returns(() => (null, null));
+
+            Assert.False(mockHashTable.Object.ContainsKey(key));
+        }
 
 
 
