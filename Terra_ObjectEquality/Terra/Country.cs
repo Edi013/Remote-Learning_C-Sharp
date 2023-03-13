@@ -15,7 +15,7 @@ namespace iQuest.Terra
             Capital = capital ?? throw new ArgumentNullException(nameof(capital));
         }
 
-        public bool Equals([AllowNull] Country other)
+        public bool Equals(Country other)
         {
             if (other == null) 
                 return false;
@@ -36,7 +36,7 @@ namespace iQuest.Terra
             return Equals(obj as Country);
         }
 
-        public int CompareTo([AllowNull] Country other)
+        public int CompareTo(Country other)
         {
             if(other == null) return 1;
             if (ReferenceEquals(this, other)) return 0;
