@@ -7,8 +7,9 @@ namespace Program
     {
         public static void Main()
         {
-            const string pathToAssembly = "D:\\technologii\\GitHubDesktop\\NagarroRepo\\RL_Csharp\\Eyeglasses\\VendingMachine.Business.dll";
-            var bussinessAssembly = Assembly.LoadFile(pathToAssembly);
+
+            var pathToAssembly = new FileInfo(@"VendingMachine.Business.dll");
+            var bussinessAssembly = Assembly.LoadFile(pathToAssembly.FullName);
 
             //Let's find out what types does this dll uses:
             var definedTypesInAssembly = bussinessAssembly.DefinedTypes;
@@ -29,6 +30,17 @@ namespace Program
                     dynamic anObject = Activator.CreateInstance(aType);
                     Type parameterType = anObject.GetType();
 
+                    Console.WriteLine("All interfaces");
+                    foreach (MemberInfo member in parameterType.GetInterfaces()) // GetInterfaces
+                        Console.WriteLine(member.Name);
+                    Console.WriteLine(); 
+
+                    Console.WriteLine("All private fields");
+                    foreach (MemberInfo member in parameterType.GetFields
+                        (BindingFlags.NonPublic | BindingFlags.Instance))
+                            Console.WriteLine(member.Name);
+                    Console.WriteLine();
+
                     Console.WriteLine("All public fields");
                     foreach (MemberInfo member in parameterType.GetFields())
                         Console.WriteLine(member.Name);
@@ -43,19 +55,21 @@ namespace Program
                     foreach (MemberInfo member in parameterType.GetProperties())
                         Console.WriteLine(member.Name);
                     Console.WriteLine();
+
                 }
                 catch (System.MissingMethodException)
                 {
                     Console.WriteLine($"Type cannot be instantiated");
                 }
 
-                if(typesContor % 3 == 0)
+                typesContor++;
+                if (typesContor % 30 == 0)
                     keepLoopOn = AskToContinue();
                 if (!keepLoopOn)
                     break;
 
-                typesContor++;
             }
+            Console.ReadLine();
 
             bool AskToContinue()
             {
