@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using iQuest.HotelQueries.Domain;
+using System.Linq;
 
 namespace iQuest.HotelQueries
 {
@@ -17,7 +18,10 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Room> GetAllRoomsForTwoPersons()
         {
-            throw new NotImplementedException();
+            var rooms =   (from r in Rooms
+                           where r.MaxPersonCount == 2
+                           select r).ToList();
+            return rooms;
         }
 
         /// <summary>
@@ -26,7 +30,10 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Customer> FindCustomerByName(string text)
         {
-            throw new NotImplementedException();
+            IEnumerable<Customer> customer = from client in Customers
+                                             where client.FullName   == text
+                                             select client;
+            return customer;
         }
 
         /// <summary>
@@ -34,7 +41,11 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Reservation> GetCompanyReservations()
         {
-            throw new NotImplementedException();
+            var reservations = (from reservation in Reservations
+                               where reservation.Customer.GetType() == typeof(CompanyCustomer)
+                               select reservation).ToList();
+
+            return reservations;
         }
 
         /// <summary>
@@ -42,7 +53,12 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Customer> FindWomen(DateTime startTime, DateTime endTime)
         {
-            throw new NotImplementedException();
+            IEnumerable<Customer> customers = (from reservation in Reservations
+                                              where reservation.StartDate >= startTime && reservation.EndDate <= endTime
+                                              && reservation.Customer.GetType() == typeof(PersonCustomer) 
+                                              && (reservation.Customer as PersonCustomer).Gender.ToString() == "Female"
+                                              select reservation.Customer).ToList();
+            return customers;
         }
 
         /// <summary>
@@ -50,7 +66,10 @@ namespace iQuest.HotelQueries
         /// </summary>
         public int CalculateHotelCapacity()
         {
-            throw new NotImplementedException();
+            int hotelCapacity = (from room in Rooms
+                                select room.MaxPersonCount).Sum();
+
+            return hotelCapacity;
         }
 
         /// <summary>
@@ -61,7 +80,11 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Room> GetPageOfRoomsOrderedBySurface(int pageNumber, int pageSize)
         {
-            throw new NotImplementedException();
+            var roomsOrderedBySurface = (from room in Rooms
+                                         orderby room.Surface descending
+                                         select room).ToList();
+
+            return roomsOrderedBySurface;
         }
 
         /// <summary>
@@ -70,7 +93,11 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Room> GetRoomsOrderedByCapacity()
         {
-            throw new NotImplementedException();
+            var roomsOrderedBySurface = (from room in Rooms
+                                         orderby room.MaxPersonCount descending, room.Number ascending 
+                                         select room).ToList();
+
+            return roomsOrderedBySurface;
         }
 
         /// <summary>
@@ -79,7 +106,12 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Reservation> GetReservationsOrderedByDateFor(int customerId)
         {
-            throw new NotImplementedException();
+            var roomsOrderedBySurface = (from reservation in Reservations
+                                         where reservation.Customer.Id == customerId
+                                         orderby reservation.StartDate descending, reservation.EndDate descending
+                                         select reservation).ToList();
+
+            return roomsOrderedBySurface;
         }
 
         /// <summary>
@@ -89,7 +121,52 @@ namespace iQuest.HotelQueries
         /// </summary>
         public List<KeyValuePair<int, Customer[]>> GetCustomersGroupedByYear()
         {
-            throw new NotImplementedException();
+            List<KeyValuePair<int, List<Customer>>> customersGroupedUsingList = new List<KeyValuePair<int, List<Customer>>>();
+            
+            var years = Enumerable.Range(2010, 2019 - 2010).ToArray();
+            foreach (int year in years)
+                customersGroupedUsingList.Add(new KeyValuePair<int, List<Customer>>(year, new List<Customer>()));
+
+            foreach (var customer in Customers)
+            {
+                int lastYearOfAccomodation = customer.LastAccommodation.Year;
+
+                foreach(var pair in customersGroupedUsingList)
+                {
+                    if(pair.Key == lastYearOfAccomodation)
+                    {
+                        pair.Value.Add(customer);
+                        break;
+                    }
+                }
+            }
+
+            //sort customers by FullName
+            // aux list is required 'cause KeyValuePair.Value is readonly
+            List<KeyValuePair<int, List<Customer>>> auxList = new List<KeyValuePair<int, List<Customer>>>();
+            foreach (var pair in customersGroupedUsingList)
+            {
+                auxList.Add(new KeyValuePair<int, List<Customer>>
+                    (pair.Key, pair.Value.OrderBy(x => x.FullName).ToList() ));
+            }
+            customersGroupedUsingList = auxList;
+            auxList = null;
+
+            //sort years descending
+            customersGroupedUsingList = customersGroupedUsingList.OrderByDescending(x => x.Key).ToList();
+
+            //Create the returned type ( List<KeyValuePair<int, Customer[]>> )
+            // and map actual type ( List<KeyValuePair<int, List<Customer>>> ) to it.
+            List<KeyValuePair<int, Customer[]>> customersGroupedByYear = new List<KeyValuePair<int, Customer[]>>();
+            foreach(var pair in customersGroupedUsingList)
+            {
+                customersGroupedByYear.Add(new KeyValuePair<int, Customer[]>(pair.Key, new Customer[pair.Value.Count]));
+                for(int i = 0; i < pair.Value.Count; i++)
+                {
+                    customersGroupedByYear.Last().Value[i] = pair.Value[i];
+                }
+            }
+            return customersGroupedByYear;
         }
 
         /// <summary>
