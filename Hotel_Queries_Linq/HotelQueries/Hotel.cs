@@ -30,12 +30,12 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Customer> FindCustomerByName(string text)
         {
-            IEnumerable<Customer> customer = from client in Customers
-                                             where client.FullName   == text
-                                             select client;
-            return customer;
+            IEnumerable<Customer> customers = from client in Customers
+                                              where client.FullName.ToLower().Contains(text.ToLower())
+                                              select client;
+            return customers;
         }
-
+        
         /// <summary>
         /// 3) Return all reservations made by companies.
         /// </summary>
@@ -53,11 +53,13 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Customer> FindWomen(DateTime startTime, DateTime endTime)
         {
-            IEnumerable<Customer> customers = (from reservation in Reservations
-                                              where reservation.StartDate >= startTime && reservation.EndDate <= endTime
-                                              && reservation.Customer.GetType() == typeof(PersonCustomer) 
-                                              && (reservation.Customer as PersonCustomer).Gender.ToString() == "Female"
-                                              select reservation.Customer).ToList();
+            IEnumerable<Customer> customers = from customer in Customers
+                                              where startTime <= customer.LastAccommodation
+                                              where customer.LastAccommodation <= endTime
+                                              where customer.GetType() == typeof(PersonCustomer)
+                                              where (customer as PersonCustomer).Gender.Equals(PersonGender.Female)
+                                              select customer;
+                                              
             return customers;
         }
 
@@ -80,11 +82,16 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Room> GetPageOfRoomsOrderedBySurface(int pageNumber, int pageSize)
         {
-            var roomsOrderedBySurface = (from room in Rooms
-                                         orderby room.Surface descending
+            var roomsOrderedBySurface =  (from room in Rooms
+                                         orderby room.Surface
                                          select room).ToList();
 
-            return roomsOrderedBySurface;
+            List<Room> page = new List<Room>();
+            for(int i = 0; i<roomsOrderedBySurface.Count(); i++)
+                if (pageNumber * pageSize <= i && i < pageNumber * pageSize + pageSize)
+                    page.Add(roomsOrderedBySurface[i]);
+
+            return page;
         }
 
         /// <summary>
@@ -123,7 +130,7 @@ namespace iQuest.HotelQueries
         {
             List<KeyValuePair<int, List<Customer>>> customersGroupedUsingList = new List<KeyValuePair<int, List<Customer>>>();
             
-            var years = Enumerable.Range(2010, 2019 - 2010).ToArray();
+            var years = Enumerable.Range(2010, 2018 - 2009).ToArray();
             foreach (int year in years)
                 customersGroupedUsingList.Add(new KeyValuePair<int, List<Customer>>(year, new List<Customer>()));
 
@@ -176,6 +183,20 @@ namespace iQuest.HotelQueries
         public double CalculateAverageReservationsPerMonth()
         {
             throw new NotImplementedException();
+            /*double numberOfReservations = Reservations.Count();
+            double numberOfMonths = 12 * (2018 - 2009);
+            List<int> a = new List<int>();
+            a.Average(12, 1234)
+
+            double averageReservationsPerMonth = numberOfReservations / numberOfMonths;
+            return averageReservationsPerMonth;*/
+            //grupam rezervarile pe 
+            var a = Reservations
+                .GroupBy(rezervare => rezervare.StartDate.Month)
+                .Average(grup => grup.Key);
+
+            Console.ReadLine();
+            return 1.1;
         }
 
         /// <summary>
@@ -185,7 +206,27 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IDictionary<Reservation, List<Reservation>> GetConflictingReservations()
         {
-            throw new NotImplementedException();
+            Dictionary<Reservation, List<Reservation>> conflictingReservations 
+                = new Dictionary<Reservation, List<Reservation>>();
+
+            foreach(Reservation reservation1 in Reservations)
+            {
+                foreach (Reservation reservation2 in Reservations)
+                {
+                    if (reservation1.ConflictsWith(reservation2))
+                    {
+                        if (conflictingReservations.ContainsKey(reservation1))
+                        {
+                            conflictingReservations[reservation1].Add(reservation2);
+                            continue;
+                        }
+                        conflictingReservations.Add(reservation1, new List<Reservation>() { reservation2 });
+
+                    }
+                }
+            }
+
+            return conflictingReservations;
         }
 
         /// <summary>
@@ -198,7 +239,17 @@ namespace iQuest.HotelQueries
         /// </summary>
         public Room FindNewFreeRoomFor(Reservation reservation)
         {
-            throw new NotImplementedException();
+            var similarRooms = (from room in Rooms
+                                where room.IsInUse == false
+                                where room.MaxPersonCount >= reservation.Room.MaxPersonCount 
+                                where reservation.Room.HasAirConditioner  ? room.HasAirConditioner  == true : room.HasAirConditioner  == false
+                                where reservation.Room.HasBalcony         ? room.HasBalcony         == true : room.HasBalcony         == false
+                                where reservation.Room.IsDisabledFriendly ? room.IsDisabledFriendly == true : room.IsDisabledFriendly == false
+                                select room).ToList();
+
+            if (!similarRooms.Any())
+                return null;
+            return similarRooms[0];
         }
     }
 }
