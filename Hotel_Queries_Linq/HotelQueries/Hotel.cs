@@ -18,9 +18,9 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Room> GetAllRoomsForTwoPersons()
         {
-            var rooms =   (from r in Rooms
+            var rooms =    from r in Rooms
                            where r.MaxPersonCount == 2
-                           select r).ToList();
+                           select r;
             return rooms;
         }
 
@@ -41,9 +41,9 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Reservation> GetCompanyReservations()
         {
-            var reservations = (from reservation in Reservations
+            var reservations = from reservation in Reservations
                                where reservation.Customer.GetType() == typeof(CompanyCustomer)
-                               select reservation).ToList();
+                               select reservation;
 
             return reservations;
         }
@@ -100,9 +100,9 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Room> GetRoomsOrderedByCapacity()
         {
-            var roomsOrderedBySurface = (from room in Rooms
+            var roomsOrderedBySurface = from room in Rooms
                                          orderby room.MaxPersonCount descending, room.Number ascending 
-                                         select room).ToList();
+                                         select room;
 
             return roomsOrderedBySurface;
         }
@@ -113,10 +113,10 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IEnumerable<Reservation> GetReservationsOrderedByDateFor(int customerId)
         {
-            var roomsOrderedBySurface = (from reservation in Reservations
+            var roomsOrderedBySurface = from reservation in Reservations
                                          where reservation.Customer.Id == customerId
                                          orderby reservation.StartDate descending, reservation.EndDate descending
-                                         select reservation).ToList();
+                                         select reservation;
 
             return roomsOrderedBySurface;
         }
@@ -182,21 +182,22 @@ namespace iQuest.HotelQueries
         /// </summary>
         public double CalculateAverageReservationsPerMonth()
         {
-            throw new NotImplementedException();
-            /*double numberOfReservations = Reservations.Count();
+            /*
+             * Varianta normala pt medie:
+            double numberOfReservations = Reservations.Count();
             double numberOfMonths = 12 * (2018 - 2009);
-            List<int> a = new List<int>();
-            a.Average(12, 1234)
-
             double averageReservationsPerMonth = numberOfReservations / numberOfMonths;
+
             return averageReservationsPerMonth;*/
-            //grupam rezervarile pe 
-            var a = Reservations
+
+            //throw new NotImplementedException();
+
+            var average = Reservations
                 .GroupBy(rezervare => rezervare.StartDate.Month)
                 .Average(grup => grup.Key);
 
             Console.ReadLine();
-            return 1.1;
+            return average;
         }
 
         /// <summary>
