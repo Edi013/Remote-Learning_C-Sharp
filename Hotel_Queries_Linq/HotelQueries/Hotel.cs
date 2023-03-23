@@ -228,38 +228,14 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IDictionary<Reservation, List<Reservation>> GetConflictingReservations()
         {
-            throw new NotImplementedException();
+            var dictionary = new Dictionary<Reservation, List<Reservation>>();
 
-            /*Dictionary<Reservation, List<Reservation>> conflictingReservations
-               = new Dictionary<Reservation, List<Reservation>>();
-           conflictingReservations = Reservations.FindAll(eachReservation => eachReservation.ConflictsWith())
-             var conflictingReservations = new Dictionary<Reservation, List<Reservation>>();
-
-              conflictingReservations = Reservations
-                  .ToLookup((x, y) => x.ConflictsWith(y))
-                  //.Where(x => x.ConflictsWith())
-                  .ToDictionary(x => x, x => new List<Reservation>());*/
-            /*Dictionary<Reservation, List<Reservation>> conflictingReservations
-                = new Dictionary<Reservation, List<Reservation>>();
-
-            foreach (Reservation reservation1 in Reservations)
-            {
-                foreach (Reservation reservation2 in Reservations)
-                {
-                    if (reservation1.ConflictsWith(reservation2))
-                    {
-                        if (conflictingReservations.ContainsKey(reservation1))
-                        {
-                            conflictingReservations[reservation1].Add(reservation2);
-                            continue;
-                        }
-                        conflictingReservations.Add(reservation1, new List<Reservation>() { reservation2 });
-
-                    }
-                }
-            }
-
-            return conflictingReservations;*/
+           Reservations
+                .Where(eachReservation => Reservations.FindAll(x => x.ConflictsWith(eachReservation)).Any())
+                .ToList()
+                .ForEach(eachReservation => dictionary.Add(eachReservation,Reservations.FindAll(x => x.ConflictsWith(eachReservation))));
+           
+            return dictionary;
         }
 
         /// <summary>
