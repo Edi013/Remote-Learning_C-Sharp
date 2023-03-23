@@ -159,53 +159,6 @@ namespace iQuest.HotelQueries
             .OrderByDescending(x => x.Key)
             .Select(x => new KeyValuePair<int, Customer[]>(x.Key, x.OrderBy(z => z.FullName).ToArray()))
             .ToList();
-
-            /*List<KeyValuePair<int, List<Customer>>> customersGroupedUsingList = new List<KeyValuePair<int, List<Customer>>>();
-
-            var years = Enumerable.Range(2010, 2018 - 2009).ToArray();
-            foreach (int year in years)
-                customersGroupedUsingList.Add(new KeyValuePair<int, List<Customer>>(year, new List<Customer>()));
-
-            foreach (var customer in Customers)
-            {
-                int lastYearOfAccomodation = customer.LastAccommodation.Year;
-
-                foreach (var pair in customersGroupedUsingList)
-                {
-                    if (pair.Key == lastYearOfAccomodation)
-                    {
-                        pair.Value.Add(customer);
-                        break;
-                    }
-                }
-            }
-
-            //sort customers by FullName
-            // aux list is required 'cause KeyValuePair.Value is readonly
-            List<KeyValuePair<int, List<Customer>>> auxList = new List<KeyValuePair<int, List<Customer>>>();
-            foreach (var pair in customersGroupedUsingList)
-            {
-                auxList.Add(new KeyValuePair<int, List<Customer>>
-                    (pair.Key, pair.Value.OrderBy(x => x.FullName).ToList()));
-            }
-            customersGroupedUsingList = auxList;
-            auxList = null;
-
-            //sort years descending
-            customersGroupedUsingList = customersGroupedUsingList.OrderByDescending(x => x.Key).ToList();
-
-            //Create the returned type ( List<KeyValuePair<int, Customer[]>> )
-            // and map actual type ( List<KeyValuePair<int, List<Customer>>> ) to it.
-            List<KeyValuePair<int, Customer[]>> customersGroupedByYear = new List<KeyValuePair<int, Customer[]>>();
-            foreach (var pair in customersGroupedUsingList)
-            {
-                customersGroupedByYear.Add(new KeyValuePair<int, Customer[]>(pair.Key, new Customer[pair.Value.Count]));
-                for (int i = 0; i < pair.Value.Count; i++)
-                {
-                    customersGroupedByYear.Last().Value[i] = pair.Value[i];
-                }
-            }
-            return customersGroupedByYear;*/
         }
 
         /// <summary>
