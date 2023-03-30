@@ -9,25 +9,48 @@ namespace iQuest.VendingMachine
 {
     internal class Bootstrapper
     {
-        private static IContainer Container { get; set; }
-
         public void Run()
         {
-            VendingMachineApplication vendingMachineApplication = BuildApplication();
-            vendingMachineApplication.Run();
+            var container = BuildApplication();
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<VendingMachineApplication>();
+                app.Run();
+            }
         }
 
-        private static VendingMachineApplication BuildApplication()
+        private static IContainer BuildApplication()
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<MainDisplay>()
-                 .As<IMainDisplay>();
+            builder.RegisterType<CardPayment>()
+                 .As<IPaymentAlgorithm>();
+            builder.RegisterType<CashPayment>()
+                 .As<IPaymentAlgorithm>();
+            builder.RegisterType<PaymentUseCase>()
+                .As<IPaymentUseCase>();
+            builder.RegisterType<CardValidator>()
+                .AsSelf();
 
-            var businessAssembly = Assembly.GetAssembly(typeof(IUseCase));
-            builder.RegisterAssemblyTypes(businessAssembly)
-                 .Where(type => type.Name.EndsWith("UseCase"))
-                 .As<IUseCase>();
+            builder.RegisterType<BuyUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<LoginUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<LogoutUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<LookUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<PaymentUseCase>()
+                .As<IPaymentUseCase>();
+            builder.RegisterType<TurnOffUseCase>()
+                .AsSelf();
+
+            builder.RegisterType<TurnOffService>()
+                .As<ITurnOffService>();
+            builder.RegisterType<AuthenticationService>()
+                .As<IAuthenticationService>();
+            builder.RegisterType<PaymentMethod>()
+                .AsSelf();
 
             string _connectionString;
             switch (ConfigurationManager.AppSettings["repoType"])
@@ -50,79 +73,28 @@ namespace iQuest.VendingMachine
                     break;
             }
 
-            builder.RegisterType<TurnOffService>()
-                .As<ITurnOffService>();
-            builder.RegisterType<AuthenticationService>()
-                .As<IAuthenticationService>();
-
-
-
             builder.RegisterType<ShelfView>()
                 .As<IShelfView>();
             builder.RegisterType<BuyView>()
                 .As<IBuyView>();
+            builder.RegisterType<MainDisplay>()
+                 .As<IMainDisplay>();
+            builder.RegisterType<CashPaymentTerminal>()
+                .As<ICashPaymentTerminal>();
+            builder.RegisterType<CardPaymentTerminal>()
+                            .As<ICardPaymentTerminal>();
 
-            builder.RegisterAssemblyTypes(businessAssembly)
-                 .Where(type => type.Name.EndsWith("Payment"))
-                 .As<IPaymentAlgorithm>(); ;
+            builder.RegisterType<VendingMachineApplication>()
+                .As<VendingMachineApplication>()
+                .SingleInstance();
 
+            var container =  builder.Build();
 
+            //var list2 = container.Resolve<List<IPaymentAlgorithm>>();
+            var paymentUseCase = container.Resolve<IPaymentUseCase>();
+            var list = container.Resolve<IEnumerable<IUseCase>>();
 
-            builder.RegisterCallback(_ => new VendingMachineApplication(
-                (List<IUseCase>)Container.Resolve<IUseCase>(),
-                Container.Resolve<MainDisplay>(), Container.Resolve<TurnOffService>()));
-
-
-            Container = builder.Build();
-            return Container.Resolve<VendingMachineApplication>();
+            return container;
         }
     }
 }
-
-/*string _connectionString;
-
-IProductRepository productRepository = null;
-switch (ConfigurationManager.AppSettings["repoType"])
-{
-    case "InMemory":
-        productRepository = new InMemoryRepository();
-        break;
-    case "SQL":
-        _connectionString = 
-            ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
-        productRepository = new SqlServerRepository(_connectionString);
-        break;
-    case "LiteDB":
-        _connectionString =
-            ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
-
-        productRepository = new LiteDBRepository(_connectionString);
-        break;
-}
-
-TurnOffService turnOffService = new TurnOffService();
-
-AuthenticationService authenticationService = new AuthenticationService();
-
-VendingMachineApplication vendingMachineApplication =
-    new VendingMachineApplication(useCases, mainDisplay, turnOffService);
-
-ShelfView shelfView = new ShelfView();
-BuyView buyView = new BuyView();
-
-List<IPaymentAlgorithm> paymentAlgorithms = new List<IPaymentAlgorithm>
-{
-    new CardPayment(new CardPaymentTerminal()),
-    new CashPayment(new CashPaymentTerminal())
-};
-PaymentUseCase payment = new PaymentUseCase(buyView, paymentAlgorithms); 
-
-useCases.AddRange(new IUseCase[]
-{
-
-    new LoginUseCase(mainDisplay, authenticationService),
-    new LogoutUseCase(authenticationService),
-    new TurnOffUseCase(turnOffService, authenticationService), 
-    new LookUseCase(productRepository, shelfView),
-    new BuyUseCase(buyView, authenticationService, productRepository, payment)
-});*/
