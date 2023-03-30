@@ -1,6 +1,5 @@
 ﻿using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.Business.Exceptions;
-using iQuest.VendingMachine.Presentation;
 
 namespace iQuest.VendingMachine
 {

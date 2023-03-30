@@ -1,5 +1,5 @@
-﻿using System.Configuration;
-using Autofac;
+﻿using Autofac;
+using System.Configuration;
 using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.DataAcces;
 using iQuest.VendingMachine.Presentation;

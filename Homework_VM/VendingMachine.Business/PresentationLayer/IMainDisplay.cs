@@ -4,7 +4,6 @@
     {
         public IUseCase ChooseCommand(IEnumerable<IUseCase> useCases);
         public string AskForPassword();
-
         public void DisplayLine(string message);
     }
 }
