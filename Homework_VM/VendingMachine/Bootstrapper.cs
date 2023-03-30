@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using System.Reflection;
 using Autofac;
 using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.DataAcces;
@@ -11,7 +10,7 @@ namespace iQuest.VendingMachine
     {
         public void Run()
         {
-            var container = BuildApplication();
+            var container = BuildAutofacContainer();
             using (var scope = container.BeginLifetimeScope())
             {
                 var app = scope.Resolve<VendingMachineApplication>();
@@ -19,7 +18,7 @@ namespace iQuest.VendingMachine
             }
         }
 
-        private static IContainer BuildApplication()
+        private static IContainer BuildAutofacContainer()
         {
             var builder = new ContainerBuilder();
 
@@ -82,19 +81,13 @@ namespace iQuest.VendingMachine
             builder.RegisterType<CashPaymentTerminal>()
                 .As<ICashPaymentTerminal>();
             builder.RegisterType<CardPaymentTerminal>()
-                            .As<ICardPaymentTerminal>();
+                .As<ICardPaymentTerminal>();
 
             builder.RegisterType<VendingMachineApplication>()
                 .As<VendingMachineApplication>()
                 .SingleInstance();
 
-            var container =  builder.Build();
-
-            //var list2 = container.Resolve<List<IPaymentAlgorithm>>();
-            var paymentUseCase = container.Resolve<IPaymentUseCase>();
-            var list = container.Resolve<IEnumerable<IUseCase>>();
-
-            return container;
+            return builder.Build();
         }
     }
 }
