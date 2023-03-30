@@ -5,10 +5,10 @@ namespace iQuest.VendingMachine.Business
     public class PaymentUseCase : IPaymentUseCase
     {
         private readonly IBuyView buyView;
-        private readonly List<IPaymentAlgorithm> paymentAlgorithms;
+        private readonly IEnumerable<IPaymentAlgorithm> paymentAlgorithms;
         private readonly List<PaymentMethod> paymentMethods;
 
-        public PaymentUseCase(IBuyView buyView, List<IPaymentAlgorithm> paymentAlgorithms) 
+        public PaymentUseCase(IBuyView buyView, IEnumerable<IPaymentAlgorithm> paymentAlgorithms) 
         {
             this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
             this.paymentAlgorithms = paymentAlgorithms ?? throw new ArgumentNullException(nameof(paymentAlgorithms)); 
@@ -27,7 +27,8 @@ namespace iQuest.VendingMachine.Business
             if (paymentMethodIndex != 1 && paymentMethodIndex != 2)
                 throw new InvalidPaymentMethodException();
 
-            paymentAlgorithms[paymentMethodIndex-1].Run(price);
+            //paymentAlgorithms[paymentMethodIndex-1].Run(price);
+            paymentAlgorithms.ElementAt(paymentMethodIndex - 1).Run(price);
         }
     }
 }

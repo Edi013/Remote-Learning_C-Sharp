@@ -6,10 +6,11 @@ namespace iQuest.VendingMachine
 {
     internal class VendingMachineApplication
     {
-        private readonly List<IUseCase> useCases;
-        private readonly MainDisplay mainDisplay;
-        private TurnOffService turnOffWasRequestedChecker;
-        public VendingMachineApplication(List<IUseCase> useCases, MainDisplay mainDisplay, TurnOffService turnOffWasRequestedChecker)
+        private readonly IEnumerable<IUseCase> useCases;
+        private readonly IMainDisplay mainDisplay;
+        private ITurnOffService turnOffWasRequestedChecker;
+
+        public VendingMachineApplication(IEnumerable<IUseCase> useCases, IMainDisplay mainDisplay, ITurnOffService turnOffWasRequestedChecker)
         {
             this.useCases = useCases ?? throw new ArgumentNullException(nameof(useCases));
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
