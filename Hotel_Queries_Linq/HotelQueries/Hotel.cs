@@ -151,11 +151,20 @@ namespace iQuest.HotelQueries
         /// </summary>
         public List<KeyValuePair<int, Customer[]>> GetCustomersGroupedByYear()
         {
-            return Customers
+           /* return Customers
             .GroupBy(x => x.LastAccommodation.Year)
             .OrderByDescending(x => x.Key)
-            .Select(x => new KeyValuePair<int, Customer[]>(x.Key, x.OrderBy(z => z.FullName).ToArray()))
-            .ToList();
+            .Select(x => 
+            new KeyValuePair<int, Customer[]>(x.Key, x.OrderBy(z => z.FullName).ToArray()))
+            .ToList();*/
+
+            return Customers
+                .OrderByDescending(customer => customer.LastAccommodation.Year)
+                .ThenBy(customer => customer.FullName)
+                .GroupBy(customer => customer.LastAccommodation.Year)
+                .Select(group => new KeyValuePair<int, Customer[]>
+                                                 (group.Key, group.ToArray()))
+                .ToList();
         }
 
         /// <summary>
