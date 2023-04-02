@@ -151,7 +151,8 @@ namespace iQuest.HotelQueries
         /// </summary>
         public List<KeyValuePair<int, Customer[]>> GetCustomersGroupedByYear()
         {
-           /* return Customers
+           /* Grouping after/before GroupBy
+            * return Customers
             .GroupBy(x => x.LastAccommodation.Year)
             .OrderByDescending(x => x.Key)
             .Select(x => 
@@ -187,14 +188,17 @@ namespace iQuest.HotelQueries
         /// </summary>
         public IDictionary<Reservation, List<Reservation>> GetConflictingReservations()
         {
-            var dictionary = new Dictionary<Reservation, List<Reservation>>();
-
-           Reservations
-                .Where(eachReservation => Reservations.FindAll(x => x.ConflictsWith(eachReservation)).Any())
-                .ToList()
-                .ForEach(eachReservation => dictionary.Add(eachReservation,Reservations.FindAll(x => x.ConflictsWith(eachReservation))));
-           
-            return dictionary;
+            return Reservations
+                .Select(reservation => new
+                {
+                    Reservation = reservation,
+                    Conflicts = Reservations
+                                .Where(reservation.ConflictsWith)
+                                .ToList()
+                })
+                .Where(dataStructure => dataStructure.Conflicts.Any())
+                .ToDictionary(dataStructure => dataStructure.Reservation,
+                              dataStructure => dataStructure.Conflicts);
         }
 
         /// <summary>
@@ -207,20 +211,11 @@ namespace iQuest.HotelQueries
         /// </summary>
         public Room FindNewFreeRoomFor(Reservation reservation)
         {
-            var similarRooms = Rooms
-               .Where(room => room.IsInUse == false)
-               .Where(room => reservation.Room.MaxPersonCount <= room.MaxPersonCount)
-               .Where(room => reservation.Room.HasAirConditioner ? room.HasAirConditioner == true : room.HasAirConditioner == false)
-               .Where(room => reservation.Room.HasBalcony ? room.HasBalcony == true : room.HasBalcony == false)
-               .Where(room => reservation.Room.IsDisabledFriendly ? room.IsDisabledFriendly == true : room.IsDisabledFriendly == false)
-               .Where(room => Reservations.Where(eachReservation => eachReservation.ConflictsWith(reservation) == true)
-                                          .Select(eachReservation => eachReservation.Room)
-                                          .Where(eachRoom => eachRoom.Equals(room))
-                                          .Any() == false);
-            if (!similarRooms.Any())
-                return null;
-
-            return similarRooms.First();
+            return Rooms.FirstOrDefault(room =>
+                room.OffersSameOrBetterConditionsThen(reservation.Room)
+                && Reservations
+                    .Where(r => r.Room.Equals(room))
+                    .All(r => !r.ConflictsWith(reservation.StartDate, reservation.EndDate)));
             /* Query sintax : 
              * var similarRooms = from room in Rooms
                                 where room.IsInUse == false

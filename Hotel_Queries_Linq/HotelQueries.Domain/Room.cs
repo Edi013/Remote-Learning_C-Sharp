@@ -1,4 +1,6 @@
-﻿namespace iQuest.HotelQueries.Domain
+﻿using System;
+
+namespace iQuest.HotelQueries.Domain
 {
     public class Room
     {
@@ -50,6 +52,14 @@
         public override string ToString()
         {
             return $"{Number} ({MaxPersonCount} pers; {Surface} m2)";
+        }
+
+        public bool OffersSameOrBetterConditionsThen(Room room)
+        {
+            return this.MaxPersonCount >= room.MaxPersonCount
+                && this.HasAirConditioner == room.HasAirConditioner
+                && this.HasBalcony == room.HasBalcony
+                && this.IsDisabledFriendly == room.IsDisabledFriendly;
         }
     }
 }
