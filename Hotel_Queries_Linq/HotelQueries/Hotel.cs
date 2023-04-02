@@ -42,8 +42,8 @@ namespace iQuest.HotelQueries
         public IEnumerable<Reservation> GetCompanyReservations()
         {
             var companyCustomers = Reservations
-                .Select(x => x.Customer)
-                .OfType<CompanyCustomer>();
+                .Select(customer => customer.Customer)
+                .Where(customer => customer is CompanyCustomer);
 
             var reservations = Reservations
                 .Where(reservation => companyCustomers.Contains(reservation.Customer));
