@@ -45,9 +45,11 @@ namespace iQuest.VendingMachine
                 .AsSelf();
 
             builder.RegisterType<TurnOffService>()
-                .As<ITurnOffService>();
+                .As<ITurnOffService>()
+                .SingleInstance();
             builder.RegisterType<AuthenticationService>()
-                .As<IAuthenticationService>();
+                .As<IAuthenticationService>()
+                .SingleInstance();
             builder.RegisterType<PaymentMethod>()
                 .AsSelf();
 
