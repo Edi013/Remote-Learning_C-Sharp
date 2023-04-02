@@ -70,11 +70,8 @@ namespace iQuest.HotelQueries
         /// </summary>
         public int CalculateHotelCapacity()
         {
-            int hotelCapacity = Rooms
-                .Select(x => x.MaxPersonCount)
-                .Sum();
-
-            return hotelCapacity;
+            return Rooms
+                .Sum(room => room.MaxPersonCount);
         }
 
         /// <summary>
