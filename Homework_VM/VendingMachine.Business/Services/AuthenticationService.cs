@@ -5,7 +5,11 @@ namespace iQuest.VendingMachine.Business
     public class AuthenticationService : IAuthenticationService
     {
         private bool isUserAuthenticated;
-        public bool IsUserAuthenticated { get => isUserAuthenticated; private set => isUserAuthenticated = value; }
+        public bool IsUserAuthenticated 
+        { 
+            get => isUserAuthenticated;
+            private set => isUserAuthenticated = value; 
+        }
 
         public AuthenticationService()
         {

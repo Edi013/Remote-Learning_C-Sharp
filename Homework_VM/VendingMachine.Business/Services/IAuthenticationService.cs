@@ -8,7 +8,7 @@ namespace iQuest.VendingMachine.Business
 {
     public interface IAuthenticationService
     {
-        public bool IsUserAuthenticated { get;}
+        public bool IsUserAuthenticated { get; }
         public void Login(string userInputedPassword);
         public void Logout();
 

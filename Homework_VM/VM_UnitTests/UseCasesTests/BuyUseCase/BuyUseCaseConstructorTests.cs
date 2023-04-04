@@ -7,9 +7,9 @@ namespace VM_UnitTests.UseCasesTests
 {
     public class BuyUseCaseConstructorTests
     {
-        private  InMemoryRepository productRepository;
-        private  AuthenticationService authenticationService;
-        private  BuyView buyView;
+        private  IProductRepository productRepository;
+        private  IAuthenticationService authenticationService;
+        private  IBuyView buyView;
 
         [Fact]
         public void HavingAllArgumentsInOrder_ThanNameAndDescriptionAreInOrder()
@@ -33,6 +33,7 @@ namespace VM_UnitTests.UseCasesTests
             List<IPaymentAlgorithm> paymentAlgorithms = new List<IPaymentAlgorithm>()
             {
             };
+            buyView = new BuyView();
             IPaymentUseCase paymentUseCase = new PaymentUseCase(buyView, paymentAlgorithms);
 
             buyView = null;

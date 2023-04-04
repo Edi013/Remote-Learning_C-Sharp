@@ -25,15 +25,21 @@ namespace VM_UnitTests.UseCasesTests
         public void HavingProductAvailable_WithPositiveQuantity_ExecuteIsSuccesful()
         {
             //Arrange
+            int initialQuantity = 2;
+            int columnId = 1;
+            Product testProduct = new Product(columnId, "testProduct", 5.22f, initialQuantity);
+
             buyView
                 .Setup(x => x.RequestProduct())
-                .Returns(1);
+                .Returns(columnId);
 
-            Product testProduct = new Product(1, "testProduct", 5.22f, 5);
             productRepository
-                .Setup(x => x.GetProductByColumnId(1))
+                .Setup(x => x.GetProductByColumnId(columnId))
                 .Returns(testProduct);
 
+            productRepository
+            .Setup(x => x.DecreaseQuantity(testProduct))
+            .Callback( () => { testProduct.Quantity--; });
 
             BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
             
@@ -41,7 +47,7 @@ namespace VM_UnitTests.UseCasesTests
             buyUseCase.Execute();
 
             //Assert
-            Assert.Equal(4, testProduct.Quantity);
+            Assert.Equal(initialQuantity - 1, testProduct.Quantity);
         }
 
         [Fact]

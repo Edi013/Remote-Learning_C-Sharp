@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using Autofac;
+using System.Configuration;
 using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.DataAcces;
 using iQuest.VendingMachine.Presentation;
@@ -9,64 +10,86 @@ namespace iQuest.VendingMachine
     {
         public void Run()
         {
-            VendingMachineApplication vendingMachineApplication = BuildApplication();
-            vendingMachineApplication.Run();
+            var container = BuildAutofacContainer();
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<VendingMachineApplication>();
+                app.Run();
+            }
         }
 
-        private static VendingMachineApplication BuildApplication()
+        private static IContainer BuildAutofacContainer()
         {
-            List<IUseCase> useCases = new List<IUseCase>();
-            MainDisplay mainDisplay = new MainDisplay();
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<CardPayment>()
+                 .As<IPaymentAlgorithm>();
+            builder.RegisterType<CashPayment>()
+                 .As<IPaymentAlgorithm>();
+            builder.RegisterType<PaymentUseCase>()
+                .As<IPaymentUseCase>();
+            builder.RegisterType<CardValidator>()
+                .AsSelf();
+
+            builder.RegisterType<BuyUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<LoginUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<LogoutUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<LookUseCase>()
+                .As<IUseCase>();
+            builder.RegisterType<PaymentUseCase>()
+                .As<IPaymentUseCase>();
+            builder.RegisterType<TurnOffUseCase>()
+                .AsSelf();
+
+            builder.RegisterType<TurnOffService>()
+                .As<ITurnOffService>()
+                .SingleInstance();
+            builder.RegisterType<AuthenticationService>()
+                .As<IAuthenticationService>()
+                .SingleInstance();
+            builder.RegisterType<PaymentMethod>()
+                .AsSelf();
 
             string _connectionString;
-
-            IProductRepository productRepository = null;
             switch (ConfigurationManager.AppSettings["repoType"])
             {
                 case "InMemory":
-                    productRepository = new InMemoryRepository();
+                    builder.RegisterType<InMemoryRepository>()
+                        .As<IProductRepository>();
                     break;
                 case "SQL":
-                    _connectionString = 
+                    _connectionString =
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
-                    productRepository = new SqlServerRepository(_connectionString);
+                    builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
+                        .As<IProductRepository>();
                     break;
                 case "LiteDB":
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
-
-                    productRepository = new LiteDBRepository(_connectionString);
+                    builder.Register<LiteDBRepository>(_ => new LiteDBRepository(_connectionString))
+                        .As<IProductRepository>();
                     break;
             }
 
-            TurnOffService turnOffService = new TurnOffService();
+            builder.RegisterType<ShelfView>()
+                .As<IShelfView>();
+            builder.RegisterType<BuyView>()
+                .As<IBuyView>();
+            builder.RegisterType<MainDisplay>()
+                 .As<IMainDisplay>();
+            builder.RegisterType<CashPaymentTerminal>()
+                .As<ICashPaymentTerminal>();
+            builder.RegisterType<CardPaymentTerminal>()
+                .As<ICardPaymentTerminal>();
 
-            AuthenticationService authenticationService = new AuthenticationService();
+            builder.RegisterType<VendingMachineApplication>()
+                .As<VendingMachineApplication>()
+                .SingleInstance();
 
-            VendingMachineApplication vendingMachineApplication =
-                new VendingMachineApplication(useCases, mainDisplay, turnOffService);
-            
-            ShelfView shelfView = new ShelfView();
-            BuyView buyView = new BuyView();
-
-            List<IPaymentAlgorithm> paymentAlgorithms = new List<IPaymentAlgorithm>
-            {
-                new CardPayment(new CardPaymentTerminal()),
-                new CashPayment(new CashPaymentTerminal())
-            };
-            PaymentUseCase payment = new PaymentUseCase(buyView, paymentAlgorithms); 
-
-            useCases.AddRange(new IUseCase[]
-            {
-
-                new LoginUseCase(mainDisplay, authenticationService),
-                new LogoutUseCase(authenticationService),
-                new TurnOffUseCase(turnOffService, authenticationService), 
-                new LookUseCase(productRepository, shelfView),
-                new BuyUseCase(buyView, authenticationService, productRepository, payment)
-            });
-
-            return vendingMachineApplication;
+            return builder.Build();
         }
     }
 }
