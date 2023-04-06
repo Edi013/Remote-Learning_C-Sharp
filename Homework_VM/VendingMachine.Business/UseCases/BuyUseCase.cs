@@ -4,16 +4,9 @@ namespace iQuest.VendingMachine.Business
 {
     public class BuyUseCase : IUseCase
     {
-        private readonly IProductRepository productRepository;
         private readonly IBuyView buyView;
-        private readonly IAuthenticationService authenticationService;
         private readonly IPaymentUseCase paymentUseCase;
-
-        public string Name => "Buy";
-
-        public string Description => "You will buy something.";
-
-        public bool CanExecute => productRepository.GetProducts().Any() && !authenticationService.IsUserAuthenticated; 
+        private readonly IProductRepository productRepository;
 
         public BuyUseCase(
             IBuyView buyView, IAuthenticationService authenticationService,
@@ -21,7 +14,6 @@ namespace iQuest.VendingMachine.Business
             )
         {
             this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
-            this.authenticationService = authenticationService ?? throw new ArgumentNullException(nameof(authenticationService));
             this.productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             this.paymentUseCase = paymentUseCase ?? throw new ArgumentNullException(nameof(paymentUseCase));
         }
