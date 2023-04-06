@@ -15,9 +15,9 @@ namespace iQuest.VendingMachine.Presentation
         public string Description => "Get access to administration buttons.";
         public bool CanExecute => !authenticationService.IsUserAuthenticated;
 
-        public LoginCommand(IUseCaseFactory _factory, IAuthenticationService authenticationService)
+        public LoginCommand(IUseCaseFactory factory, IAuthenticationService authenticationService)
         {
-            this.factory = _factory;
+            this.factory = factory;
             this.authenticationService = authenticationService;
         }
 

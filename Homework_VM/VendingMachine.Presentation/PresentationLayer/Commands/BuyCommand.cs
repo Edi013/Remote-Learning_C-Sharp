@@ -17,9 +17,9 @@ namespace iQuest.VendingMachine.Presentation
         public string Description => "You will buy something.";
         public bool CanExecute => productRepository.GetProducts().Any() && !authenticationService.IsUserAuthenticated;
 
-        public BuyCommand(IUseCaseFactory _factory, IProductRepository productRepository, IAuthenticationService authenticationService)
+        public BuyCommand(IUseCaseFactory factory, IProductRepository productRepository, IAuthenticationService authenticationService)
         {
-            this.factory = _factory;
+            this.factory = factory;
             this.productRepository = productRepository;
             this.authenticationService = authenticationService;
         }

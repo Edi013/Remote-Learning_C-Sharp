@@ -11,9 +11,9 @@ namespace iQuest.VendingMachine.Presentation
         public string Description => "Restrict access to administration buttons.";
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
-        public LogoutCommand(IUseCaseFactory _factory, IAuthenticationService authenticationService)
+        public LogoutCommand(IUseCaseFactory factory, IAuthenticationService authenticationService)
         {
-            this.factory = _factory;
+            this.factory = factory;
             this.authenticationService = authenticationService;
         }
 
