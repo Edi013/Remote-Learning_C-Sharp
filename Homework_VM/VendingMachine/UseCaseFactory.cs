@@ -5,7 +5,11 @@ namespace iQuest.VendingMachine
 {
     public class UseCaseFactory : IUseCaseFactory
     {
-        private IContainer container = AutofacContainer.GetInstance();
+        private ILifetimeScope container;
+        public UseCaseFactory(ILifetimeScope container)
+        {
+            this.container = container.BeginLifetimeScope();
+        }
         public T Create<T>()
         {
             return container.Resolve<T>();

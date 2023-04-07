@@ -71,7 +71,6 @@ namespace iQuest.VendingMachine
             builder.RegisterType<LookUseCase>()
                 .AsSelf();
             
-            
 
             builder.RegisterType<TurnOffService>()
                 .As<ITurnOffService>()
