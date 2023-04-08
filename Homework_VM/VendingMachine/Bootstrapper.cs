@@ -7,8 +7,8 @@ namespace iQuest.VendingMachine
     {
         public void Run()
         {
-            var container = AutofacContainer.GetInstance();
-            using (var scope = container.BeginLifetimeScope())
+            var container = AutofacContainer.BuildAutofacContainer();
+            using (var scope = container)
             {
                 var app = scope.Resolve<VendingMachineApplication>();
                 app.Run();

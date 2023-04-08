@@ -8,16 +8,7 @@ namespace iQuest.VendingMachine
 {
     public class AutofacContainer
     {
-        private static IContainer container;
-
-        public static IContainer GetInstance()
-        {
-            if (container == null)
-                container = BuildAutofacContainer();
-            return container;
-        }
-
-        private static IContainer BuildAutofacContainer()
+        public static IContainer BuildAutofacContainer()
         {
             var builder = new ContainerBuilder();
 
@@ -86,19 +77,24 @@ namespace iQuest.VendingMachine
             {
                 case "InMemory":
                     builder.RegisterType<InMemoryRepository>()
-                        .As<IProductRepository>();
+                        .As<IProductRepository>()
+                        .SingleInstance();
                     break;
+
                 case "SQL":
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
                     builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
-                        .As<IProductRepository>();
+                        .As<IProductRepository>()
+                        .SingleInstance();
                     break;
+
                 case "LiteDB":
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
                     builder.Register<LiteDBRepository>(_ => new LiteDBRepository(_connectionString))
-                        .As<IProductRepository>();
+                        .As<IProductRepository>()
+                        .SingleInstance();
                     break;
             }
 
