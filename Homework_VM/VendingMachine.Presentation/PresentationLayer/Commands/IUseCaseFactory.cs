@@ -1,9 +1,10 @@
 ﻿using Autofac;
+using iQuest.VendingMachine.Business;
 
 namespace iQuest.VendingMachine.Presentation
 {
     public interface IUseCaseFactory
     {
-        public T Create<T>();
+        public IUseCase Create<T>();
     }
 }

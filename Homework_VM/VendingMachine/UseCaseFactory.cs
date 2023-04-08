@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.Business.Exceptions;
 using iQuest.VendingMachine.Presentation;
 
 namespace iQuest.VendingMachine
@@ -8,11 +10,16 @@ namespace iQuest.VendingMachine
         private ILifetimeScope container;
         public UseCaseFactory(ILifetimeScope container)
         {
-            this.container = container.BeginLifetimeScope();
+            this.container = container;
         }
-        public T Create<T>()
+        public IUseCase Create<T>()
         {
-            return container.Resolve<T>();
+            var useCase = container.Resolve<T>();
+
+            if (useCase is IUseCase)
+                return (IUseCase)useCase;
+
+            throw new FactoryTypeException();
         }
     }
 }
