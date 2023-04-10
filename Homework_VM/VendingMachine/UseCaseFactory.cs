@@ -12,14 +12,9 @@ namespace iQuest.VendingMachine
         {
             this.container = container;
         }
-        public IUseCase Create<T>()
+        public IUseCase Create<T>() where T : IUseCase
         {
-            var useCase = container.Resolve<T>();
-
-            if (useCase is IUseCase)
-                return (IUseCase)useCase;
-
-            throw new FactoryTypeException();
+            return container.Resolve<T>();
         }
     }
 }

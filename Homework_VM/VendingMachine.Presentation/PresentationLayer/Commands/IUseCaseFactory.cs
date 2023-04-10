@@ -5,6 +5,6 @@ namespace iQuest.VendingMachine.Presentation
 {
     public interface IUseCaseFactory
     {
-        public IUseCase Create<T>();
+        public IUseCase Create<T>() where T : IUseCase;
     }
 }
