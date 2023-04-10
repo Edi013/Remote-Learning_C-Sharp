@@ -4,42 +4,42 @@ namespace iQuest.VendingMachine.Presentation
 {
     public class MainDisplay : DisplayBase, IMainDisplay
     {
-        public IUseCase ChooseCommand(IEnumerable<IUseCase> useCases)
+        public ICommand ChooseCommand(IEnumerable<ICommand> commands)
         {
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Available commands:");
             Console.WriteLine();
 
-            foreach (IUseCase useCase in useCases)
-                DisplayUseCase(useCase);
+            foreach (ICommand command in commands)
+                DisplayUseCase(command);
 
             while (true)
             {
                 string rawValue = ReadCommandName();
 
-                IUseCase selectedUseCase = useCases.FirstOrDefault(x => x.Name == rawValue);
+                ICommand selectedCommand = commands.FirstOrDefault(x => x.Name == rawValue);
 
-                if (selectedUseCase == null)
+                if (selectedCommand == null)
                 {
                     DisplayLine("Invalid command. Please try again.", ConsoleColor.Red);
                     continue;
                 }
                 
-                return selectedUseCase;
+                return selectedCommand;
             }
         }
 
-        private static void DisplayUseCase(IUseCase useCase)
+        private static void DisplayUseCase(ICommand command)
         {
             ConsoleColor oldColor = Console.ForegroundColor;
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write(useCase.Name);
+            Console.Write(command.Name);
 
             Console.ForegroundColor = oldColor;
 
-            Console.WriteLine(" - " + useCase.Description);
+            Console.WriteLine(" - " + command.Description);
         }
 
         private string ReadCommandName()

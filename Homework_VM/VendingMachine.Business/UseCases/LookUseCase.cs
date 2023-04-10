@@ -4,14 +4,8 @@ namespace iQuest.VendingMachine.Business
 {
     public class LookUseCase : IUseCase
     {
-        private readonly IProductRepository productRepository;
         private readonly IShelfView view;
-
-        public string Name => "See products";
-
-        public string Description => "This is our stock.";
-
-        public bool CanExecute => productRepository.GetProducts().Any();
+        private readonly IProductRepository productRepository;
 
         public LookUseCase(IProductRepository products, IShelfView view)
         {

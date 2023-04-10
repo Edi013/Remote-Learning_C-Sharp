@@ -2,7 +2,7 @@
 {
     public interface IMainDisplay
     {
-        public IUseCase ChooseCommand(IEnumerable<IUseCase> useCases);
+        public ICommand ChooseCommand(IEnumerable<ICommand> useCases);
         public string AskForPassword();
         public void DisplayLine(string message);
     }

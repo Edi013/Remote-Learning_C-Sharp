@@ -1,19 +1,21 @@
 ﻿using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.Business.Exceptions;
+using iQuest.VendingMachine.Presentation;
+using System.Linq;
 
 namespace iQuest.VendingMachine
 {
     internal class VendingMachineApplication
     {
-        private readonly IEnumerable<IUseCase> useCases;
+        private readonly IEnumerable<ICommand> commands;
         private readonly IMainDisplay mainDisplay;
         private ITurnOffService turnOffWasRequestedChecker;
 
-        public VendingMachineApplication(IEnumerable<IUseCase> useCases, IMainDisplay mainDisplay, ITurnOffService turnOffWasRequestedChecker)
+        public VendingMachineApplication(IEnumerable<ICommand> commands, IMainDisplay mainDisplay, ITurnOffService turnOffWasRequestedChecker)
         {
-            this.useCases = useCases ?? throw new ArgumentNullException(nameof(useCases));
+            this.commands = commands ?? throw new ArgumentNullException(nameof(commands));
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
-            this.turnOffWasRequestedChecker = turnOffWasRequestedChecker ?? throw new ArgumentNullException(nameof(useCases));
+            this.turnOffWasRequestedChecker = turnOffWasRequestedChecker ?? throw new ArgumentNullException(nameof(turnOffWasRequestedChecker));
         }
 
         public void Run()
@@ -22,10 +24,10 @@ namespace iQuest.VendingMachine
             {
                 try
                 {
-                    IEnumerable<IUseCase> availableUseCases = useCases
-                    .Where(x => x.CanExecute);
-                    IUseCase useCase = mainDisplay.ChooseCommand(availableUseCases);
-                    useCase.Execute();
+                    IEnumerable<ICommand> availableCommands =
+                        commands.Where(command => command.CanExecute);
+                    ICommand command = mainDisplay.ChooseCommand(availableCommands);
+                    command.Execute();
                 }
                 catch (InvalidCardNumberException e)
                 {
