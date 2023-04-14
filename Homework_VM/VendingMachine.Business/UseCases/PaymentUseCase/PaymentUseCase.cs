@@ -27,7 +27,6 @@ namespace iQuest.VendingMachine.Business
             if (paymentMethodIndex != 1 && paymentMethodIndex != 2)
                 throw new InvalidPaymentMethodException();
 
-            //paymentAlgorithms[paymentMethodIndex-1].Run(price);
             paymentAlgorithms.ElementAt(paymentMethodIndex - 1).Run(price);
         }
     }

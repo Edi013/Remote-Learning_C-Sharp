@@ -50,9 +50,13 @@ namespace iQuest.VendingMachine
             builder.RegisterType<LookCommand>()
                 .As<ICommand>()
                 .SingleInstance();
+            builder.RegisterType<StockReportCommand>()
+                .As<ICommand>()
+                .SingleInstance();
 
             builder.RegisterType<UseCaseFactory>()
                 .As<IUseCaseFactory>();
+
             builder.RegisterType<BuyUseCase>()
                 .AsSelf();
             builder.RegisterType<LoginUseCase>()
@@ -61,7 +65,13 @@ namespace iQuest.VendingMachine
                 .AsSelf();
             builder.RegisterType<LookUseCase>()
                 .AsSelf();
-            
+
+            builder.RegisterType<StockReportUseCase>()
+                .AsSelf();
+            builder.RegisterType<SalesReportUseCase>()
+                .AsSelf();
+            builder.RegisterType<VolumeReportUseCase>()
+                .AsSelf();
 
             builder.RegisterType<TurnOffService>()
                 .As<ITurnOffService>()
