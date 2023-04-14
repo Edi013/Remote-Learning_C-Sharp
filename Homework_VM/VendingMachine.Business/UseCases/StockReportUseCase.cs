@@ -9,10 +9,12 @@ namespace iQuest.VendingMachine.Business
     public class StockReportUseCase : IUseCase
     {
         IProductRepository productRepository;
+        IStockReportRepository stockReportRepository;
 
-        public StockReportUseCase(IProductRepository productRepository)
+        public StockReportUseCase(IProductRepository productRepository, IStockReportRepository stockReportRepository)
         {
             this.productRepository = productRepository;
+            this.stockReportRepository = stockReportRepository;
         }
 
         public void Execute()

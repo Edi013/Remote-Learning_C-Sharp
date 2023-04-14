@@ -7,8 +7,7 @@ namespace iQuest.VendingMachine.JsonReports
 {
     public class JsonStockReportRepository : JsonFileReportsRepository, IStockReportRepository
     {
-        public JsonStockReportRepository(string directoryName):
-            base(directoryName)
+        public JsonStockReportRepository()
         {
         }
 
@@ -38,7 +37,9 @@ namespace iQuest.VendingMachine.JsonReports
         }
 
         public void Add(StockReport stockReport)
-        {            
+        {
+
+            GenerateFile(ToJsonStockReport(stockReport));
         }
 
     }

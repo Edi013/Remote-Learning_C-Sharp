@@ -9,24 +9,24 @@ namespace iQuest.VendingMachine.JsonReports
 {
     public class JsonFileReportsRepository
     {
-        private string DirectoryName { get; set; }
+        private string Path { get; set; }
 
-        public JsonFileReportsRepository(string directoryName)
+        public JsonFileReportsRepository()
         {
-            DirectoryName = directoryName;
+            Path = ConfigurationManager.AppSettings["ReportFilePath"];
         }
 
         private void CreateReportsDirectory()
         {
-            if(!Directory.Exists(DirectoryName))
-                Directory.CreateDirectory(DirectoryName);
+            Directory.CreateDirectory(Path);
         }
         private void GenerateFileName(string reportName, DateTime time)
         {
             var generatedType = ConfigurationManager.AppSettings["ReportType"];
+            var reportsFilePath = Path;
             var fileName = reportName + "-" + time.ToString() + "." + generatedType;
-            if (!File.Exists(fileName))
-                File.Create(fileName);
+            if (!File.Exists(reportsFilePath+fileName))
+                File.Create(reportsFilePath+fileName);
         }
         private void Generate(string filePath, JsonReport jsonReport)
         {
@@ -36,7 +36,7 @@ namespace iQuest.VendingMachine.JsonReports
 
         protected void GenerateFile(JsonReport jsonReport)
         {
-            Generate(ConfigurationManager.AppSettings["ReportFilePath"], jsonReport);
+            Generate(Path, jsonReport);
         }
     }
 }
