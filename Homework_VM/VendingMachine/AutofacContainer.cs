@@ -3,6 +3,7 @@ using System.Configuration;
 using iQuest.VendingMachine.DataAcces;
 using iQuest.VendingMachine.Presentation;
 using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.JsonReports;
 
 namespace iQuest.VendingMachine
 {
@@ -72,6 +73,14 @@ namespace iQuest.VendingMachine
                 .AsSelf();
             builder.RegisterType<VolumeReportUseCase>()
                 .AsSelf();
+
+            builder.RegisterType<JsonStockReportRepository>()
+                .As<IStockReportRepository>();
+            /*builder.RegisterType<JsonSalesReportRepository>()
+                .As<ISalesReportRepository>();
+            builder.RegisterType<JsonVolumeReportRepository>()
+                .As<IVolumeReportRepository>();*/
+
 
             builder.RegisterType<TurnOffService>()
                 .As<ITurnOffService>()
