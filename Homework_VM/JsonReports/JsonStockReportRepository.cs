@@ -1,6 +1,4 @@
 ﻿using iQuest.VendingMachine.Business;
-using iQuest.VendingMachine.DataAccess;
-
 using Newtonsoft.Json;
 
 namespace iQuest.VendingMachine.JsonReports

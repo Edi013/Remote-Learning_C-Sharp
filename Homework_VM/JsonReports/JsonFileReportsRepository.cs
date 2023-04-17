@@ -13,7 +13,7 @@ namespace iQuest.VendingMachine.JsonReports
 
         public JsonFileReportsRepository()
         {
-            Path = ConfigurationManager.AppSettings["ReportFilePath"];
+            Path = ConfigurationManager.AppSettings["ReportsFilePath"];
         }
 
         private void CreateReportsDirectory()
@@ -22,7 +22,7 @@ namespace iQuest.VendingMachine.JsonReports
         }
         private void GenerateFileName(string reportName, DateTime time)
         {
-            var generatedType = ConfigurationManager.AppSettings["ReportType"];
+            var generatedType = ConfigurationManager.AppSettings["ReportsType"];
             var reportsFilePath = Path;
             var fileName = reportName + "-" + time.ToString() + "." + generatedType;
             if (!File.Exists(reportsFilePath+fileName))
