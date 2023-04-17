@@ -20,18 +20,20 @@ namespace iQuest.VendingMachine.JsonReports
         {
             Directory.CreateDirectory(Path);
         }
-        private void GenerateFileName(string reportName, DateTime time)
+        private string GenerateFileName(string reportName, ref DateTime time)
         {
             var generatedType = ConfigurationManager.AppSettings["ReportsType"];
             var reportsFilePath = Path;
-            var fileName = reportName + "-" + time.ToString() + "." + generatedType;
-            if (!File.Exists(reportsFilePath+fileName))
-                File.Create(reportsFilePath+fileName);
+            return reportsFilePath + "Stock Report - " +
+                time.ToString("yyyy MM dd HHmmss") + "." + generatedType;
         }
         private void Generate(string filePath, JsonReport jsonReport)
         {
             CreateReportsDirectory();
-            GenerateFileName(jsonReport.ReportName, jsonReport.GeneratedTime);
+            var fileName = GenerateFileName
+                (jsonReport.ReportName, ref jsonReport.GeneratedTime);
+
+            File.WriteAllText(fileName, jsonReport.ReportAsJsonString);
         }
 
         protected void GenerateFile(JsonReport jsonReport)

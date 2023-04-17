@@ -8,7 +8,7 @@ namespace iQuest.VendingMachine.Business
 
         public string Name { get; private set; }
 
-        public StockReport(IEnumerable<Product> products, string name = "StockReport"):
+        public StockReport(IEnumerable<Product> products, string name = "Stock Report"):
             base(products)
         {
             GeneratedTime = DateTime.Now;

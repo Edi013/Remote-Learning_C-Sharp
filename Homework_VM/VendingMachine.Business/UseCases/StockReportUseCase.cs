@@ -19,7 +19,7 @@ namespace iQuest.VendingMachine.Business
 
         public void Execute()
         {
-
+            stockReportRepository.Add(new StockReport(productRepository.GetProducts(), name: "Edi's report"));
         }
     }
 }

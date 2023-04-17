@@ -5,22 +5,15 @@ namespace iQuest.VendingMachine.JsonReports
 {
     public class JsonStockReportRepository : JsonFileReportsRepository, IStockReportRepository
     {
-        public JsonStockReportRepository()
-        {
-        }
-
         private JsonStockReportContent CreateReportContent(StockReport stockReport)
         {
-            var content = new JsonStockReportContent()
-            {
-                ReportName = stockReport.Name,
-                GeneratedTime = stockReport.GeneratedTime,
-            };
+            var content = new JsonStockReportContent();
 
             foreach (Product item in stockReport)
             {
-                content.Name.Add(item.Name);
-                content.Quantity.Add(item.Quantity);
+                content.Stock.Add( 
+                    new ProductPOCO(
+                        item.Name, item.Quantity));
             }
 
             return content;
@@ -30,15 +23,15 @@ namespace iQuest.VendingMachine.JsonReports
             var content = CreateReportContent(stockReport);
             return new JsonReport()
             {
-                ReportAsJsonString = JsonConvert.SerializeObject(content)
+                ReportName = stockReport.Name,
+                GeneratedTime = stockReport.GeneratedTime,
+                ReportAsJsonString = JsonConvert.SerializeObject(content.Stock)
             };
         }
 
         public void Add(StockReport stockReport)
         {
-
             GenerateFile(ToJsonStockReport(stockReport));
         }
-
     }
 }
