@@ -25,7 +25,7 @@ namespace iQuest.VendingMachine.JsonReports
             {
                 ReportName = stockReport.Name,
                 GeneratedTime = stockReport.GeneratedTime,
-                ReportAsJsonString = JsonConvert.SerializeObject(content.Stock)
+                ReportAsJsonString = JsonConvert.SerializeObject(content.Stock, Formatting.Indented)
             };
         }
 
