@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VendingMachine.Presentation.PresentationLayer
+namespace iQuest.VendingMachine.Business
 {
     public class TimeInterval
     {

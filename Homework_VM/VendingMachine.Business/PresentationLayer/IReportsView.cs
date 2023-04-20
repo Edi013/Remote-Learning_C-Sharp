@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,5 +9,7 @@ namespace iQuest.VendingMachine.Business
 {
     public interface IReportsView
     {
+        public TimeInterval AskForTimeInterval();
+        public void DisplaySuccessMessage([Optional] string displayInformationOnNewLine);
     }
 }

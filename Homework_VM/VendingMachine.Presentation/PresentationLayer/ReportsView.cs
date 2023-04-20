@@ -1,8 +1,9 @@
 ﻿using System.Runtime.InteropServices;
+using iQuest.VendingMachine.Business;
 
-namespace VendingMachine.Presentation.PresentationLayer
+namespace iQuest.VendingMachine.Presentation
 {
-    public class ReportsView
+    public class ReportsView : IReportsView
     {
         private DateTime RequestDateTimeForReport(string displayedRequest)
         {
