@@ -37,7 +37,7 @@ namespace iQuest.VendingMachine.JsonReports
                 (jsonReport.ReportName, jsonReport.GeneratedTime);
 
             File.WriteAllText(
-                fileName, JsonConvert.SerializeObject(jsonReport.Content, Formatting.Indented)); // Encoding.UTF8
+                fileName, JsonConvert.SerializeObject(jsonReport.Content, Formatting.Indented), Encoding.UTF8);
         }
 
         protected void GenerateFile(JsonReport<T> jsonReport)
