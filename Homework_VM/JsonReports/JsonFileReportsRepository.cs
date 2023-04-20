@@ -4,10 +4,11 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace iQuest.VendingMachine.JsonReports
 {
-    public class JsonFileReportsRepository
+    public class JsonFileReportsRepository<T>
     {
         private string Path { get; set; }
 
@@ -20,25 +21,28 @@ namespace iQuest.VendingMachine.JsonReports
         {
             Directory.CreateDirectory(Path);
         }
-        private string GenerateFileName(string reportName, ref DateTime time)
+        private string GenerateFileName(string reportName, DateTime time)
         {
             var generatedType = ConfigurationManager.AppSettings["ReportsType"];
-            var reportsFilePath = Path;
-            return reportsFilePath + "Stock Report - " +
+
+            return Path + reportName + " - " +
                 time.ToString("yyyy MM dd HHmmss") + "." + generatedType;
         }
-        private void Generate(string filePath, JsonReport jsonReport)
+
+        private void Generate(JsonReport<T> jsonReport)
         {
             CreateReportsDirectory();
-            var fileName = GenerateFileName
-                (jsonReport.ReportName, ref jsonReport.GeneratedTime);
 
-            File.WriteAllText(fileName, jsonReport.ReportAsJsonString);
+            var fileName = GenerateFileName
+                (jsonReport.ReportName, jsonReport.GeneratedTime);
+
+            File.WriteAllText(
+                fileName, JsonConvert.SerializeObject(jsonReport.Content, Formatting.Indented)); // Encoding.UTF8
         }
 
-        protected void GenerateFile(JsonReport jsonReport)
+        protected void GenerateFile(JsonReport<T> jsonReport)
         {
-            Generate(Path, jsonReport);
+            Generate(jsonReport);
         }
     }
 }
