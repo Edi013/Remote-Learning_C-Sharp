@@ -43,6 +43,9 @@ namespace iQuest.VendingMachine
             builder.RegisterType<SalesReportUseCase>()
                 .As<IUseCase>()
                 .SingleInstance();
+            builder.RegisterType<VolumeReportUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
 
             builder.RegisterType<BuyCommand>()
                 .As<ICommand>()
@@ -60,6 +63,9 @@ namespace iQuest.VendingMachine
                 .As<ICommand>()
                 .SingleInstance();
             builder.RegisterType<SalesReportCommand>()
+                .As<ICommand>()
+                .SingleInstance();
+            builder.RegisterType<VolumeReportCommand>()
                 .As<ICommand>()
                 .SingleInstance();
 
@@ -88,20 +94,19 @@ namespace iQuest.VendingMachine
                 .As<IReportRepository<StockReport>>();
             builder.RegisterType<JsonSalesReportRepository>()
                 .As<IReportRepository<SalesReport>>();
-            /*
             builder.RegisterType<JsonVolumeReportRepository>()
-                .As<IVolumeReportRepository>();*/
+                .As<IReportRepository<VolumeReport>>();
 
             builder.RegisterType<SalesRepository>()
                 .As<ISaleRepository>()
                 .SingleInstance();
 
-            builder.RegisterType<JsonStockReportRepository>()
+      /*      builder.RegisterType<JsonStockReportRepository>()
                 .As<IReportRepository<StockReport>>()
                 .SingleInstance();
             builder.RegisterType<JsonSalesReportRepository>()
                 .As<IReportRepository<SalesReport>>()
-                .SingleInstance();
+                .SingleInstance();*/
 
             builder.RegisterType<ReportsView>()
                 .As<IReportsView>();
