@@ -4,6 +4,7 @@ using iQuest.VendingMachine.DataAcces;
 using iQuest.VendingMachine.Presentation;
 using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.JsonReports;
+using iQuest.VendingMachine.DataAccess;
 
 namespace iQuest.VendingMachine
 {
@@ -36,8 +37,12 @@ namespace iQuest.VendingMachine
             builder.RegisterType<LookUseCase>()
                 .As<IUseCase>()
                 .SingleInstance();
-            builder.RegisterType<TurnOffUseCase>()
-                .AsSelf();
+            builder.RegisterType<StockReportUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
+            builder.RegisterType<SalesReportUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
 
             builder.RegisterType<BuyCommand>()
                 .As<ICommand>()
@@ -54,6 +59,9 @@ namespace iQuest.VendingMachine
             builder.RegisterType<StockReportCommand>()
                 .As<ICommand>()
                 .SingleInstance();
+            builder.RegisterType<SalesReportCommand>()
+                .As<ICommand>()
+                .SingleInstance();
 
             builder.RegisterType<UseCaseFactory>()
                 .As<IUseCaseFactory>();
@@ -66,7 +74,8 @@ namespace iQuest.VendingMachine
                 .AsSelf();
             builder.RegisterType<LookUseCase>()
                 .AsSelf();
-
+            builder.RegisterType<TurnOffUseCase>()
+                .AsSelf();
             builder.RegisterType<StockReportUseCase>()
                 .AsSelf();
             builder.RegisterType<SalesReportUseCase>()
@@ -74,13 +83,28 @@ namespace iQuest.VendingMachine
             builder.RegisterType<VolumeReportUseCase>()
                 .AsSelf();
 
+
             builder.RegisterType<JsonStockReportRepository>()
-                .As<IStockReportRepository>();
-            /*builder.RegisterType<JsonSalesReportRepository>()
-                .As<ISalesReportRepository>();
+                .As<IReportRepository<StockReport>>();
+            builder.RegisterType<JsonSalesReportRepository>()
+                .As<IReportRepository<SalesReport>>();
+            /*
             builder.RegisterType<JsonVolumeReportRepository>()
                 .As<IVolumeReportRepository>();*/
 
+            builder.RegisterType<SalesRepository>()
+                .As<ISaleRepository>()
+                .SingleInstance();
+
+            builder.RegisterType<JsonStockReportRepository>()
+                .As<IReportRepository<StockReport>>()
+                .SingleInstance();
+            builder.RegisterType<JsonSalesReportRepository>()
+                .As<IReportRepository<SalesReport>>()
+                .SingleInstance();
+
+            builder.RegisterType<ReportsView>()
+                .As<IReportsView>();
 
             builder.RegisterType<TurnOffService>()
                 .As<ITurnOffService>()
