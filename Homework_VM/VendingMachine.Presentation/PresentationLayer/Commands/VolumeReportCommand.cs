@@ -15,7 +15,7 @@ namespace iQuest.VendingMachine.Presentation
 
 
         public string Name => "Volume report";
-        public string Description => "Admins can generate reports - volume";
+        public string Description => "Generate a report about volume";
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
         public VolumeReportCommand(IAuthenticationService authenticationService, IUseCaseFactory factory)
@@ -26,7 +26,7 @@ namespace iQuest.VendingMachine.Presentation
 
         public void Execute()
         {
-            var usecCase = factory.Create<StockReportUseCase>();
+            var usecCase = factory.Create<VolumeReportUseCase>();
             usecCase.Execute();
         }
     }
