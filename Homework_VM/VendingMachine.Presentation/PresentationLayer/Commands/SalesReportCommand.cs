@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using iQuest.VendingMachine.Business;
+﻿using iQuest.VendingMachine.Business;
 
 namespace iQuest.VendingMachine.Presentation
 {
@@ -15,7 +9,7 @@ namespace iQuest.VendingMachine.Presentation
 
 
         public string Name => "Sales report";
-        public string Description => "Admins can generate reports - sales";
+        public string Description => "Generate a report about sales";
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
         public SalesReportCommand(IAuthenticationService authenticationService, IUseCaseFactory factory)

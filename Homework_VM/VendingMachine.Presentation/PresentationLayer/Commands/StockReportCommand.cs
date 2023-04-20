@@ -15,7 +15,7 @@ namespace iQuest.VendingMachine.Presentation
 
 
         public string Name => "Stock report";
-        public string Description => "Admins can generate reports - stock";
+        public string Description => "Generate a report about stock";
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
         public StockReportCommand(IAuthenticationService authenticationService, IUseCaseFactory factory)
