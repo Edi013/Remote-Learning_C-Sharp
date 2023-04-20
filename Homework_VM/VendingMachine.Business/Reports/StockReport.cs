@@ -4,7 +4,7 @@ namespace iQuest.VendingMachine.Business
 {
     public class StockReport : List<Product>
     {
-        public DateTime GeneratedTime;
+        public DateTime GeneratedTime { get; set; }
 
         public string Name { get; private set; }
 

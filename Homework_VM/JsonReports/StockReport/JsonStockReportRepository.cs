@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace iQuest.VendingMachine.JsonReports
 {
-    public class JsonStockReportRepository : JsonFileReportsRepository, IStockReportRepository
+    public class JsonStockReportRepository : JsonFileReportsRepository<JsonStockReportContent>, IReportRepository<StockReport>
     {
         private JsonStockReportContent CreateReportContent(StockReport stockReport)
         {
@@ -11,21 +11,21 @@ namespace iQuest.VendingMachine.JsonReports
 
             foreach (Product item in stockReport)
             {
-                content.Stock.Add( 
-                    new ProductPOCO(
+                content.Add( 
+                    new StockReportProduct(
                         item.Name, item.Quantity));
             }
 
             return content;
         }
-        private JsonReport ToJsonStockReport(StockReport stockReport)
+        private JsonReport<JsonStockReportContent> ToJsonStockReport(StockReport stockReport)
         {
             var content = CreateReportContent(stockReport);
-            return new JsonReport()
+            return new JsonReport<JsonStockReportContent>()
             {
                 ReportName = stockReport.Name,
                 GeneratedTime = stockReport.GeneratedTime,
-                ReportAsJsonString = JsonConvert.SerializeObject(content.Stock, Formatting.Indented)
+                Content = content
             };
         }
 

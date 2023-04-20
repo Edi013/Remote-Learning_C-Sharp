@@ -9,17 +9,17 @@ namespace iQuest.VendingMachine.Business
     public class StockReportUseCase : IUseCase
     {
         IProductRepository productRepository;
-        IStockReportRepository stockReportRepository;
+        IReportRepository<StockReport> reportRepository;
 
-        public StockReportUseCase(IProductRepository productRepository, IStockReportRepository stockReportRepository)
+        public StockReportUseCase(IProductRepository productRepository, IReportRepository<StockReport> stockReportRepository)
         {
             this.productRepository = productRepository;
-            this.stockReportRepository = stockReportRepository;
+            this.reportRepository = stockReportRepository;
         }
 
         public void Execute()
         {
-            stockReportRepository.Add(new StockReport(productRepository.GetProducts(), name: "Edi's report"));
+            reportRepository.Add(new StockReport(productRepository.GetProducts()));
         }
     }
 }
