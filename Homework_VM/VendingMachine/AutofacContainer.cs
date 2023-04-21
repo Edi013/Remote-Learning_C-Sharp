@@ -46,6 +46,12 @@ namespace iQuest.VendingMachine
             builder.RegisterType<VolumeReportUseCase>()
                 .As<IUseCase>()
                 .SingleInstance();
+            builder.RegisterType<SupplyNewProductUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
+            builder.RegisterType<SupplyExistingProductUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
 
             builder.RegisterType<BuyCommand>()
                 .As<ICommand>()
@@ -68,6 +74,12 @@ namespace iQuest.VendingMachine
             builder.RegisterType<VolumeReportCommand>()
                 .As<ICommand>()
                 .SingleInstance();
+            builder.RegisterType<SupplyNewProductCommand>()
+                .As<ICommand>()
+                .SingleInstance();
+            builder.RegisterType<SupplyExistingProductCommand>()
+                .As<ICommand>()
+                .SingleInstance();
 
             builder.RegisterType<UseCaseFactory>()
                 .As<IUseCaseFactory>();
@@ -88,6 +100,10 @@ namespace iQuest.VendingMachine
                 .AsSelf();
             builder.RegisterType<VolumeReportUseCase>()
                 .AsSelf();
+            builder.RegisterType<SupplyNewProductUseCase>()
+                .AsSelf(); 
+            builder.RegisterType<SupplyExistingProductUseCase>()
+                .AsSelf();
 
 
             builder.RegisterType<JsonStockReportRepository>()
@@ -101,15 +117,10 @@ namespace iQuest.VendingMachine
                 .As<ISaleRepository>()
                 .SingleInstance();
 
-      /*      builder.RegisterType<JsonStockReportRepository>()
-                .As<IReportRepository<StockReport>>()
-                .SingleInstance();
-            builder.RegisterType<JsonSalesReportRepository>()
-                .As<IReportRepository<SalesReport>>()
-                .SingleInstance();*/
-
             builder.RegisterType<ReportsView>()
                 .As<IReportsView>();
+            builder.RegisterType<SupplyProductView>()
+                .As<ISupplyProductView>();
 
             builder.RegisterType<TurnOffService>()
                 .As<ITurnOffService>()
