@@ -10,16 +10,19 @@ namespace iQuest.VendingMachine.Business
     {
         IProductRepository productRepository;
         IReportRepository<StockReport> reportRepository;
+        IReportsView reportsView;
 
-        public StockReportUseCase(IProductRepository productRepository, IReportRepository<StockReport> stockReportRepository)
+        public StockReportUseCase(IProductRepository productRepository, IReportRepository<StockReport> stockReportRepository, IReportsView reportsView)
         {
             this.productRepository = productRepository;
             this.reportRepository = stockReportRepository;
+            this.reportsView = reportsView;
         }
 
         public void Execute()
         {
             reportRepository.Add(new StockReport(productRepository.GetProducts()));
+            reportsView.DisplaySuccessMessage("Stock report generated !");
         }
     }
 }

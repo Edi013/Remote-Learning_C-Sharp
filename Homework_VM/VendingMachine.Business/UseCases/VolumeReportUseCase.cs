@@ -25,6 +25,7 @@ namespace iQuest.VendingMachine.Business
                 new VolumeReport(
                     saleRepository.GetGroupedByProduct(
                          reportsView.AskForTimeInterval())));
+            reportsView.DisplaySuccessMessage("Volume report generated !");
         }
     }
 }

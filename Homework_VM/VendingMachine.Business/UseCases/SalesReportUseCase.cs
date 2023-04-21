@@ -19,6 +19,7 @@
             reportsRepository.Add(new SalesReport(
                 productRepository.Get(
                    reportsView.AskForTimeInterval())));
+            reportsView.DisplaySuccessMessage("Sales report generated !");
         }
     }
 }
