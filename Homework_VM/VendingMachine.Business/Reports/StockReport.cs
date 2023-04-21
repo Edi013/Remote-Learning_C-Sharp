@@ -6,13 +6,12 @@ namespace iQuest.VendingMachine.Business
     {
         public DateTime GeneratedTime { get; set; }
 
-        public string Name { get; private set; }
+        public string Name { get; } = "Stock Report";
 
-        public StockReport(IEnumerable<Product> products, string name = "Stock Report"):
+        public StockReport(IEnumerable<Product> products, ):
             base(products)
         {
             GeneratedTime = DateTime.Now;
-            Name = name;
         }
     }
 }

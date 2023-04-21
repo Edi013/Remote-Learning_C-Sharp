@@ -2,14 +2,13 @@
 {
     public class SalesReport : List<Sale>
     {
-        public string Name { get; set; }
+        public string Name { get; } = "Sales Report";
         public DateTime GeneratedTime { get; set; }
 
-        public SalesReport(IEnumerable<Sale> products, string name = "Sales Report")
+        public SalesReport(IEnumerable<Sale> products)
             : base(products)
         {
             GeneratedTime = DateTime.Now;
-            Name = name;
         }
 
     }
