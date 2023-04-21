@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+﻿using System.Configuration;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace iQuest.VendingMachine.JsonReports
 {
     public class JsonFileReportsRepository<T>
     {
-        private string Path { get; set; }
+        private string Path { get; }
 
         public JsonFileReportsRepository()
         {

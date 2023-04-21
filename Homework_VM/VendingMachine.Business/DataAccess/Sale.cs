@@ -3,13 +3,13 @@
     public class Sale
     {
         public DateTime Date { get; set; }
-        public string Name { get; set; }
+        public string ProductName { get; set; }
         public decimal Price { get; set; }
         public string PaymentMethod { get; set; }
 
-        public Sale(string name, DateTime date, decimal price, string paymentMethod)
+        public Sale(string productName, DateTime date, decimal price, string paymentMethod)
         {
-            Name = name;
+            ProductName = productName;
             Date = date;
             Price = price;
             PaymentMethod = paymentMethod;

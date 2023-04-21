@@ -13,7 +13,7 @@ namespace iQuest.VendingMachine.JsonReports
             {
                 content.Add(
                     new SalesReportProduct(
-                       item.Date, item.Name, item.Price, item.PaymentMethod));
+                       item.Date, item.ProductName, item.Price, item.PaymentMethod));
             }
 
             return content;

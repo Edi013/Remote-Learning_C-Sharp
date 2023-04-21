@@ -47,8 +47,8 @@ namespace iQuest.VendingMachine.DataAccess
             return sales
                 .Where(s =>
                         interval.StartDate <= s.Date && s.Date <= interval.EndDate)
-                .GroupBy(s => s.Name)
-                .Select(t => new ProductSale(t.First().Name, interval, t.Count()));
+                .GroupBy(s => s.ProductName)
+                .Select(t => new ProductSale(t.First().ProductName, interval, t.Count()));
         }
         public void Add(Sale sale)
         {

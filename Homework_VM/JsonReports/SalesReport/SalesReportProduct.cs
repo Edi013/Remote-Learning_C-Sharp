@@ -3,14 +3,14 @@
     public class SalesReportProduct
     {
         public DateTime Date { get; set; }
-        public string Name { get; set; }
+        public string ProductName { get; set; }
         public decimal Price { get; set; }
         public string PaymentMethod { get; set; }
 
-        public SalesReportProduct(DateTime date, string name, decimal price, string paymentMethod)
+        public SalesReportProduct(DateTime date, string productName, decimal price, string paymentMethod)
         {
             Date = date;
-            Name = name;
+            ProductName = productName;
             Price = price;
             PaymentMethod = paymentMethod;
         }
