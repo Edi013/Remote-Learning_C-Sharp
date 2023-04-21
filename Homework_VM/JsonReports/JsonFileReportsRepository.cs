@@ -23,10 +23,8 @@ namespace iQuest.VendingMachine.JsonReports
         }
         private string GenerateFileName(string reportName, DateTime time)
         {
-            var generatedType = ConfigurationManager.AppSettings["ReportsType"];
-
             return Path + reportName + " - " +
-                time.ToString("yyyy MM dd HHmmss") + "." + generatedType;
+                time.ToString("yyyy MM dd HHmmss") + ".json";
         }
 
         private void Generate(JsonReport<T> jsonReport)
