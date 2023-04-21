@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.Business.Exceptions;
 using LiteDB;
 
 namespace iQuest.VendingMachine.DataAcces
@@ -71,6 +72,34 @@ namespace iQuest.VendingMachine.DataAcces
                 products = collection.FindAll().ToList();
             }
             return products;
+        }
+
+        public void IncreaseQuantity(QuantitySupply supply)
+        {
+            var product = GetProductByColumnId(supply.ColumnId);
+
+            if (product == null)
+            {
+                throw new InvalidColumnNumberException();
+            }
+            product.Quantity += supply.Quantity;
+
+            using(var database = new LiteDatabase(
+                        _connectionString))
+            {
+                var collection = database.GetCollection<Product>("Products");
+                collection.Update(product);
+            }
+        }
+
+        public void AddOrReplace(Product product)
+        {
+            using (var database = new LiteDatabase(
+                        _connectionString))
+            {
+                var collection = database.GetCollection<Product>("Products");
+                collection.Upsert(product);
+            }
         }
     }
 }
