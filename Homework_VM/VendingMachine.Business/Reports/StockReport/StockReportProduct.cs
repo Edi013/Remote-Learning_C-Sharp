@@ -1,4 +1,4 @@
-﻿namespace iQuest.VendingMachine.JsonReports
+﻿namespace iQuest.VendingMachine.Business
 {
     public class StockReportProduct
     {
@@ -8,6 +8,9 @@
         {
             Name = name;
             Quantity = quantity;
+        }
+        public StockReportProduct()
+        {
         }
     }
 }

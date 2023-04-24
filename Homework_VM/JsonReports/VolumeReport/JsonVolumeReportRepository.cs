@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using iQuest.VendingMachine.Business;
+﻿using iQuest.VendingMachine.Business;
 
 namespace iQuest.VendingMachine.JsonReports
 {
-    public class JsonVolumeReportRepository : JsonFileReportsRepository<JsonVolumeReportContent>, IReportRepository<VolumeReport>
+    public class JsonVolumeReportRepository : JsonFileReportsRepository<VolumeReportContent>, IReportRepository<VolumeReport>
     {
-        private JsonVolumeReportContent CreateReportContent(VolumeReport volumeReport)
+        private VolumeReportContent CreateReportContent(VolumeReport volumeReport)
         {
-            var content = new JsonVolumeReportContent()
+            var content = new VolumeReportContent()
             {
                 StartTime = volumeReport.Select(x => x.TimeInterval.StartDate).Min(),
                 EndTime = volumeReport.Select(x => x.TimeInterval.EndDate).Max(),
@@ -25,10 +20,10 @@ namespace iQuest.VendingMachine.JsonReports
 
             return content;
         }
-        private JsonReport<JsonVolumeReportContent> ToJsonStockReport(VolumeReport volumeReport)
+        private JsonReport<VolumeReportContent> ToJsonStockReport(VolumeReport volumeReport)
         {
             var content = CreateReportContent(volumeReport);
-            return new JsonReport<JsonVolumeReportContent>()
+            return new JsonReport<VolumeReportContent>()
             {
                 ReportName = volumeReport.Name,
                 GeneratedTime = volumeReport.GeneratedTime,

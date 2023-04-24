@@ -1,4 +1,4 @@
-﻿namespace iQuest.VendingMachine.JsonReports
+﻿namespace iQuest.VendingMachine.Business
 {
     public class SalesReportProduct
     {
@@ -7,6 +7,9 @@
         public decimal Price { get; set; }
         public string PaymentMethod { get; set; }
 
+        public SalesReportProduct()
+        {
+        }
         public SalesReportProduct(DateTime date, string productName, decimal price, string paymentMethod)
         {
             Date = date;

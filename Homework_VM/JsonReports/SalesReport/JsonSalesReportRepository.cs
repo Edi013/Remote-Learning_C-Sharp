@@ -1,13 +1,12 @@
 ﻿using iQuest.VendingMachine.Business;
-using Newtonsoft.Json;
 
 namespace iQuest.VendingMachine.JsonReports
 {
-    public class JsonSalesReportRepository : JsonFileReportsRepository<JsonSalesReportContent>, IReportRepository<SalesReport>
+    public class JsonSalesReportRepository : JsonFileReportsRepository<SalesReportContent>, IReportRepository<SalesReport>
     {
-        private JsonSalesReportContent CreateReportContent(SalesReport salesReport)
+        private SalesReportContent CreateReportContent(SalesReport salesReport)
         {
-            var content = new JsonSalesReportContent();
+            var content = new SalesReportContent();
 
             foreach(var item in salesReport)
             {
@@ -18,10 +17,10 @@ namespace iQuest.VendingMachine.JsonReports
 
             return content;
         }
-        private JsonReport<JsonSalesReportContent> ToJsonStockReport(SalesReport salesReport)
+        private JsonReport<SalesReportContent> ToJsonStockReport(SalesReport salesReport)
         {
             var content = CreateReportContent(salesReport);
-            return new JsonReport<JsonSalesReportContent>()
+            return new JsonReport<SalesReportContent>()
             {
                 ReportName = salesReport.Name,
                 GeneratedTime = salesReport.GeneratedTime,

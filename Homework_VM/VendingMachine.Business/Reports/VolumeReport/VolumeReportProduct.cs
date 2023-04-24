@@ -1,6 +1,4 @@
-﻿using iQuest.VendingMachine.Business;
-
-namespace iQuest.VendingMachine.JsonReports
+﻿namespace iQuest.VendingMachine.Business
 {
     public class VolumeReportProduct
     {
