@@ -5,6 +5,7 @@ using iQuest.VendingMachine.Presentation;
 using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.JsonReports;
 using iQuest.VendingMachine.DataAccess;
+using iQuest.VendingMachine.XmlReports;
 
 namespace iQuest.VendingMachine
 {
@@ -105,13 +106,27 @@ namespace iQuest.VendingMachine
             builder.RegisterType<SupplyExistingProductUseCase>()
                 .AsSelf();
 
+            switch (ConfigurationManager.AppSettings["ReportsType"])
+            {
 
-            builder.RegisterType<JsonStockReportRepository>()
-                .As<IReportRepository<StockReport>>();
-            builder.RegisterType<JsonSalesReportRepository>()
-                .As<IReportRepository<SalesReport>>();
-            builder.RegisterType<JsonVolumeReportRepository>()
-                .As<IReportRepository<VolumeReport>>();
+                case "JSON":
+                    builder.RegisterType<JsonStockReportRepository>()
+                        .As<IReportRepository<StockReport>>();
+                    builder.RegisterType<JsonSalesReportRepository>()
+                        .As<IReportRepository<SalesReport>>();
+                    builder.RegisterType<JsonVolumeReportRepository>()
+                        .As<IReportRepository<VolumeReport>>();
+                    break;
+
+                case "XML":
+                    builder.RegisterType<XmlStockReportRepository>()
+                        .As<IReportRepository<StockReport>>();
+                    builder.RegisterType<XmlSalesReportRepository>()
+                       .As<IReportRepository<SalesReport>>();
+                    builder.RegisterType<XmlVolumeReportRepository>()
+                        .As<IReportRepository<VolumeReport>>();
+                    break;
+            }
 
             switch (ConfigurationManager.AppSettings["SalesRepository"])
             {
