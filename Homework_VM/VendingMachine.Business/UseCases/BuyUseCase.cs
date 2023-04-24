@@ -35,7 +35,7 @@ namespace iQuest.VendingMachine.Business
             paymentUseCase.Execute(wantedProduct.Price);
             productRepository.DecreaseQuantity(wantedProduct);
             
-            //log the transaction to a json
+            //add sale in repo
             buyView.DispenseProduct(wantedProduct.Name);
         }
     }

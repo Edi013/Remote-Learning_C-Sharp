@@ -85,15 +85,6 @@ namespace iQuest.VendingMachine.DataAcces
             product.Quantity--;
 
             UpdateProductsTableWith($"UPDATE Products SET Quantity = '{product.Quantity}' Where ColumnId='{product.ColumnId}';");
-            /*using var connection = new SqlConnection(_connectionString);
-            string queryString = $"UPDATE Products SET Quantity = '{product.Quantity}' Where ColumnId='{product.ColumnId}';";
-
-            SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
-            DataSet dataset = new DataSet();
-
-            adapter.TableMappings.Add("Products", "Products");
-
-            adapter.Fill(dataset);*/
         }
 
         public void IncreaseQuantity(QuantitySupply supply)
@@ -107,17 +98,6 @@ namespace iQuest.VendingMachine.DataAcces
             product.Quantity += supply.Quantity;
 
             UpdateProductsTableWith($"UPDATE Products SET Quantity = '{product.Quantity}' WHERE ColumnId = '{product.ColumnId}'");
-           /* using (var connection = new SqlConnection(_connectionString))
-            {
-                string queryString = $"UPDATE Products SET Quantity = '{product.Quantity}' WHERE ColumnId = '{product.ColumnId}'";
-                
-                SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
-                DataSet dataset = new DataSet();
-
-                adapter.TableMappings.Add("Products", "Products");
-
-                adapter.Fill(dataset);
-            }*/
         }
 
         public void AddOrReplace(Product product)

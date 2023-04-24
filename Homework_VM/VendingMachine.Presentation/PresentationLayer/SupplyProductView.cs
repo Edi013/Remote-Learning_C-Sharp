@@ -7,6 +7,7 @@ namespace iQuest.VendingMachine.Presentation
         public Product RequestNewProduct()
         {
             Console.WriteLine("Input data for new product:");
+
             var result = new Product();
             var properties = typeof(Product).GetProperties();
             foreach (var property in properties)
@@ -17,6 +18,7 @@ namespace iQuest.VendingMachine.Presentation
                 while (true)
                 {
                     userInput = Console.ReadLine();
+
                     if (property.PropertyType == typeof(string))
                         break;
                     if (property.PropertyType == typeof(float))
@@ -40,7 +42,6 @@ namespace iQuest.VendingMachine.Presentation
             }
             return result;
         }
-
 
         public QuantitySupply RequestProductQuantity()
         {
