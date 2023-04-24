@@ -2,7 +2,7 @@
 {
     public interface IPaymentUseCase
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
         public string Description { get; }
 
