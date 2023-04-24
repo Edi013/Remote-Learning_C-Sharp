@@ -113,9 +113,20 @@ namespace iQuest.VendingMachine
             builder.RegisterType<JsonVolumeReportRepository>()
                 .As<IReportRepository<VolumeReport>>();
 
-            builder.RegisterType<SalesRepository>()
-                .As<ISaleRepository>()
-                .SingleInstance();
+            switch (ConfigurationManager.AppSettings["SalesRepository"])
+            {
+                case "Local":
+                    builder.RegisterType<SalesRepository>()
+                        .As<ISaleRepository>()
+                        .SingleInstance();
+                    break;
+                case "SQL":
+                    string sqlConnectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+                    builder.Register<SqlSalesRepository>(_ => new SqlSalesRepository(sqlConnectionString))
+                        .As<ISaleRepository>()
+                        .SingleInstance();
+                    break;
+            }
 
             builder.RegisterType<ReportsView>()
                 .As<IReportsView>();

@@ -71,7 +71,6 @@ namespace iQuest.VendingMachine.DataAcces
 
         public IEnumerable<ProductSale> GetGroupedByProduct(TimeInterval interval)
         {
-
             var sales = Get(interval);
             
             return sales
