@@ -7,6 +7,9 @@
         public decimal Price { get; set; }
         public string PaymentMethod { get; set; }
 
+        public Sale()
+        {
+        }
         public Sale(string productName, DateTime date, decimal price, string paymentMethod)
         {
             ProductName = productName;
