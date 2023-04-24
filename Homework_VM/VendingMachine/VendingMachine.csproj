@@ -26,6 +26,7 @@
     <ProjectReference Include="..\VendingMachine.Business\VendingMachine.Business.csproj" />
     <ProjectReference Include="..\VendingMachine.DataAccess\VendingMachine.DataAccess.csproj" />
     <ProjectReference Include="..\VendingMachine.Presentation\VendingMachine.Presentation.csproj" />
+    <ProjectReference Include="..\XmlReports\XmlReports.csproj" />
   </ItemGroup>
 
 </Project>
