@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.DataAccess",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonReports", "JsonReports\JsonReports.csproj", "{F7017FEB-C24A-444E-AA83-BF33D9BB1C85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlReports", "XmlReports\XmlReports.csproj", "{E7121718-3150-405C-B7BB-26699777711F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{F7017FEB-C24A-444E-AA83-BF33D9BB1C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7017FEB-C24A-444E-AA83-BF33D9BB1C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7017FEB-C24A-444E-AA83-BF33D9BB1C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7121718-3150-405C-B7BB-26699777711F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7121718-3150-405C-B7BB-26699777711F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7121718-3150-405C-B7BB-26699777711F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7121718-3150-405C-B7BB-26699777711F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
