@@ -74,24 +74,6 @@ namespace iQuest.VendingMachine.DataAcces
             return products;
         }
 
-        public void IncreaseQuantity(QuantitySupply supply)
-        {
-            var product = GetProductByColumnId(supply.ColumnId);
-
-            if (product == null)
-            {
-                throw new InvalidColumnNumberException();
-            }
-            product.Quantity += supply.Quantity;
-
-            using(var database = new LiteDatabase(
-                        _connectionString))
-            {
-                var collection = database.GetCollection<Product>("Products");
-                collection.Update(product);
-            }
-        }
-
         public void AddOrReplace(Product product)
         {
             using (var database = new LiteDatabase(
@@ -99,6 +81,16 @@ namespace iQuest.VendingMachine.DataAcces
             {
                 var collection = database.GetCollection<Product>("Products");
                 collection.Upsert(product);
+            }
+        }
+
+        public void Update(Product product)
+        {
+            using (var database = new LiteDatabase(
+                        _connectionString))
+            {
+                var collection = database.GetCollection<Product>("Products");
+                collection.Update(product);
             }
         }
     }

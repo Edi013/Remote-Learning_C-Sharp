@@ -87,18 +87,6 @@ namespace iQuest.VendingMachine.DataAcces
             UpdateProductsTableWith($"UPDATE Products SET Quantity = '{product.Quantity}' Where ColumnId='{product.ColumnId}';");
         }
 
-        public void IncreaseQuantity(QuantitySupply supply)
-        {
-            var product = GetProductByColumnId(supply.ColumnId);
-
-            if (product == null)
-            {
-                throw new InvalidColumnNumberException();
-            }
-            product.Quantity += supply.Quantity;
-
-            UpdateProductsTableWith($"UPDATE Products SET Quantity = '{product.Quantity}' WHERE ColumnId = '{product.ColumnId}'");
-        }
 
         public void AddOrReplace(Product product)
         {
@@ -128,6 +116,16 @@ namespace iQuest.VendingMachine.DataAcces
 
                 adapter.Fill(dataset);
             }
+        }
+
+        public void Update(Product product)
+        {
+            string query = 
+                "UPDATE Products " +
+                $"SET Quantity={product.Quantity} " +
+                $"WHERE ColumnId = {product.ColumnId}";
+
+            UpdateProductsTableWith(query);
         }
     }
 }

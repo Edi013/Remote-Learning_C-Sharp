@@ -37,15 +37,6 @@ namespace iQuest.VendingMachine.DataAcces
             product.Quantity--;
         }
 
-        public void IncreaseQuantity(QuantitySupply supply)
-        {
-            var product = GetProductByColumnId(supply.ColumnId);
-
-            if(product == null)
-                throw new InvalidColumnNumberException();
-
-            product.Quantity += supply.Quantity;
-        }
 
         public void AddOrReplace(Product product)
         {
@@ -58,6 +49,11 @@ namespace iQuest.VendingMachine.DataAcces
             }
 
             existingProduct = product;
+        }
+
+        public void Update(Product product)
+        {
+            products.Find(x => x.ColumnId == product.ColumnId).Quantity = product.Quantity;
         }
     }
 }
