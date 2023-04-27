@@ -7,8 +7,7 @@
         public Product? GetProductByColumnId(int columnId);
 
         public void DecreaseQuantity(Product product);
-        public void IncreaseQuantity(QuantitySupply supply);
         public void AddOrReplace(Product product);
-
+        public void Update(Product product);
     }
 }
