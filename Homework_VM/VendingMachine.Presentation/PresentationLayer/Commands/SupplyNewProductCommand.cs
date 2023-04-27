@@ -7,8 +7,8 @@ namespace iQuest.VendingMachine.Presentation
         private readonly IAuthenticationService authenticationService;
         private IUseCaseFactory factory;
 
-        public string Name => "Add/replace product";
-        public string Description => "Adds or replaces a product quantity";
+        public string Name => "New";
+        public string Description => "Adds new product or replace existing product ( supply new product )";
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
         public SupplyNewProductCommand(IUseCaseFactory factory, IAuthenticationService authenticationService)

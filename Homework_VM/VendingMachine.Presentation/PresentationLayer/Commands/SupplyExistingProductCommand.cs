@@ -7,8 +7,8 @@ namespace iQuest.VendingMachine.Presentation
         private readonly IAuthenticationService authenticationService;
         private IUseCaseFactory factory;
 
-        public string Name => "Update product";
-        public string Description => "Updates a product";
+        public string Name => "Update";
+        public string Description => "Update quantity of a product ( supply existing product )";
         public bool CanExecute => authenticationService.IsUserAuthenticated;
 
         public SupplyExistingProductCommand(IUseCaseFactory factory, IAuthenticationService authenticationService)
