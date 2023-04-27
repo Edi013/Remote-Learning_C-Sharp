@@ -19,8 +19,14 @@ namespace iQuest.VendingMachine.Business
 
         public void Execute()
         {
-            productRepository.IncreaseQuantity(
-                supplyProductView.RequestProductQuantity());
+            QuantitySupply quantitySupply = supplyProductView.RequestProductQuantity();
+            Product product = productRepository.GetProductByColumnId(quantitySupply.ColumnId);
+
+            if (product == null)
+                throw new Exception("Accessed product does not exists !");
+
+            product.Quantity += quantitySupply.Quantity;
+            productRepository.Update(product);
         }
     }
 }
