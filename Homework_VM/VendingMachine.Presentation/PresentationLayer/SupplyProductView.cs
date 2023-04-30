@@ -2,17 +2,17 @@
 
 namespace iQuest.VendingMachine.Presentation
 {
-    public class SupplyProductView : ISupplyProductView
+    public class SupplyProductView : DisplayBase, ISupplyProductView
     {
         public Product RequestNewProduct()
         {
-            Console.WriteLine("Input data for new product:");
+            DisplayLine("Input data for new product:", ConsoleColor.Cyan);
 
             var result = new Product();
             var properties = typeof(Product).GetProperties();
             foreach (var property in properties)
             {
-                Console.WriteLine($"Input {property.Name} as {property.DeclaringType}");
+                DisplayLine($"Input {property.Name} as {property.DeclaringType}", ConsoleColor.Cyan);
 
                 dynamic userInput;
                 while (true)
@@ -35,7 +35,7 @@ namespace iQuest.VendingMachine.Presentation
                         userInput = auxInput;
                         break;
                     }
-                    Console.WriteLine("Invalid data type. Try again.");
+                    DisplayLine("Invalid data type.Try again.", ConsoleColor.Cyan);
                 }
 
                 property.SetValue(result, userInput);
@@ -45,14 +45,14 @@ namespace iQuest.VendingMachine.Presentation
 
         public QuantitySupply RequestProductQuantity()
         {
-            Console.WriteLine("Input data to supply a product:");
+            DisplayLine("Input data to supply a product:", ConsoleColor.Cyan);
 
             var quantitySupply = new QuantitySupply();
             var properties = typeof(QuantitySupply).GetProperties();
 
             foreach (var property in properties)
             {
-                Console.WriteLine($"Input {property.Name} as {property.DeclaringType}");
+                DisplayLine($"Input {property.Name} as {property.DeclaringType}", ConsoleColor.Cyan);
 
                 dynamic userInput;
                 while (true)
@@ -65,7 +65,7 @@ namespace iQuest.VendingMachine.Presentation
                         userInput = auxInput;
                         break;
                     }
-                    Console.WriteLine("Invalid data type. Try again.");
+                    DisplayLine("Invalid data type. Try again.", ConsoleColor.Cyan);
                 }
 
                 property.SetValue(quantitySupply, userInput);
