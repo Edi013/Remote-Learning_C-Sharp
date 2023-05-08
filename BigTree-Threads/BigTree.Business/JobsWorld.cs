@@ -7,10 +7,11 @@ namespace iQuest.BigTree.Business
     {
         private readonly IJob[] jobs =
         {
-            new SingleThreadJob()
+            //new SingleThreadJob(),
+            new MultiThreadJob(),
         };
 
-        public int LevelCount { get; } = 14;
+        public int LevelCount { get; } = 3;//14;
 
         public int ExpectedNodeCount => (int)Math.Pow(2, LevelCount) - 1;
 
