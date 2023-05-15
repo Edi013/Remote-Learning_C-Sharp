@@ -8,7 +8,9 @@ namespace iQuest.BigTree.Business
         private readonly IJob[] jobs =
         {
             //new SingleThreadJob(),
-            new MultiThreadJob(),
+            new MultiThreadJobJoin(),
+            new MultiThreadJobWaitAll(),
+            new MultiThreadJobJoinAndWaitAll(),
         };
 
         public int LevelCount { get; } = 3;//14;
