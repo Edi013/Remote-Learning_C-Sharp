@@ -7,6 +7,8 @@ namespace iQuest.VendingMachine.Business
         private readonly IBuyView buyView;
         private readonly IEnumerable<IPaymentAlgorithm> paymentAlgorithms;
         private readonly List<PaymentMethod> paymentMethods;
+        public string Name { get; set; }
+        public string Description => "Payment method";
 
         public PaymentUseCase(IBuyView buyView, IEnumerable<IPaymentAlgorithm> paymentAlgorithms) 
         {
@@ -19,16 +21,16 @@ namespace iQuest.VendingMachine.Business
                     new PaymentMethod(2, "Cash")
                 } ?? throw new ArgumentNullException(nameof(paymentMethods));
         }
-        public string Name => "pay";
-        public string Description => "Payment method";
         public void Execute(float price)
         {
-            int paymentMethodIndex = buyView.AskForPaymentMethod(paymentMethods);
+            int paymentMethodIndex = buyView.AskForPaymentMethod(paymentMethods) - 1;
+
+            Name = paymentMethods[paymentMethodIndex].Name + " payment";
+
             if (paymentMethodIndex != 1 && paymentMethodIndex != 2)
                 throw new InvalidPaymentMethodException();
 
-            //paymentAlgorithms[paymentMethodIndex-1].Run(price);
-            paymentAlgorithms.ElementAt(paymentMethodIndex - 1).Run(price);
+            paymentAlgorithms.ElementAt(paymentMethodIndex).Run(price);
         }
     }
 }

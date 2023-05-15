@@ -7,15 +7,17 @@ namespace iQuest.VendingMachine.Business
         private readonly IBuyView buyView;
         private readonly IPaymentUseCase paymentUseCase;
         private readonly IProductRepository productRepository;
+        private readonly ISaleRepository saleRepository;
 
         public BuyUseCase(
-            IBuyView buyView, IAuthenticationService authenticationService,
-            IProductRepository productRepository, IPaymentUseCase paymentUseCase
+            IBuyView buyView, IProductRepository productRepository,
+            IPaymentUseCase paymentUseCase, ISaleRepository saleRepository
             )
         {
             this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
             this.productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             this.paymentUseCase = paymentUseCase ?? throw new ArgumentNullException(nameof(paymentUseCase));
+            this.saleRepository = saleRepository ?? throw new ArgumentNullException(nameof(saleRepository));
         }
 
         public void Execute()
@@ -34,7 +36,14 @@ namespace iQuest.VendingMachine.Business
 
             paymentUseCase.Execute(wantedProduct.Price);
             productRepository.DecreaseQuantity(wantedProduct);
-            
+
+            saleRepository.Add(new Sale()
+            {
+                ProductName = wantedProduct.Name,
+                Price = (decimal)wantedProduct.Price,
+                Date = DateTime.Now,
+                PaymentMethod = paymentUseCase.Name
+            });
             buyView.DispenseProduct(wantedProduct.Name);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.Business.Exceptions;
 
 namespace iQuest.VendingMachine.DataAcces
 {
@@ -34,6 +35,25 @@ namespace iQuest.VendingMachine.DataAcces
         public void DecreaseQuantity(Product product)
         {
             product.Quantity--;
+        }
+
+
+        public void AddOrReplace(Product product)
+        {
+            var existingProduct = GetProductByColumnId(product.ColumnId);
+
+            if(existingProduct == null)
+            {
+                products.Add(product);
+                return;
+            }
+
+            existingProduct = product;
+        }
+
+        public void Update(Product product)
+        {
+            products.Find(x => x.ColumnId == product.ColumnId).Quantity = product.Quantity;
         }
     }
 }

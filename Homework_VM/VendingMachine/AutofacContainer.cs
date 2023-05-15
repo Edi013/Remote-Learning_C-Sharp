@@ -3,6 +3,9 @@ using System.Configuration;
 using iQuest.VendingMachine.DataAcces;
 using iQuest.VendingMachine.Presentation;
 using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.JsonReports;
+using iQuest.VendingMachine.DataAccess;
+using iQuest.VendingMachine.XmlReports;
 
 namespace iQuest.VendingMachine
 {
@@ -35,8 +38,21 @@ namespace iQuest.VendingMachine
             builder.RegisterType<LookUseCase>()
                 .As<IUseCase>()
                 .SingleInstance();
-            builder.RegisterType<TurnOffUseCase>()
-                .AsSelf();
+            builder.RegisterType<StockReportUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
+            builder.RegisterType<SalesReportUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
+            builder.RegisterType<VolumeReportUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
+            builder.RegisterType<SupplyNewProductUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
+            builder.RegisterType<SupplyExistingProductUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
 
             builder.RegisterType<BuyCommand>()
                 .As<ICommand>()
@@ -50,9 +66,25 @@ namespace iQuest.VendingMachine
             builder.RegisterType<LookCommand>()
                 .As<ICommand>()
                 .SingleInstance();
+            builder.RegisterType<StockReportCommand>()
+                .As<ICommand>()
+                .SingleInstance();
+            builder.RegisterType<SalesReportCommand>()
+                .As<ICommand>()
+                .SingleInstance();
+            builder.RegisterType<VolumeReportCommand>()
+                .As<ICommand>()
+                .SingleInstance();
+            builder.RegisterType<SupplyNewProductCommand>()
+                .As<ICommand>()
+                .SingleInstance();
+            builder.RegisterType<SupplyExistingProductCommand>()
+                .As<ICommand>()
+                .SingleInstance();
 
             builder.RegisterType<UseCaseFactory>()
                 .As<IUseCaseFactory>();
+
             builder.RegisterType<BuyUseCase>()
                 .AsSelf();
             builder.RegisterType<LoginUseCase>()
@@ -61,7 +93,60 @@ namespace iQuest.VendingMachine
                 .AsSelf();
             builder.RegisterType<LookUseCase>()
                 .AsSelf();
-            
+            builder.RegisterType<TurnOffUseCase>()
+                .AsSelf();
+            builder.RegisterType<StockReportUseCase>()
+                .AsSelf();
+            builder.RegisterType<SalesReportUseCase>()
+                .AsSelf();
+            builder.RegisterType<VolumeReportUseCase>()
+                .AsSelf();
+            builder.RegisterType<SupplyNewProductUseCase>()
+                .AsSelf(); 
+            builder.RegisterType<SupplyExistingProductUseCase>()
+                .AsSelf();
+
+            switch (ConfigurationManager.AppSettings["ReportsType"])
+            {
+
+                case "JSON":
+                    builder.RegisterType<JsonStockReportRepository>()
+                        .As<IReportRepository<StockReport>>();
+                    builder.RegisterType<JsonSalesReportRepository>()
+                        .As<IReportRepository<SalesReport>>();
+                    builder.RegisterType<JsonVolumeReportRepository>()
+                        .As<IReportRepository<VolumeReport>>();
+                    break;
+
+                case "XML":
+                    builder.RegisterType<XmlStockReportRepository>()
+                        .As<IReportRepository<StockReport>>();
+                    builder.RegisterType<XmlSalesReportRepository>()
+                       .As<IReportRepository<SalesReport>>();
+                    builder.RegisterType<XmlVolumeReportRepository>()
+                        .As<IReportRepository<VolumeReport>>();
+                    break;
+            }
+
+            switch (ConfigurationManager.AppSettings["SalesRepository"])
+            {
+                case "Local":
+                    builder.RegisterType<SalesRepository>()
+                        .As<ISaleRepository>()
+                        .SingleInstance();
+                    break;
+                case "SQL":
+                    string sqlConnectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+                    builder.Register<SqlSalesRepository>(_ => new SqlSalesRepository(sqlConnectionString))
+                        .As<ISaleRepository>()
+                        .SingleInstance();
+                    break;
+            }
+
+            builder.RegisterType<ReportsView>()
+                .As<IReportsView>();
+            builder.RegisterType<SupplyProductView>()
+                .As<ISupplyProductView>();
 
             builder.RegisterType<TurnOffService>()
                 .As<ITurnOffService>()

@@ -18,7 +18,7 @@ namespace iQuest.VendingMachine.Business
 
         public void Login(string userInputedPassword)
         {
-            if (userInputedPassword != "supercalifragilisticexpialidocious")
+            if (userInputedPassword != "edi") // supercalifragilisticexpialidocious
             {
                 throw new InvalidPasswordException("Invalid password");
             }

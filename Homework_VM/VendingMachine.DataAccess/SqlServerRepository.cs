@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using iQuest.VendingMachine.Business;
+using iQuest.VendingMachine.Business.Exceptions;
 
 namespace iQuest.VendingMachine.DataAcces
 {
@@ -56,6 +57,10 @@ namespace iQuest.VendingMachine.DataAcces
                 connection.Open();  
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
+
+                if (!reader.HasRows)
+                    return null;
+
                 return new Product
                 {
                     ColumnId = Convert.ToInt32(reader["ColumnId"]),
@@ -64,27 +69,63 @@ namespace iQuest.VendingMachine.DataAcces
                     Quantity = Convert.ToInt32(reader["Quantity"])
                 };         
             }
+            catch(InvalidOperationException e)
+            {
+                throw new Exception("Parsing error ~", e);
+            }
             catch (Exception)
             {
                 throw;
             }
-
-            return null;
+            return null; //unreachable
         }
 
         public void DecreaseQuantity(Product product)
         {
             product.Quantity--;
 
-            using var connection = new SqlConnection(_connectionString);
-            string queryString = $"UPDATE Products SET Quantity = '{product.Quantity}' Where ColumnId='{product.ColumnId}';";
+            UpdateProductsTableWith($"UPDATE Products SET Quantity = '{product.Quantity}' Where ColumnId='{product.ColumnId}';");
+        }
 
-            SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
-            DataSet dataset = new DataSet();
 
-            adapter.TableMappings.Add("Products", "Products");
+        public void AddOrReplace(Product product)
+        {
+            var existingProduct = GetProductByColumnId(product.ColumnId);
 
-            adapter.Fill(dataset);
+            if (existingProduct == null)
+            {
+                UpdateProductsTableWith($"INSERT INTO Products(ColumnId, Name, Price, Quantity) VALUES " +
+                    $"({product.ColumnId},'{product.Name}',{product.Price},{product.Quantity})");
+                return;
+            }
+
+            UpdateProductsTableWith(
+                $"UPDATE Products " +
+                $"SET ColumnId={product.ColumnId}, Name={product.Name}, Price={product.Price}, Quantity={product.Quantity} " +
+                $"WHERE ColumnId = {product.ColumnId}");
+        }
+
+        private void UpdateProductsTableWith(string sqlQuery)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlQuery, connection);
+                DataSet dataset = new DataSet();
+
+                adapter.TableMappings.Add("Products", "Products");
+
+                adapter.Fill(dataset);
+            }
+        }
+
+        public void Update(Product product)
+        {
+            string query = 
+                "UPDATE Products " +
+                $"SET Quantity={product.Quantity} " +
+                $"WHERE ColumnId = {product.ColumnId}";
+
+            UpdateProductsTableWith(query);
         }
     }
 }
