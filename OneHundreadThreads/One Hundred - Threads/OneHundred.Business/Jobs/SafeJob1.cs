@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace iQuest.OneHundred.Business.Jobs
 {
-    internal class UnsafeJob : IJob
+    internal class SaveJob1 : IJob
     {
         private long value;
 
