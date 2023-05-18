@@ -8,7 +8,8 @@ namespace iQuest.OneHundred.Business
         private readonly IJob[] jobs = {
             //new UnsafeJob(),
             //new SafeJob1(),
-            new SafeJob2(),
+            //new SafeJob2(),
+            new SafeJob3(),
         };
 
         public ushort ThreadCount { get; } = 100;

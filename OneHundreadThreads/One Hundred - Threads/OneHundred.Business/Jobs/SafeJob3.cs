@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace iQuest.OneHundred.Business.Jobs
 {
-    internal class SafeJob2 : IJob
+    internal class SafeJob3 : IJob
     {
         private long value;
 
@@ -30,37 +30,34 @@ namespace iQuest.OneHundred.Business.Jobs
 
         private void RunAllThreads()
         {
-            Semaphore semaphore = new Semaphore(initialCount: 1, maximumCount: 1);
+            Mutex mutex = new Mutex();
 
             List<Thread> threads = Enumerable.Range(0, ThreadCount)
-                .Select(x => StartNewThread(semaphore))
+                .Select(x => StartNewThread(mutex))
                 .ToList();
 
             foreach (Thread thread in threads)
                 thread.Join();
 
-            semaphore.Close();
-            semaphore.Dispose();
+            mutex.Close();
+            mutex.Dispose();
         }
 
-        private Thread StartNewThread(Semaphore semaphore)
+        private Thread StartNewThread(Mutex mutex)
         {
             Thread thread = new Thread(o =>
             {
                 for (ulong i = 0; i < IncrementCount; i++)
                 {
-                   
-                   
-                        semaphore.WaitOne();
-                        value++;
-                        semaphore.Release();
-                        
-                      
+                    mutex.WaitOne();
+                    value++;
+                    mutex.ReleaseMutex();
                 }
             });
 
             thread.Start();
-            
+            thread.Join();
+
             return thread;
         }
 
