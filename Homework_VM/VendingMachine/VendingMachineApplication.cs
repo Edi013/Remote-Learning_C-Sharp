@@ -19,13 +19,13 @@ namespace iQuest.VendingMachine
             this.commands = commands ?? throw new ArgumentNullException(nameof(commands));
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
             this.turnOffWasRequestedChecker = turnOffWasRequestedChecker ?? throw new ArgumentNullException(nameof(turnOffWasRequestedChecker));
-            this.logger = LogManager.GetLogger(typeof(VendingMachineApplication));
-
+            this.logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); //(typeof(VendingMachineApplication));
         }
 
         public void Run()
         {
             logger.Info("Application started");
+            
             while (!turnOffWasRequestedChecker.Status)
             {
                 try
@@ -33,7 +33,7 @@ namespace iQuest.VendingMachine
                     IEnumerable<ICommand> availableCommands =
                         commands.Where(command => command.CanExecute);
                     ICommand command = mainDisplay.ChooseCommand(availableCommands);
-                    logger.Info($"Action {command.Name} performed.");
+                    logger.Info($"Action '{command.Name}' performed.");
                     command.Execute();
                 }
                 catch (InvalidCardNumberException e)

@@ -196,24 +196,6 @@ namespace iQuest.VendingMachine
                     break;
             }
 
-            var patternLayout = new PatternLayout()
-            {
-                ConversionPattern = "date[yyyy-MM-dd HH:mm:ss] [%level] [%class] - %message"
-            };
-            patternLayout.ActivateOptions();
-            var fileAppender = new FileAppender()
-            {
-                Name = "fileAppender",
-                Layout = patternLayout,
-                Threshold = Level.All,
-                AppendToFile = true,
-                File = "FileLogger.log",
-            };
-            fileAppender.ActivateOptions();
-            BasicConfigurator.Configure(fileAppender);
-            builder.RegisterType<ILog>()
-                .AsSelf();
-
             builder.RegisterType<ShelfView>()
                 .As<IShelfView>();
             builder.RegisterType<BuyView>()
