@@ -19,7 +19,7 @@ namespace iQuest.VendingMachine
             this.commands = commands ?? throw new ArgumentNullException(nameof(commands));
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
             this.turnOffWasRequestedChecker = turnOffWasRequestedChecker ?? throw new ArgumentNullException(nameof(turnOffWasRequestedChecker));
-            this.logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); //(typeof(VendingMachineApplication));
+            this.logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
 
         public void Run()

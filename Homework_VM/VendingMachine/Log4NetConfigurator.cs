@@ -13,7 +13,8 @@ namespace iQuest.VendingMachine
                 File.Create(pathToLogFile);
             }
 
-            FileInfo configFile = new FileInfo("D:\\technologii\\GitHubDesktop\\NagarroRepo\\RL_Csharp\\Homework_VM\\VendingMachine\\log4net.config");
+            string logPath = ConfigurationManager.AppSettings["LogFilePath"];
+            FileInfo configFile = new FileInfo(logPath);
             XmlConfigurator.Configure(configFile);
         }
     }
