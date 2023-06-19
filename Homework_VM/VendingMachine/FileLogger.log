@@ -1,5 +1,0 @@
-2023-05-28 06:50:31,884 [1] INFO iQuest.VendingMachine.VendingMachineApplication - Application started
-2023-05-28 06:50:40,958 [1] INFO iQuest.VendingMachine.VendingMachineApplication - Action 'See products' performed.
-2023-05-28 06:51:07,666 [1] INFO iQuest.VendingMachine.VendingMachineApplication - Action 'login' performed.
-2023-05-28 06:51:17,371 [1] INFO iQuest.VendingMachine.VendingMachineApplication - Action 'Shutdown' performed.
-2023-05-28 06:51:17,372 [1] INFO iQuest.VendingMachine.VendingMachineApplication - Application closed
