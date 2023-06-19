@@ -7,14 +7,13 @@ namespace iQuest.VendingMachine
     {
         public static void Configure()
         {
-            string pathToLogFile = ConfigurationManager.AppSettings["LogFilePath"];
+            string pathToLogFile = ConfigurationManager.AppSettings["LoggerConfigFilePath"];
             if (!File.Exists(pathToLogFile))
             {
                 File.Create(pathToLogFile);
             }
 
-            string logPath = ConfigurationManager.AppSettings["LogFilePath"];
-            FileInfo configFile = new FileInfo(logPath);
+            FileInfo configFile = new FileInfo(pathToLogFile);
             XmlConfigurator.Configure(configFile);
         }
     }
