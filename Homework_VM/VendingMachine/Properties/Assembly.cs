@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
 // In SDK-style projects such as this one, several assembly attributes that were historically
@@ -19,3 +19,4 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("VM_UnitTests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+//[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]

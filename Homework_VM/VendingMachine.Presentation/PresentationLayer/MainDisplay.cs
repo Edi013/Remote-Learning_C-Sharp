@@ -18,8 +18,12 @@ namespace iQuest.VendingMachine.Presentation
             {
                 string rawValue = ReadCommandName();
 
-                ICommand selectedCommand = commands.FirstOrDefault(x => x.Name == rawValue);
+                if (string.IsNullOrEmpty(rawValue))
+                {
+                    return commands.Where(x => x.Name.Equals("Shutdown")).First();
+                }
 
+                ICommand selectedCommand = commands.FirstOrDefault(x => x.Name == rawValue);
                 if (selectedCommand == null)
                 {
                     DisplayLine("Invalid command. Please try again.", ConsoleColor.Red);

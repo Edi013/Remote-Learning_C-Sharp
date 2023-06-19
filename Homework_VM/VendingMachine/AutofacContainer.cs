@@ -6,6 +6,11 @@ using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.JsonReports;
 using iQuest.VendingMachine.DataAccess;
 using iQuest.VendingMachine.XmlReports;
+using log4net;
+using log4net.Layout;
+using log4net.Appender;
+using log4net.Core;
+using log4net.Config;
 
 namespace iQuest.VendingMachine
 {
@@ -53,6 +58,9 @@ namespace iQuest.VendingMachine
             builder.RegisterType<SupplyExistingProductUseCase>()
                 .As<IUseCase>()
                 .SingleInstance();
+            builder.RegisterType<ShutDownUseCase>()
+                .As<IUseCase>()
+                .SingleInstance();
 
             builder.RegisterType<BuyCommand>()
                 .As<ICommand>()
@@ -81,6 +89,9 @@ namespace iQuest.VendingMachine
             builder.RegisterType<SupplyExistingProductCommand>()
                 .As<ICommand>()
                 .SingleInstance();
+            builder.RegisterType<ShutDownCommand>()
+                .As<ICommand>()
+                .SingleInstance();
 
             builder.RegisterType<UseCaseFactory>()
                 .As<IUseCaseFactory>();
@@ -104,6 +115,8 @@ namespace iQuest.VendingMachine
             builder.RegisterType<SupplyNewProductUseCase>()
                 .AsSelf(); 
             builder.RegisterType<SupplyExistingProductUseCase>()
+                .AsSelf();
+            builder.RegisterType<ShutDownUseCase>()
                 .AsSelf();
 
             switch (ConfigurationManager.AppSettings["ReportsType"])

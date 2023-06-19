@@ -3,3 +3,4 @@
 **/.vscode/
 **/.vs/
 **/database.db
+**/FileLogger.log
