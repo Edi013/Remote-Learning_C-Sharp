@@ -6,10 +6,11 @@ namespace iQuest.VendingMachine
     {
         public void Run()
         {
-            Log4NetConfigurator.Configure();
+
             var container = AutofacContainer.BuildAutofacContainer();
             using (var scope = container)
             {
+                Log4NetConfigurator.Configure();
                 var app = scope.Resolve<VendingMachineApplication>();
                 app.Run();
             }
