@@ -51,7 +51,6 @@ namespace iQuest.VendingMachine.DataAcces
                     var reader = command.ExecuteReader();
                     while(reader.Read())
                     {
-
                             sales.Add(new Sale()
                             {
                                 Date          = (DateTime)reader["Date"],

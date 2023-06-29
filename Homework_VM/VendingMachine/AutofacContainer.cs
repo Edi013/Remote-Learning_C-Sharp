@@ -6,6 +6,7 @@ using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.JsonReports;
 using iQuest.VendingMachine.DataAccess;
 using iQuest.VendingMachine.XmlReports;
+using Microsoft.EntityFrameworkCore;
 
 namespace iQuest.VendingMachine
 {
@@ -169,6 +170,7 @@ namespace iQuest.VendingMachine
                 case "SQL":
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+
                     builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
                         .As<IProductRepository>()
                         .SingleInstance();
@@ -178,10 +180,24 @@ namespace iQuest.VendingMachine
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
                     builder.Register<LiteDBRepository>(_ => new LiteDBRepository(_connectionString))
-                        .As<IProductRepository>()
+                        .As<IProductRepository>() 
                         .SingleInstance();
                     break;
+
+                case "EF":
+                    _connectionString =
+                       ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+
+                    builder.RegisterType<EfProductRepository>()
+                      .As<IProductRepository>()
+                      .SingleInstance();
+
+                    builder.RegisterType<VmDbContext>()
+                        .AsSelf();
+
+                    break;
             }
+
 
             builder.RegisterType<ShelfView>()
                 .As<IShelfView>();
