@@ -192,7 +192,7 @@ namespace iQuest.VendingMachine
                       .As<IProductRepository>()
                       .SingleInstance();
 
-                    builder.RegisterType<VmDbContext>()
+                    builder.RegisterType<ApplicationDbContext>()
                         .AsSelf();
 
                     break;

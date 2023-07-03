@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace iQuest.VendingMachine.DataAcces
 {
-    public class VmDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
 
-        public VmDbContext() 
+        public ApplicationDbContext() 
             : base() 
         {
         }

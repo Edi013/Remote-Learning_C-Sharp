@@ -6,9 +6,9 @@ namespace iQuest.VendingMachine.DataAccess
 {
     public class EfSalesRepository : ISaleRepository
     {
-        private VmDbContext dbContext;
+        private ApplicationDbContext dbContext;
 
-        public EfSalesRepository(VmDbContext dbContext)
+        public EfSalesRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

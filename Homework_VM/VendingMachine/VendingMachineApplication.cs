@@ -12,9 +12,9 @@ namespace iQuest.VendingMachine
         private readonly IEnumerable<ICommand> commands;
         private readonly IMainDisplay mainDisplay;
         private ITurnOffService turnOffWasRequestedChecker;
-        private VmDbContext context; 
+        private ApplicationDbContext context; 
 
-        public VendingMachineApplication(IEnumerable<ICommand> commands, IMainDisplay mainDisplay, ITurnOffService turnOffWasRequestedChecker, VmDbContext context)
+        public VendingMachineApplication(IEnumerable<ICommand> commands, IMainDisplay mainDisplay, ITurnOffService turnOffWasRequestedChecker, ApplicationDbContext context)
         {
             this.commands = commands ?? throw new ArgumentNullException(nameof(commands));
             this.mainDisplay = mainDisplay ?? throw new ArgumentNullException(nameof(mainDisplay));
