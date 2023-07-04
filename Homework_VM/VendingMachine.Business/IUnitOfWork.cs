@@ -2,7 +2,9 @@
 {
     public interface IUnitOfWork
     {
-        IProductRepository productRepository { get; }
-        ISaleRepository saleRepository { get; }
+        public IProductRepository ProductRepository { get; }
+        public ISaleRepository SaleRepository { get; }
+
+        public void SaveChanges();
     }
 }
