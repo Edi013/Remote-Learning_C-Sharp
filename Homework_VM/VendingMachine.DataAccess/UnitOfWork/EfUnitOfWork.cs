@@ -4,11 +4,11 @@ namespace iQuest.VendingMachine.DataAccess
 {
     public class EfUnitOfWork : IProductAndSalesUnitOfWork
     {
-        private ApplicationDbContext _context;
+        private EfDbContext _context;
         public IProductRepository ProductRepository { get; }
         public ISaleRepository SaleRepository { get; }
 
-        public EfUnitOfWork(IProductRepository productRepository, ISaleRepository saleRepository, ApplicationDbContext context)
+        public EfUnitOfWork(IProductRepository productRepository, ISaleRepository saleRepository, EfDbContext context)
         {
             ProductRepository = productRepository;
             SaleRepository = saleRepository;

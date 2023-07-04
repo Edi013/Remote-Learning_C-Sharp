@@ -190,8 +190,8 @@ namespace iQuest.VendingMachine
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
 
-                   /* builder.RegisterType<LiteDBUnitOfWork>()
-                        .As<IProductAndSalesUnitOfWork>();*/
+                   builder.RegisterType<LiteDBUnitOfWork>()
+                        .As<IProductAndSalesUnitOfWork>();
 
                     builder.Register<LiteDBRepository>(_ => new LiteDBRepository(_connectionString))
                         .As<IProductRepository>() 
@@ -202,7 +202,7 @@ namespace iQuest.VendingMachine
                     builder.RegisterType<EfUnitOfWork>()
                         .As<IProductAndSalesUnitOfWork>();
 
-                    builder.RegisterType<ApplicationDbContext>()
+                    builder.RegisterType<EfDbContext>()
                         .AsSelf();
 
                     builder.RegisterType<EfProductRepository>()
