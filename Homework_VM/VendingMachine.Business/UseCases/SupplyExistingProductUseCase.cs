@@ -8,25 +8,27 @@ namespace iQuest.VendingMachine.Business
 {
     public class SupplyExistingProductUseCase : IUseCase
     {
-        IProductRepository productRepository;
-        ISupplyProductView supplyProductView;
+        private ISupplyProductView _supplyProductView;
+        private IProductAndSalesUnitOfWork _productAndSalesUnitOfWork;
 
-        public SupplyExistingProductUseCase(IProductRepository productRepository, ISupplyProductView supplyProductView)
+        public SupplyExistingProductUseCase(IProductAndSalesUnitOfWork productAndSalesUnitOfWork, ISupplyProductView supplyProductView)
         {
-            this.productRepository = productRepository;
-            this.supplyProductView = supplyProductView;
+            _productAndSalesUnitOfWork = productAndSalesUnitOfWork;
+            this._supplyProductView = supplyProductView;
         }
 
         public void Execute()
         {
-            QuantitySupply quantitySupply = supplyProductView.RequestProductQuantity();
-            Product product = productRepository.GetProductByColumnId(quantitySupply.ColumnId);
+            QuantitySupply quantitySupply = _supplyProductView.RequestProductQuantity();
+            Product product = _productAndSalesUnitOfWork.ProductRepository.GetProductByColumnId(quantitySupply.ColumnId);
 
             if (product == null)
                 throw new Exception("Accessed product does not exists !");
 
             product.Quantity += quantitySupply.Quantity;
-            productRepository.Update(product);
+            _productAndSalesUnitOfWork.ProductRepository.Update(product);
+
+            _productAndSalesUnitOfWork.SaveChanges();
         }
     }
 }

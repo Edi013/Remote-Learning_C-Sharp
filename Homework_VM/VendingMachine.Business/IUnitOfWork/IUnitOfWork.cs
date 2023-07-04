@@ -1,6 +1,6 @@
 ﻿namespace iQuest.VendingMachine.Business
 {
-    public interface IUnitOfWork
+    public interface IProductAndSalesUnitOfWork
     {
         public IProductRepository ProductRepository { get; }
         public ISaleRepository SaleRepository { get; }

@@ -6,9 +6,9 @@ namespace iQuest.VendingMachine.Business
     {
         private readonly IBuyView buyView;
         private readonly IPaymentUseCase paymentUseCase;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IProductAndSalesUnitOfWork unitOfWork;
 
-        public BuyUseCase(IBuyView buyView, IPaymentUseCase paymentUseCase, IUnitOfWork unitOfWork)
+        public BuyUseCase(IBuyView buyView, IPaymentUseCase paymentUseCase, IProductAndSalesUnitOfWork unitOfWork)
         {
             this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
             this.paymentUseCase = paymentUseCase ?? throw new ArgumentNullException(nameof(paymentUseCase));

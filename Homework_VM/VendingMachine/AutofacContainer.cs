@@ -167,7 +167,7 @@ namespace iQuest.VendingMachine
             {
                 case "InMemory":
                    /* builder.RegisterType<InMemoryUnitOfWork>()
-                        .As<IUnitOfWork>();*/
+                        .As<IProductAndSalesUnitOfWork>();*/
 
                     builder.RegisterType<InMemoryRepository>()
                         .As<IProductRepository>()
@@ -179,7 +179,7 @@ namespace iQuest.VendingMachine
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
 
                     /*builder.RegisterType<SqlUnitOfWork>()
-                        .As<IUnitOfWork>();*/
+                        .As<IProductAndSalesUnitOfWork>();*/
 
                     builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
                         .As<IProductRepository>()
@@ -191,7 +191,7 @@ namespace iQuest.VendingMachine
                         ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
 
                    /* builder.RegisterType<LiteDBUnitOfWork>()
-                        .As<IUnitOfWork>();*/
+                        .As<IProductAndSalesUnitOfWork>();*/
 
                     builder.Register<LiteDBRepository>(_ => new LiteDBRepository(_connectionString))
                         .As<IProductRepository>() 
@@ -200,7 +200,7 @@ namespace iQuest.VendingMachine
 
                 case "EF":
                     builder.RegisterType<EfUnitOfWork>()
-                        .As<IUnitOfWork>();
+                        .As<IProductAndSalesUnitOfWork>();
 
                     builder.RegisterType<ApplicationDbContext>()
                         .AsSelf();

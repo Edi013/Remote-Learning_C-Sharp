@@ -2,19 +2,20 @@
 {
     public class SupplyNewProductUseCase : IUseCase
     {
-        IProductRepository productRepository;
+        IProductAndSalesUnitOfWork _productAndSalesUnitOfWork;
         ISupplyProductView supplyProductView;
 
-        public SupplyNewProductUseCase(IProductRepository productRepository, ISupplyProductView supplyProductView)
+        public SupplyNewProductUseCase(IProductAndSalesUnitOfWork productAndSalesUnitOfWork, ISupplyProductView supplyProductView)
         {
-            this.productRepository = productRepository;
+            _productAndSalesUnitOfWork = productAndSalesUnitOfWork;
             this.supplyProductView = supplyProductView;
         }
 
         public void Execute()
         {
-            productRepository.AddOrReplace(
+            _productAndSalesUnitOfWork.ProductRepository.AddOrReplace(
                 supplyProductView.RequestNewProduct());
+            _productAndSalesUnitOfWork.SaveChanges();
         }
     }
 }
