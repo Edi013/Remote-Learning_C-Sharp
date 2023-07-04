@@ -2,7 +2,7 @@
 using iQuest.VendingMachine.Business;
 using Microsoft.EntityFrameworkCore;
 
-namespace iQuest.VendingMachine.DataAcces
+namespace iQuest.VendingMachine.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {
@@ -12,6 +12,7 @@ namespace iQuest.VendingMachine.DataAcces
         public ApplicationDbContext() 
             : base() 
         {
+            this.Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

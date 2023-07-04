@@ -1,19 +1,23 @@
 ﻿using iQuest.VendingMachine.Business;
 
-namespace iQuest.VendingMachine.DataAcces
+namespace iQuest.VendingMachine.DataAccess
 {
-    public class UnitOfWork : IUnitOfWork
+    public class EfUnitOfWork : IUnitOfWork
     {
-        private ApplicationDbContext context;
+        private ApplicationDbContext _context;
+        public IProductRepository ProductRepository { get; }
+        public ISaleRepository SaleRepository { get; }
 
-        public IProductRepository productRepository { get; }
-        public ISaleRepository saleRepository { get; }
-
-        public UnitOfWork(IProductRepository productRepository, ISaleRepository saleRepository, ApplicationDbContext context)
+        public EfUnitOfWork(IProductRepository productRepository, ISaleRepository saleRepository, ApplicationDbContext context)
         {
-            this.productRepository = productRepository;
-            this.saleRepository = saleRepository;
-            this.context = context;
+            ProductRepository = productRepository;
+            SaleRepository = saleRepository;
+            _context = context;
+        }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }
 }

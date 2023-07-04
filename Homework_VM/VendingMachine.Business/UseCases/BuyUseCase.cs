@@ -6,25 +6,20 @@ namespace iQuest.VendingMachine.Business
     {
         private readonly IBuyView buyView;
         private readonly IPaymentUseCase paymentUseCase;
-        private readonly IProductRepository productRepository;
-        private readonly ISaleRepository saleRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public BuyUseCase(
-            IBuyView buyView, IProductRepository productRepository,
-            IPaymentUseCase paymentUseCase, ISaleRepository saleRepository
-            )
+        public BuyUseCase(IBuyView buyView, IPaymentUseCase paymentUseCase, IUnitOfWork unitOfWork)
         {
             this.buyView = buyView ?? throw new ArgumentNullException(nameof(buyView));
-            this.productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             this.paymentUseCase = paymentUseCase ?? throw new ArgumentNullException(nameof(paymentUseCase));
-            this.saleRepository = saleRepository ?? throw new ArgumentNullException(nameof(saleRepository));
+            this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public void Execute()
         {
-            int columnNumber = buyView.RequestProduct();    
+            int columnNumber = buyView.RequestProduct();
 
-            Product? wantedProduct = productRepository.GetProductByColumnId(columnNumber);
+            Product? wantedProduct = unitOfWork.ProductRepository.GetProductByColumnId(columnNumber);
             if (wantedProduct == null)
             {
                 throw new InvalidColumnNumberException();
@@ -35,9 +30,9 @@ namespace iQuest.VendingMachine.Business
             }
 
             paymentUseCase.Execute(wantedProduct.Price);
-            productRepository.DecreaseQuantity(wantedProduct);
+            unitOfWork.ProductRepository.DecreaseQuantity(wantedProduct);
 
-            saleRepository.Add(new Sale()
+            unitOfWork.SaleRepository.Add(new Sale()
             {
                 ProductName = wantedProduct.Name,
                 Price = (decimal)wantedProduct.Price,
@@ -45,6 +40,8 @@ namespace iQuest.VendingMachine.Business
                 PaymentMethod = paymentUseCase.Name
             });
             buyView.DispenseProduct(wantedProduct.Name);
+
+            unitOfWork.SaveChanges();
         }
     }
 }

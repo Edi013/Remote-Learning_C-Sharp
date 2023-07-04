@@ -1,6 +1,6 @@
 ﻿using iQuest.VendingMachine.Business;
 
-namespace iQuest.VendingMachine.DataAcces
+namespace iQuest.VendingMachine.DataAccess
 {
     public class EfProductRepository : IProductRepository
     {
@@ -17,19 +17,16 @@ namespace iQuest.VendingMachine.DataAcces
             if (existingProduct == null)
             {
                 dbContext.Products.Add(product);
-                dbContext.SaveChanges();
                 return;
             }
 
             Update(product);
-            dbContext.SaveChanges();
         }
 
         public void DecreaseQuantity(Product product)
         {
             product.Quantity--;
             Update(product);
-            dbContext.SaveChanges();
         }
 
         public Product? GetProductByColumnId(int columnId)
@@ -49,7 +46,6 @@ namespace iQuest.VendingMachine.DataAcces
             dbContext.Products
                 .First(eachProduct => product.ColumnId == eachProduct.ColumnId)
                 .Quantity = product.Quantity;
-            dbContext.SaveChanges();
         }
     }
 }

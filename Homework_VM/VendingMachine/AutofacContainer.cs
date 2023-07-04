@@ -142,6 +142,10 @@ namespace iQuest.VendingMachine
                         .As<ISaleRepository>()
                         .SingleInstance();
                     break;
+                case "EF":
+                    builder.RegisterType<EfSalesRepository>()
+                        .As<ISaleRepository>();
+                    break;
             }
 
             builder.RegisterType<ReportsView>()
@@ -162,6 +166,9 @@ namespace iQuest.VendingMachine
             switch (ConfigurationManager.AppSettings["repoType"])
             {
                 case "InMemory":
+                   /* builder.RegisterType<InMemoryUnitOfWork>()
+                        .As<IUnitOfWork>();*/
+
                     builder.RegisterType<InMemoryRepository>()
                         .As<IProductRepository>()
                         .SingleInstance();
@@ -171,6 +178,9 @@ namespace iQuest.VendingMachine
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
 
+                    /*builder.RegisterType<SqlUnitOfWork>()
+                        .As<IUnitOfWork>();*/
+
                     builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
                         .As<IProductRepository>()
                         .SingleInstance();
@@ -179,25 +189,28 @@ namespace iQuest.VendingMachine
                 case "LiteDB":
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
+
+                   /* builder.RegisterType<LiteDBUnitOfWork>()
+                        .As<IUnitOfWork>();*/
+
                     builder.Register<LiteDBRepository>(_ => new LiteDBRepository(_connectionString))
                         .As<IProductRepository>() 
                         .SingleInstance();
                     break;
 
                 case "EF":
-                    _connectionString =
-                       ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
-
-                    builder.RegisterType<EfProductRepository>()
-                      .As<IProductRepository>()
-                      .SingleInstance();
+                    builder.RegisterType<EfUnitOfWork>()
+                        .As<IUnitOfWork>();
 
                     builder.RegisterType<ApplicationDbContext>()
                         .AsSelf();
 
+                    builder.RegisterType<EfProductRepository>()
+                      .As<IProductRepository>()
+                      .SingleInstance();
+                    
                     break;
             }
-
 
             builder.RegisterType<ShelfView>()
                 .As<IShelfView>();
