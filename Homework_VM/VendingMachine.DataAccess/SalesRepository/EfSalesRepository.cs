@@ -16,7 +16,6 @@ namespace iQuest.VendingMachine.DataAccess
         public void Add(Sale sale)
         {
            dbContext.Sales.Add(sale);
-           dbContext.SaveChanges();
         }
 
         public IEnumerable<Sale> Get(TimeInterval interval)
