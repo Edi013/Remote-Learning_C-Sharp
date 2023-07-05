@@ -107,6 +107,13 @@ namespace iQuest.VendingMachine
             builder.RegisterType<SupplyExistingProductUseCase>()
                 .AsSelf();
 
+            builder.RegisterType<ReportsUnitOfWork<StockReport>>()
+                        .As<IReportsUnitOfWork<StockReport>>();
+            builder.RegisterType<ReportsUnitOfWork<SalesReport>>()
+                        .As<IReportsUnitOfWork<SalesReport>>();
+            builder.RegisterType<ReportsUnitOfWork<VolumeReport>>()
+                        .As<IReportsUnitOfWork<VolumeReport>>();
+
             switch (ConfigurationManager.AppSettings["ReportsType"])
             {
 
@@ -178,8 +185,8 @@ namespace iQuest.VendingMachine
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
 
-                    /*builder.RegisterType<SqlUnitOfWork>()
-                        .As<IProductAndSalesUnitOfWork>();*/
+                    builder.RegisterType<SqlUnitOfWork>()
+                        .As<IProductAndSalesUnitOfWork>();
 
                     builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
                         .As<IProductRepository>()
@@ -203,7 +210,8 @@ namespace iQuest.VendingMachine
                         .As<IProductAndSalesUnitOfWork>();
 
                     builder.RegisterType<EfDbContext>()
-                        .AsSelf();
+                        .AsSelf()
+                        .SingleInstance();
 
                     builder.RegisterType<EfProductRepository>()
                       .As<IProductRepository>()
