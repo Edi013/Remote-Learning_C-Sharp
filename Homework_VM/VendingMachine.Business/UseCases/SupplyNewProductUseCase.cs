@@ -5,7 +5,8 @@
         IProductAndSalesUnitOfWork _productAndSalesUnitOfWork;
         ISupplyProductView supplyProductView;
 
-        public SupplyNewProductUseCase(IProductAndSalesUnitOfWork productAndSalesUnitOfWork, ISupplyProductView supplyProductView)
+        public SupplyNewProductUseCase(IProductAndSalesUnitOfWork productAndSalesUnitOfWork,
+            ISupplyProductView supplyProductView)
         {
             _productAndSalesUnitOfWork = productAndSalesUnitOfWork;
             this.supplyProductView = supplyProductView;
@@ -13,8 +14,10 @@
 
         public void Execute()
         {
-            _productAndSalesUnitOfWork.ProductRepository.AddOrReplace(
-                supplyProductView.RequestNewProduct());
+            var product = supplyProductView.RequestNewProduct();
+
+            _productAndSalesUnitOfWork.ProductRepository.AddOrReplace(product);
+
             _productAndSalesUnitOfWork.SaveChanges();
         }
     }

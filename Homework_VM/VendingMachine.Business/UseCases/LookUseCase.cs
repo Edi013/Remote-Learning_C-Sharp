@@ -5,17 +5,17 @@ namespace iQuest.VendingMachine.Business
     public class LookUseCase : IUseCase
     {
         private readonly IShelfView view;
-        private readonly IProductRepository productRepository;
+        private readonly IProductAndSalesUnitOfWork productAndSalesUnitOfWork;
 
-        public LookUseCase(IProductRepository products, IShelfView view)
+        public LookUseCase(IShelfView view, IProductAndSalesUnitOfWork productAndSalesUnitOfWork)
         {
-            this.productRepository = products ?? throw new ArgumentNullException(nameof(products));
-            this.view = view ?? throw new ArgumentNullException(nameof(view));
-        }            
+            this.view = view;
+            this.productAndSalesUnitOfWork = productAndSalesUnitOfWork;
+        }
 
         public void Execute()
         {
-            view.DisplayProducts(productRepository.GetProducts());
+            view.DisplayProducts(productAndSalesUnitOfWork.ProductRepository.GetProducts());
         }
     }
 }

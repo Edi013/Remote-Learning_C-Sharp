@@ -28,10 +28,10 @@ namespace iQuest.VendingMachine.DataAccess
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Product>().ToTable("Products");
-            modelBuilder.Entity<Product>().HasKey(p => p.ColumnId);
+            modelBuilder.Entity<Product>().HasKey(p => p.Id);
+
             modelBuilder.Entity<Product>()
                 .Property(p => p.ColumnId)
-                .ValueGeneratedNever()
                 .IsRequired();
 
             modelBuilder.Entity<Product>()
