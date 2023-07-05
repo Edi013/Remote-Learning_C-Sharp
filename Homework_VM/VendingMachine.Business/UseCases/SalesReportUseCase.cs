@@ -2,24 +2,24 @@
 {
     public class SalesReportUseCase : IUseCase
     {
-        ISaleRepository productRepository;
-        IReportRepository<SalesReport> reportsRepository;
+        IReportsUnitOfWork<SalesReport> unitOfWork;
         IReportsView reportsView;
 
-        public SalesReportUseCase(ISaleRepository productRepository, 
-            IReportRepository<SalesReport> reportsRepository, IReportsView reportsView)
+        public SalesReportUseCase(IReportsUnitOfWork<SalesReport> unitOfWork,
+            IReportsView reportsView)
         {
-            this.productRepository = productRepository;
-            this.reportsRepository = reportsRepository;
+            this.unitOfWork = unitOfWork;
             this.reportsView = reportsView;
         }
 
         public void Execute()
         {
-            reportsRepository.Add(new SalesReport(
-                productRepository.Get(
+            unitOfWork.ReportRepository.Add(new SalesReport(
+                unitOfWork.SaleRepository.Get(
                    reportsView.AskForTimeInterval())));
             reportsView.DisplaySuccessMessage("Sales report generated !");
+
+            unitOfWork.SaveChanges();
         }
     }
 }

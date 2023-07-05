@@ -8,24 +8,23 @@ namespace iQuest.VendingMachine.Business
 {
     public class VolumeReportUseCase : IUseCase
     {
-        ISaleRepository saleRepository;
-        IReportRepository<VolumeReport> reportRepository;
+        IReportsUnitOfWork<VolumeReport> unitOfWork;
         IReportsView reportsView;
-        public VolumeReportUseCase(ISaleRepository saleRepository,
-            IReportRepository<VolumeReport> reportRepository, IReportsView reportsView)
+        public VolumeReportUseCase(IReportsUnitOfWork<VolumeReport> unitOfWork, IReportsView reportsView)
         {
-            this.saleRepository = saleRepository;
-            this.reportRepository = reportRepository;
+            this.unitOfWork = unitOfWork;
             this.reportsView = reportsView;
         }
 
         public void Execute()
         {
-            reportRepository.Add(
+            unitOfWork.ReportRepository.Add(
                 new VolumeReport(
-                    saleRepository.GetGroupedByProduct(
+                    unitOfWork.SaleRepository.GetGroupedByProduct(
                          reportsView.AskForTimeInterval())));
             reportsView.DisplaySuccessMessage("Volume report generated !");
+
+            unitOfWork.SaveChanges();
         }
     }
 }
