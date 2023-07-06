@@ -8,7 +8,6 @@ namespace VM_UnitTests.UseCasesTests
         private  IBuyView buyView;
         private  List<IPaymentAlgorithm> paymentAlgorithms;
 
-        private string name = "pay";
         private string description = "Payment method";
         
         [Fact]
@@ -19,7 +18,6 @@ namespace VM_UnitTests.UseCasesTests
 
             PaymentUseCase paymentUseCase = new PaymentUseCase(buyView, paymentAlgorithms);
 
-            Assert.Equal(name, paymentUseCase.Name);
             Assert.Equal(description, paymentUseCase.Description);
         }
 

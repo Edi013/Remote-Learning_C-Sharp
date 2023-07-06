@@ -17,7 +17,7 @@ namespace VM_UnitTests.UseCasesTests
         [Fact]
         public void HavingAdminLoggedIn_ThanCanExecute()
         {
-            authenticationService.Login("supercalifragilisticexpialidocious");
+            authenticationService.Login("edi");
 
             TurnOffUseCase turnOffUseCase = new TurnOffUseCase(turnOffService.Object, authenticationService);
 

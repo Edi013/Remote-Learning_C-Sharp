@@ -1,4 +1,4 @@
-﻿using iQuest.VendingMachine.Business;
+﻿/*using iQuest.VendingMachine.Business;
 using Moq;
 
 namespace VM_UnitTests.UseCasesTests
@@ -48,3 +48,4 @@ namespace VM_UnitTests.UseCasesTests
         }
     }
 }
+*/

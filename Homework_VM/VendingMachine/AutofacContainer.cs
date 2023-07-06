@@ -185,8 +185,8 @@ namespace iQuest.VendingMachine
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
 
-                    builder.RegisterType<SqlUnitOfWork>()
-                        .As<IProductAndSalesUnitOfWork>();
+                    /*builder.RegisterType<SqlUnitOfWork>()
+                        .As<IProductAndSalesUnitOfWork>();*/
 
                     builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
                         .As<IProductRepository>()
