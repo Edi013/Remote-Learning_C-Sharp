@@ -4,6 +4,7 @@ namespace iQuest.VendingMachine.Business
 {
     public class Product
     {
+        public int Id { get; set; }
         [BsonId]
         public int ColumnId { get; set;}
         public string Name { get; set; }

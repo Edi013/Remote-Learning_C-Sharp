@@ -3,7 +3,7 @@ using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.Business.Exceptions;
 using LiteDB;
 
-namespace iQuest.VendingMachine.DataAcces
+namespace iQuest.VendingMachine.DataAccess
 {
     public class LiteDBRepository : IProductRepository
     {

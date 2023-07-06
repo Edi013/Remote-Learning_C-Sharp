@@ -12,6 +12,9 @@ namespace iQuest.VendingMachine.Presentation
             var properties = typeof(Product).GetProperties();
             foreach (var property in properties)
             {
+                if (property.Name == "Id")
+                    continue;
+
                 DisplayLine($"Input {property.Name} as {property.DeclaringType}", ConsoleColor.Cyan);
 
                 dynamic userInput;

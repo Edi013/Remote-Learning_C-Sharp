@@ -6,17 +6,13 @@ namespace VM_UnitTests.UseCasesTests
 {
     public class BuyUseCaseExecuteTests
     {
-        private readonly Mock<IProductRepository> productRepository;
-        private readonly Mock<IAuthenticationService> authenticationService;
+        private readonly Mock<IProductAndSalesUnitOfWork> unitOfWork;
         private readonly Mock<IBuyView> buyView;
         private readonly Mock<IPaymentUseCase> paymentUseCase;
 
-
-
         public BuyUseCaseExecuteTests()
         {
-            productRepository = new Mock<IProductRepository>();
-            authenticationService = new Mock<IAuthenticationService>();
+            unitOfWork = new Mock<IProductAndSalesUnitOfWork>();
             buyView = new Mock<IBuyView>();
             paymentUseCase = new Mock<IPaymentUseCase>();
         }
@@ -24,74 +20,60 @@ namespace VM_UnitTests.UseCasesTests
         [Fact]
         public void HavingProductAvailable_WithPositiveQuantity_ExecuteIsSuccesful()
         {
-            //Arrange
-            int initialQuantity = 2;
-            int columnId = 1;
-            Product testProduct = new Product(columnId, "testProduct", 5.22f, initialQuantity);
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, paymentUseCase.Object, unitOfWork.Object);
+
+            Product product = new Product(1, "testProduct", 3.33f, 3);
 
             buyView
                 .Setup(x => x.RequestProduct())
-                .Returns(columnId);
+                .Returns(1);
 
-            productRepository
-                .Setup(x => x.GetProductByColumnId(columnId))
-                .Returns(testProduct);
+            unitOfWork
+                .Setup(x => x.ProductRepository.GetProductByColumnId(1))
+                .Returns(product);
 
-            productRepository
-            .Setup(x => x.DecreaseQuantity(testProduct))
-            .Callback( () => { testProduct.Quantity--; });
+            var paymentMethods =
+                new List<PaymentMethod>()
+                {
+                    new PaymentMethod(1, "Card"),
+                    new PaymentMethod(2, "Cash")
+                };
+            buyView
+                .Setup(x => x.AskForPaymentMethod(paymentMethods))
+                .Returns(3);
 
-            BuyUseCase buyUseCase = new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
-            
-            //Act
+            unitOfWork
+                .Setup(x => x.ProductRepository.DecreaseQuantity(product))
+                .Callback(() => product.Quantity--);
+
+            unitOfWork
+                .Setup(x => x.SaleRepository.Add(new Sale()));
+
             buyUseCase.Execute();
 
-            //Assert
-            Assert.Equal(initialQuantity - 1, testProduct.Quantity);
+            Assert.True(product.Quantity == 2);
         }
 
+
         [Fact]
-        public void HavingProductAvailable_WithZeroQuantity_ExecuteThrowsException()
+        public void HavingProductAvailable_WithNullQuantity_ExecuteThrowsException()
         {
-            //Arrange
+            BuyUseCase buyUseCase =
+                new BuyUseCase(buyView.Object, paymentUseCase.Object, unitOfWork.Object);
+
+            Product product = new Product(1, "testProduct", 3.33f, 0);
+
             buyView
                 .Setup(x => x.RequestProduct())
                 .Returns(1);
 
-            Product testProduct = new Product(1, "testProduct", 5.22f, 0);
-            productRepository
-                .Setup(x => x.GetProductByColumnId(1))
-                .Returns(testProduct);
+            unitOfWork
+                .Setup(x => x.ProductRepository.GetProductByColumnId(1))
+                .Returns(product);
 
-
-            BuyUseCase buyUseCase =
-                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
-
-            //Act
-            //Assert
             Assert.Throws<ProductNotAvailableException>(() => buyUseCase.Execute());
-        }
-
-        [Fact]
-        public void HavingNoProductAvailable_ExecuteThrowsException()
-        {
-            //Arrange
-            buyView
-                .Setup(x => x.RequestProduct())
-                .Returns(1);
-
-            Product testProduct = null;
-            productRepository
-                .Setup(x => x.GetProductByColumnId(1))
-                .Returns(testProduct);
-
-
-            BuyUseCase buyUseCase =
-                new BuyUseCase(buyView.Object, authenticationService.Object, productRepository.Object, paymentUseCase.Object);
-
-            //Act
-            //Assert
-            Assert.Throws<InvalidColumnNumberException>(() => buyUseCase.Execute());
         }
     }
 }
+

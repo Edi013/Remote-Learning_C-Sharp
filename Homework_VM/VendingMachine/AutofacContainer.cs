@@ -6,6 +6,7 @@ using iQuest.VendingMachine.Business;
 using iQuest.VendingMachine.JsonReports;
 using iQuest.VendingMachine.DataAccess;
 using iQuest.VendingMachine.XmlReports;
+using Microsoft.EntityFrameworkCore;
 
 namespace iQuest.VendingMachine
 {
@@ -106,6 +107,13 @@ namespace iQuest.VendingMachine
             builder.RegisterType<SupplyExistingProductUseCase>()
                 .AsSelf();
 
+            builder.RegisterType<ReportsUnitOfWork<StockReport>>()
+                        .As<IReportsUnitOfWork<StockReport>>();
+            builder.RegisterType<ReportsUnitOfWork<SalesReport>>()
+                        .As<IReportsUnitOfWork<SalesReport>>();
+            builder.RegisterType<ReportsUnitOfWork<VolumeReport>>()
+                        .As<IReportsUnitOfWork<VolumeReport>>();
+
             switch (ConfigurationManager.AppSettings["ReportsType"])
             {
 
@@ -141,6 +149,10 @@ namespace iQuest.VendingMachine
                         .As<ISaleRepository>()
                         .SingleInstance();
                     break;
+                case "EF":
+                    builder.RegisterType<EfSalesRepository>()
+                        .As<ISaleRepository>();
+                    break;
             }
 
             builder.RegisterType<ReportsView>()
@@ -161,6 +173,9 @@ namespace iQuest.VendingMachine
             switch (ConfigurationManager.AppSettings["repoType"])
             {
                 case "InMemory":
+                   /* builder.RegisterType<InMemoryUnitOfWork>()
+                        .As<IProductAndSalesUnitOfWork>();*/
+
                     builder.RegisterType<InMemoryRepository>()
                         .As<IProductRepository>()
                         .SingleInstance();
@@ -169,6 +184,10 @@ namespace iQuest.VendingMachine
                 case "SQL":
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+
+                    /*builder.RegisterType<SqlUnitOfWork>()
+                        .As<IProductAndSalesUnitOfWork>();*/
+
                     builder.Register<SqlServerRepository>(_ => new SqlServerRepository(_connectionString))
                         .As<IProductRepository>()
                         .SingleInstance();
@@ -177,9 +196,27 @@ namespace iQuest.VendingMachine
                 case "LiteDB":
                     _connectionString =
                         ConfigurationManager.ConnectionStrings["LiteDB"].ConnectionString;
+
+                   builder.RegisterType<LiteDBUnitOfWork>()
+                        .As<IProductAndSalesUnitOfWork>();
+
                     builder.Register<LiteDBRepository>(_ => new LiteDBRepository(_connectionString))
-                        .As<IProductRepository>()
+                        .As<IProductRepository>() 
                         .SingleInstance();
+                    break;
+
+                case "EF":
+                    builder.RegisterType<EfUnitOfWork>()
+                        .As<IProductAndSalesUnitOfWork>();
+
+                    builder.RegisterType<EfDbContext>()
+                        .AsSelf()
+                        .SingleInstance();
+
+                    builder.RegisterType<EfProductRepository>()
+                      .As<IProductRepository>()
+                      .SingleInstance();
+                    
                     break;
             }
 

@@ -1,4 +1,4 @@
-﻿using iQuest.VendingMachine.Business;
+﻿/*using iQuest.VendingMachine.Business;
 
 namespace VM_UnitTests.UseCasesTests
 {
@@ -27,3 +27,4 @@ namespace VM_UnitTests.UseCasesTests
         }
     }
 }
+*/

@@ -5,7 +5,7 @@ namespace VM_UnitTests.UseCasesTests
 {
     public class AuthenticationServiceTests
     {
-        private string correctPassword = "supercalifragilisticexpialidocious";
+        private string correctPassword = "edi";
         private string incorrectPassword = "Just a string, not the right password";
 
         [Fact]

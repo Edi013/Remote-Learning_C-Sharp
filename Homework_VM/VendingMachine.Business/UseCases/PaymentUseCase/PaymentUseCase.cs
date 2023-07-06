@@ -25,10 +25,11 @@ namespace iQuest.VendingMachine.Business
         {
             int paymentMethodIndex = buyView.AskForPaymentMethod(paymentMethods) - 1;
 
-            Name = paymentMethods[paymentMethodIndex].Name + " payment";
-
             if (paymentMethodIndex != 1 && paymentMethodIndex != 2)
                 throw new InvalidPaymentMethodException();
+
+            Name = paymentMethods[paymentMethodIndex].Name + " payment";
+
 
             paymentAlgorithms.ElementAt(paymentMethodIndex).Run(price);
         }
